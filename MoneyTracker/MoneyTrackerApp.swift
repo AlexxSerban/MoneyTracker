@@ -7,8 +7,15 @@
 
 import SwiftUI
 import FirebaseCore
+import Firebase
+
+final class AppDependencyContainer {
+    var firebaseAuthClient = FirebaseAuthClient()
+}
 
 class AppDelegate: NSObject, UIApplicationDelegate {
+    var dependencyContainer = AppDependencyContainer()
+    
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         FirebaseApp.configure()
@@ -25,7 +32,7 @@ struct MoneyTracker: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                ContentView()
+                SignUpView(viewModel: SignUpViewModel(firebaseAuthClient: delegate.dependencyContainer.firebaseAuthClient))
             }
         }
     }

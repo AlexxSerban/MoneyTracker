@@ -15,6 +15,9 @@
 		3E6EE3A228EF6133009ECBF6 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 3E6EE3A128EF6133009ECBF6 /* FirebaseAnalytics */; };
 		3E6EE3A428EF6133009ECBF6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 3E6EE3A328EF6133009ECBF6 /* FirebaseAuth */; };
 		3E6EE3A628EF6133009ECBF6 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 3E6EE3A528EF6133009ECBF6 /* FirebaseFirestore */; };
+		3E6EE3AD28EF66E6009ECBF6 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6EE3AC28EF66E6009ECBF6 /* SignUpView.swift */; };
+		3E6EE3AF28EF67B4009ECBF6 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6EE3AE28EF67B4009ECBF6 /* SignUpViewModel.swift */; };
+		3E6EE3B228EF6D10009ECBF6 /* FirebaseAuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6EE3B128EF6D10009ECBF6 /* FirebaseAuthClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		3E17C26728EF5B8C00EC5B70 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3E17C26A28EF5B8C00EC5B70 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3E17C27328EF5F3300EC5B70 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3E6EE3AC28EF66E6009ECBF6 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		3E6EE3AE28EF67B4009ECBF6 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		3E6EE3B128EF6D10009ECBF6 /* FirebaseAuthClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +65,7 @@
 		3E17C26228EF5B8B00EC5B70 /* MoneyTracker */ = {
 			isa = PBXGroup;
 			children = (
+				3E6EE3A728EF6688009ECBF6 /* Auth */,
 				3E17C26328EF5B8B00EC5B70 /* MoneyTrackerApp.swift */,
 				3E17C26528EF5B8B00EC5B70 /* ContentView.swift */,
 				3E17C27328EF5F3300EC5B70 /* GoogleService-Info.plist */,
@@ -74,6 +81,32 @@
 				3E17C26A28EF5B8C00EC5B70 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		3E6EE3A728EF6688009ECBF6 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				3E6EE3B028EF6CF1009ECBF6 /* Users */,
+				3E6EE3A828EF6696009ECBF6 /* SingIn */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		3E6EE3A828EF6696009ECBF6 /* SingIn */ = {
+			isa = PBXGroup;
+			children = (
+				3E6EE3AC28EF66E6009ECBF6 /* SignUpView.swift */,
+				3E6EE3AE28EF67B4009ECBF6 /* SignUpViewModel.swift */,
+			);
+			path = SingIn;
+			sourceTree = "<group>";
+		};
+		3E6EE3B028EF6CF1009ECBF6 /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				3E6EE3B128EF6D10009ECBF6 /* FirebaseAuthClient.swift */,
+			);
+			path = Users;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,6 +188,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E6EE3AF28EF67B4009ECBF6 /* SignUpViewModel.swift in Sources */,
+				3E6EE3AD28EF66E6009ECBF6 /* SignUpView.swift in Sources */,
+				3E6EE3B228EF6D10009ECBF6 /* FirebaseAuthClient.swift in Sources */,
 				3E17C26628EF5B8B00EC5B70 /* ContentView.swift in Sources */,
 				3E17C26428EF5B8B00EC5B70 /* MoneyTrackerApp.swift in Sources */,
 			);
