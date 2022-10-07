@@ -1,5 +1,5 @@
 //
-//  SignUpView.swift
+//  RegisterView.swift
 //  MoneyTracker
 //
 //  Created by Alex Serban on 06.10.2022.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct SignUpView: View {
+struct RegisterView: View {
     
-    @ObservedObject var viewModel: SignUpViewModel
+    @ObservedObject var viewModel: RegisterViewModel
     
-    init(viewModel: SignUpViewModel) {
+    init(viewModel: RegisterViewModel) {
         self.viewModel = viewModel
     }
     
@@ -19,7 +19,7 @@ struct SignUpView: View {
         
         NavigationStack{
             VStack(spacing: 16) {
-                Text("Sign Up!")
+                Text("Register !")
                 
                 Group{
                     TextField("Email", text: $viewModel.email)
@@ -29,35 +29,35 @@ struct SignUpView: View {
                 .textInputAutocapitalization(.never)
                 
                 Button {
-                    viewModel.signUp()
+                    viewModel.register()
                 } label: {
-                    if viewModel.isSigningUp {
+                    if viewModel.isRegistering {
                         HStack(spacing: 16){
                             ProgressView()
                                 .progressViewStyle(CircularProgressViewStyle(tint: .orange))
-                            Text("Singing Up")
+                            Text("Registering")
                         }
                     } else {
-                        Text("Sign Up")
+                        Text("Register")
                     }
                 }
                 .buttonStyle(.borderedProminent)
                 .buttonBorderShape(.capsule)
-                .disabled(viewModel.isSigningUp)
+                .disabled(viewModel.isRegistering)
             }
             .padding()
-            .alert("Wrong email", isPresented: $viewModel.signingError, actions: {
+            .alert("Wrong email", isPresented: $viewModel.registeringError, actions: {
                 Button("Ok") { }
             })
-            .navigationDestination(isPresented: $viewModel.isSignedUp) {
+            .navigationDestination(isPresented: $viewModel.isRegistered) {
                 Text("All good")
             }
         }
     }
 }
 
-//struct SignUpView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SignUpView()
-//    }
-//}
+struct RegisterView_Previews: PreviewProvider {
+    static var previews: some View {
+        RegisterView(viewModel: RegisterViewModel.example)
+    }
+}
