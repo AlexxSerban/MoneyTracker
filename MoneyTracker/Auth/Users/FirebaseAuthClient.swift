@@ -19,4 +19,15 @@ class FirebaseAuthClient {
             }
         }
     }
+    
+    
+    func loginUser(user: String, password: String, onSuccess: @escaping () -> Void, onFailure: @escaping () -> Void){
+        Auth.auth().signIn(withEmail: user, password: password) { result, error in
+            if error == nil {
+                onSuccess()
+            } else {
+                onFailure()
+            }
+        }
+    }
 }

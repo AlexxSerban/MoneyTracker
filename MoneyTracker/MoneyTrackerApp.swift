@@ -11,6 +11,7 @@ import Firebase
 
 final class AppDependencyContainer {
     var firebaseAuthClient = FirebaseAuthClient()
+    
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
@@ -32,7 +33,9 @@ struct MoneyTracker: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                SignUpView(viewModel: SignUpViewModel(firebaseAuthClient: delegate.dependencyContainer.firebaseAuthClient))
+                LoginView(loginViewModel: LoginViewModel(loginAuthClient: delegate.dependencyContainer.firebaseAuthClient))
+//                SignUpView(viewModel: SignUpViewModel(firebaseAuthClient: delegate.dependencyContainer.firebaseAuthClient))
+                
             }
         }
     }
