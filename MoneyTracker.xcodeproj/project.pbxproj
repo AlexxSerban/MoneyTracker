@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3E17C26428EF5B8B00EC5B70 /* MoneyTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E17C26328EF5B8B00EC5B70 /* MoneyTrackerApp.swift */; };
-		3E17C26628EF5B8B00EC5B70 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E17C26528EF5B8B00EC5B70 /* ContentView.swift */; };
 		3E17C26828EF5B8C00EC5B70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E17C26728EF5B8C00EC5B70 /* Assets.xcassets */; };
 		3E17C26B28EF5B8C00EC5B70 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E17C26A28EF5B8C00EC5B70 /* Preview Assets.xcassets */; };
 		3E17C27428EF5F3300EC5B70 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E17C27328EF5F3300EC5B70 /* GoogleService-Info.plist */; };
@@ -20,12 +19,13 @@
 		3E6EE3B228EF6D10009ECBF6 /* FirebaseAuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6EE3B128EF6D10009ECBF6 /* FirebaseAuthClient.swift */; };
 		3EE3BA1228F03E590001F751 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3BA1128F03E590001F751 /* LoginViewModel.swift */; };
 		3EE3BA1428F03E670001F751 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3BA1328F03E670001F751 /* LoginView.swift */; };
+		3EE3BA1728F181820001F751 /* TransitionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3BA1628F181820001F751 /* TransitionViewModel.swift */; };
+		3EE3BA1928F1818D0001F751 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3BA1828F1818D0001F751 /* WelcomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3E17C26028EF5B8B00EC5B70 /* MoneyTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoneyTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E17C26328EF5B8B00EC5B70 /* MoneyTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyTrackerApp.swift; sourceTree = "<group>"; };
-		3E17C26528EF5B8B00EC5B70 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3E17C26728EF5B8C00EC5B70 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3E17C26A28EF5B8C00EC5B70 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3E17C27328EF5F3300EC5B70 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -34,6 +34,8 @@
 		3E6EE3B128EF6D10009ECBF6 /* FirebaseAuthClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthClient.swift; sourceTree = "<group>"; };
 		3EE3BA1128F03E590001F751 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		3EE3BA1328F03E670001F751 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		3EE3BA1628F181820001F751 /* TransitionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionViewModel.swift; sourceTree = "<group>"; };
+		3EE3BA1828F1818D0001F751 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +73,6 @@
 			children = (
 				3E6EE3A728EF6688009ECBF6 /* Auth */,
 				3E17C26328EF5B8B00EC5B70 /* MoneyTrackerApp.swift */,
-				3E17C26528EF5B8B00EC5B70 /* ContentView.swift */,
 				3E17C27328EF5F3300EC5B70 /* GoogleService-Info.plist */,
 				3E17C26728EF5B8C00EC5B70 /* Assets.xcassets */,
 				3E17C26928EF5B8C00EC5B70 /* Preview Content */,
@@ -90,20 +91,21 @@
 		3E6EE3A728EF6688009ECBF6 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				3EE3BA1028F03E3C0001F751 /* Register */,
+				3EE3BA1528F1816F0001F751 /* Welcome */,
+				3EE3BA1028F03E3C0001F751 /* Login */,
 				3E6EE3B028EF6CF1009ECBF6 /* Users */,
-				3E6EE3A828EF6696009ECBF6 /* SignUp */,
+				3E6EE3A828EF6696009ECBF6 /* Register */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
 		};
-		3E6EE3A828EF6696009ECBF6 /* SignUp */ = {
+		3E6EE3A828EF6696009ECBF6 /* Register */ = {
 			isa = PBXGroup;
 			children = (
 				3E6EE3AC28EF66E6009ECBF6 /* RegisterView.swift */,
 				3E6EE3AE28EF67B4009ECBF6 /* RegisterViewModel.swift */,
 			);
-			path = SignUp;
+			path = Register;
 			sourceTree = "<group>";
 		};
 		3E6EE3B028EF6CF1009ECBF6 /* Users */ = {
@@ -114,13 +116,22 @@
 			path = Users;
 			sourceTree = "<group>";
 		};
-		3EE3BA1028F03E3C0001F751 /* Register */ = {
+		3EE3BA1028F03E3C0001F751 /* Login */ = {
 			isa = PBXGroup;
 			children = (
 				3EE3BA1128F03E590001F751 /* LoginViewModel.swift */,
 				3EE3BA1328F03E670001F751 /* LoginView.swift */,
 			);
-			path = Register;
+			path = Login;
+			sourceTree = "<group>";
+		};
+		3EE3BA1528F1816F0001F751 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				3EE3BA1628F181820001F751 /* TransitionViewModel.swift */,
+				3EE3BA1828F1818D0001F751 /* WelcomeView.swift */,
+			);
+			path = Welcome;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,9 +216,10 @@
 				3E6EE3AF28EF67B4009ECBF6 /* RegisterViewModel.swift in Sources */,
 				3EE3BA1228F03E590001F751 /* LoginViewModel.swift in Sources */,
 				3E6EE3AD28EF66E6009ECBF6 /* RegisterView.swift in Sources */,
+				3EE3BA1928F1818D0001F751 /* WelcomeView.swift in Sources */,
+				3EE3BA1728F181820001F751 /* TransitionViewModel.swift in Sources */,
 				3EE3BA1428F03E670001F751 /* LoginView.swift in Sources */,
 				3E6EE3B228EF6D10009ECBF6 /* FirebaseAuthClient.swift in Sources */,
-				3E17C26628EF5B8B00EC5B70 /* ContentView.swift in Sources */,
 				3E17C26428EF5B8B00EC5B70 /* MoneyTrackerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -17,7 +17,7 @@ class RegisterViewModel: ObservableObject {
     @Published var isRegistering: Bool = false
     @Published var isRegistered: Bool = false
     @Published var registeringError: Bool = false
-
+    
     init(firebaseAuthClient: FirebaseAuthClient) {
         self.firebaseAuthClient = firebaseAuthClient
     }
