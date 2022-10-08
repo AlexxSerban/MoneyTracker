@@ -21,6 +21,7 @@
 		3EE3BA1428F03E670001F751 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3BA1328F03E670001F751 /* LoginView.swift */; };
 		3EE3BA1728F181820001F751 /* TransitionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3BA1628F181820001F751 /* TransitionViewModel.swift */; };
 		3EE3BA1928F1818D0001F751 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3BA1828F1818D0001F751 /* WelcomeView.swift */; };
+		3EE3BA1D28F1F4370001F751 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3BA1C28F1F4370001F751 /* ResetPasswordView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		3EE3BA1328F03E670001F751 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		3EE3BA1628F181820001F751 /* TransitionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionViewModel.swift; sourceTree = "<group>"; };
 		3EE3BA1828F1818D0001F751 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		3EE3BA1C28F1F4370001F751 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 			children = (
 				3EE3BA1128F03E590001F751 /* LoginViewModel.swift */,
 				3EE3BA1328F03E670001F751 /* LoginView.swift */,
+				3EE3BA1C28F1F4370001F751 /* ResetPasswordView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 				3E6EE3AF28EF67B4009ECBF6 /* RegisterViewModel.swift in Sources */,
 				3EE3BA1228F03E590001F751 /* LoginViewModel.swift in Sources */,
 				3E6EE3AD28EF66E6009ECBF6 /* RegisterView.swift in Sources */,
+				3EE3BA1D28F1F4370001F751 /* ResetPasswordView.swift in Sources */,
 				3EE3BA1928F1818D0001F751 /* WelcomeView.swift in Sources */,
 				3EE3BA1728F181820001F751 /* TransitionViewModel.swift in Sources */,
 				3EE3BA1428F03E670001F751 /* LoginView.swift in Sources */,
