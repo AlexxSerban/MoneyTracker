@@ -51,7 +51,21 @@ struct LoginView: View {
                     Text("Register")
                         .font(.system(size: 18, weight: .bold, design: .serif))
                         .foregroundColor(Color.orange)
+                        
                 }
+                .buttonStyle(.borderedProminent)
+                .buttonBorderShape(.capsule)
+                
+                Button {
+                    loginViewModel.forgotPassword = true
+                } label: {
+                    Text("Forgot Password")
+                        .font(.system(size: 18, weight: .bold, design: .serif))
+                        .foregroundColor(Color.green)
+                }
+                .buttonStyle(.borderedProminent)
+                .buttonBorderShape(.capsule)
+
                 
             }
             .padding()
@@ -63,6 +77,9 @@ struct LoginView: View {
             }
             .navigationDestination(isPresented: $transitionViewModel.toRegister) {
                 RegisterView(viewModel: RegisterViewModel(firebaseAuthClient: FirebaseAuthClient()), transitionViewModel: TransitionViewModel())
+            }
+            .navigationDestination(isPresented: $loginViewModel.forgotPassword) {
+                ResetPasswordView(loginViewModel: loginViewModel)
             }
         }
         

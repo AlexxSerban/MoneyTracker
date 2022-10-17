@@ -16,6 +16,9 @@ class LoginViewModel: ObservableObject {
     @Published var isLogging: Bool = false
     @Published var isLogged: Bool = false
     @Published var loggingError: Bool = false
+    @Published var forgotPassword: Bool = false
+    @Published var forgotError: Bool = false
+    @Published var passwordOk: Bool = false
 
     init(loginAuthClient: FirebaseAuthClient) {
         self.loginAuthClient = loginAuthClient
@@ -32,6 +35,18 @@ class LoginViewModel: ObservableObject {
             //onFailure
             self.isLogging = false
             self.loggingError = true
+        }
+
+    }
+    
+    func resetPassword(email: String) {
+        forgotPassword = true
+        
+        loginAuthClient.resetPassword(email: email) {
+            self.forgotPassword = false
+            self.passwordOk = true
+        } onFailure: {
+            self.forgotError = true
         }
 
     }
