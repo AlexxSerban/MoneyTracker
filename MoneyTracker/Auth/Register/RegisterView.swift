@@ -60,7 +60,7 @@ struct RegisterView: View {
                 Button("Ok") { }
             })
             .navigationDestination(isPresented: $viewModel.isRegistered) {
-                Text("All good")
+                LoginView(loginViewModel: LoginViewModel(loginAuthClient: FirebaseAuthClient()), transitionViewModel: transitionViewModel)
             }
             .navigationDestination(isPresented: $transitionViewModel.toLogin) {
                 LoginView(loginViewModel: LoginViewModel(loginAuthClient: FirebaseAuthClient()), transitionViewModel: TransitionViewModel())

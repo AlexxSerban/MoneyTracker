@@ -33,8 +33,8 @@ struct MoneyTracker: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                WelcomeView()
-//                LoginView(loginViewModel: LoginViewModel(loginAuthClient: delegate.dependencyContainer.firebaseAuthClient), transitionViewModel: TransitionViewModel())
+                
+                LoginView(loginViewModel: LoginViewModel(loginAuthClient: delegate.dependencyContainer.firebaseAuthClient), transitionViewModel: TransitionViewModel())
 //                SignUpView(viewModel: SignUpViewModel(firebaseAuthClient: delegate.dependencyContainer.firebaseAuthClient))
                 
             }

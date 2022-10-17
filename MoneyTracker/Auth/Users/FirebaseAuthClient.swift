@@ -30,4 +30,14 @@ class FirebaseAuthClient {
             }
         }
     }
+    
+    func resetPassword(email: String, onSuccess: @escaping () -> Void, onFailure: @escaping () -> Void) {
+        Auth.auth().sendPasswordReset(withEmail: email) { error in
+            if error == nil {
+                onSuccess()
+            } else {
+                onFailure()
+            }
+        }
+    }
 }
