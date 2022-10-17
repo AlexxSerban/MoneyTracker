@@ -9,12 +9,13 @@ import SwiftUI
 
 struct RegisterView: View {
     
-    @ObservedObject var viewModel: RegisterViewModel
-    @ObservedObject var transitionViewModel: TransitionViewModel
+    @State var toLogin: Bool = false
     
-    init(viewModel: RegisterViewModel, transitionViewModel: TransitionViewModel) {
+    @ObservedObject var viewModel: RegisterViewModel
+    
+    
+    init(viewModel: RegisterViewModel) {
         self.viewModel = viewModel
-        self.transitionViewModel = transitionViewModel
     }
     
     var body: some View {
@@ -48,7 +49,7 @@ struct RegisterView: View {
                 .disabled(viewModel.isRegistering)
                 
                 Button() {
-                    transitionViewModel.toLogin = true
+                    toLogin = true
                 } label: {
                     Text("Log In")
                         .font(.system(size: 18, weight: .bold, design: .serif))
@@ -60,10 +61,10 @@ struct RegisterView: View {
                 Button("Ok") { }
             })
             .navigationDestination(isPresented: $viewModel.isRegistered) {
-                LoginView(loginViewModel: LoginViewModel(loginAuthClient: FirebaseAuthClient()), transitionViewModel: transitionViewModel)
+                LoginView(loginViewModel: LoginViewModel(loginAuthClient: FirebaseAuthClient()))
             }
-            .navigationDestination(isPresented: $transitionViewModel.toLogin) {
-                LoginView(loginViewModel: LoginViewModel(loginAuthClient: FirebaseAuthClient()), transitionViewModel: TransitionViewModel())
+            .navigationDestination(isPresented: $toLogin) {
+                LoginView(loginViewModel: LoginViewModel(loginAuthClient: FirebaseAuthClient()))
             }
         }
     }
@@ -71,6 +72,6 @@ struct RegisterView: View {
 
 struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
-        RegisterView(viewModel: RegisterViewModel.example, transitionViewModel: TransitionViewModel.welcomeExample)
+        RegisterView(viewModel: RegisterViewModel.example)
     }
 }

@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct LoginView: View {
-    @ObservedObject var loginViewModel: LoginViewModel
-    @ObservedObject var transitionViewModel: TransitionViewModel
     
-    init(loginViewModel: LoginViewModel, transitionViewModel: TransitionViewModel) {
+    @State var toRegister: Bool = false
+    
+    @ObservedObject var loginViewModel: LoginViewModel
+   
+    
+    init(loginViewModel: LoginViewModel) {
         self.loginViewModel = loginViewModel
-        self.transitionViewModel = transitionViewModel
     }
     
     var body: some View {
@@ -46,7 +48,7 @@ struct LoginView: View {
                 .disabled(loginViewModel.isLogging)
                 
                 Button() {
-                    transitionViewModel.toRegister = true
+                    
                 } label: {
                     Text("Register")
                         .font(.system(size: 18, weight: .bold, design: .serif))
@@ -75,8 +77,8 @@ struct LoginView: View {
             .navigationDestination(isPresented: $loginViewModel.isLogged) {
                 Text("All good")
             }
-            .navigationDestination(isPresented: $transitionViewModel.toRegister) {
-                RegisterView(viewModel: RegisterViewModel(firebaseAuthClient: FirebaseAuthClient()), transitionViewModel: TransitionViewModel())
+            .navigationDestination(isPresented: $toRegister) {
+                RegisterView(viewModel: RegisterViewModel(firebaseAuthClient: FirebaseAuthClient()))
             }
             .navigationDestination(isPresented: $loginViewModel.forgotPassword) {
                 ResetPasswordView(loginViewModel: loginViewModel)
@@ -89,6 +91,6 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(loginViewModel: LoginViewModel.example, transitionViewModel: TransitionViewModel.welcomeExample)
+        LoginView(loginViewModel: LoginViewModel.example)
     }
 }

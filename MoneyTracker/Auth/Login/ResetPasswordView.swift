@@ -31,7 +31,7 @@ struct ResetPasswordView: View {
                 Button("Ok") { }
             })
             .navigationDestination(isPresented: $loginViewModel.passwordOk) {
-                LoginView(loginViewModel: loginViewModel, transitionViewModel: TransitionViewModel())
+                LoginView(loginViewModel: loginViewModel)
             }
         }
         
