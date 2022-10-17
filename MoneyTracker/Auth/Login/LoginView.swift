@@ -9,9 +9,11 @@ import SwiftUI
 
 struct LoginView: View {
     @ObservedObject var loginViewModel: LoginViewModel
+    @ObservedObject var transitionViewModel: TransitionViewModel
     
-    init(loginViewModel: LoginViewModel) {
+    init(loginViewModel: LoginViewModel, transitionViewModel: TransitionViewModel) {
         self.loginViewModel = loginViewModel
+        self.transitionViewModel = transitionViewModel
     }
     
     var body: some View {
@@ -42,6 +44,15 @@ struct LoginView: View {
                 .buttonStyle(.borderedProminent)
                 .buttonBorderShape(.capsule)
                 .disabled(loginViewModel.isLogging)
+                
+                Button() {
+                    transitionViewModel.toRegister = true
+                } label: {
+                    Text("Register")
+                        .font(.system(size: 18, weight: .bold, design: .serif))
+                        .foregroundColor(Color.orange)
+                }
+                
             }
             .padding()
             .alert("Wrong email", isPresented: $loginViewModel.loggingError, actions: {
@@ -49,6 +60,9 @@ struct LoginView: View {
             })
             .navigationDestination(isPresented: $loginViewModel.isLogged) {
                 Text("All good")
+            }
+            .navigationDestination(isPresented: $transitionViewModel.toRegister) {
+                RegisterView(viewModel: RegisterViewModel(firebaseAuthClient: FirebaseAuthClient()), transitionViewModel: TransitionViewModel())
             }
         }
         
@@ -58,6 +72,6 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(loginViewModel: LoginViewModel.example)
+        LoginView(loginViewModel: LoginViewModel.example, transitionViewModel: TransitionViewModel.welcomeExample)
     }
 }

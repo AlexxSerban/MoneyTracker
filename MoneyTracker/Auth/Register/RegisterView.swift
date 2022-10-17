@@ -10,9 +10,11 @@ import SwiftUI
 struct RegisterView: View {
     
     @ObservedObject var viewModel: RegisterViewModel
+    @ObservedObject var transitionViewModel: TransitionViewModel
     
-    init(viewModel: RegisterViewModel) {
+    init(viewModel: RegisterViewModel, transitionViewModel: TransitionViewModel) {
         self.viewModel = viewModel
+        self.transitionViewModel = transitionViewModel
     }
     
     var body: some View {
@@ -44,6 +46,14 @@ struct RegisterView: View {
                 .buttonStyle(.borderedProminent)
                 .buttonBorderShape(.capsule)
                 .disabled(viewModel.isRegistering)
+                
+                Button() {
+                    transitionViewModel.toLogin = true
+                } label: {
+                    Text("Log In")
+                        .font(.system(size: 18, weight: .bold, design: .serif))
+                        .foregroundColor(Color.orange)
+                }
             }
             .padding()
             .alert("Wrong email", isPresented: $viewModel.registeringError, actions: {
@@ -52,12 +62,15 @@ struct RegisterView: View {
             .navigationDestination(isPresented: $viewModel.isRegistered) {
                 Text("All good")
             }
+            .navigationDestination(isPresented: $transitionViewModel.toLogin) {
+                LoginView(loginViewModel: LoginViewModel(loginAuthClient: FirebaseAuthClient()), transitionViewModel: TransitionViewModel())
+            }
         }
     }
 }
 
 struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
-        RegisterView(viewModel: RegisterViewModel.example)
+        RegisterView(viewModel: RegisterViewModel.example, transitionViewModel: TransitionViewModel.welcomeExample)
     }
 }
