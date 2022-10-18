@@ -16,9 +16,8 @@ class LoginViewModel: ObservableObject {
     @Published var isLogging: Bool = false
     @Published var isLogged: Bool = false
     @Published var loggingError: Bool = false
-    @Published var forgotPassword: Bool = false
-    @Published var forgotError: Bool = false
-    @Published var passwordOk: Bool = false
+    
+    
     
     func login() {
         isLogging = true
@@ -34,15 +33,6 @@ class LoginViewModel: ObservableObject {
         }
     }
     
-    func resetPassword(email: String) {
-        forgotPassword = true
-        
-        authClient.resetPassword(email: email) {
-            self.forgotPassword = false
-            self.passwordOk = true
-        } onFailure: {
-            self.forgotError = true
-        }
-    }
+   
 }
 

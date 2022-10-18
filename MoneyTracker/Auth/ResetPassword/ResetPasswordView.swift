@@ -9,17 +9,17 @@ import SwiftUI
 
 struct ResetPasswordView: View {
     
-    @ObservedObject var loginViewModel: LoginViewModel
+    @ObservedObject var resetPasswordViewModel: ResetPasswordViewModel
     
     var body: some View {
         NavigationStack {
             VStack(spacing: 16) {
                 Text("Please enter your email.")
-                TextField("Your email", text: $loginViewModel.email)
+                TextField("Your email", text: $resetPasswordViewModel.email)
                     .keyboardType(.emailAddress)
                 Button {
-                    loginViewModel.resetPassword(email: loginViewModel.email)
-                    loginViewModel.passwordOk = false
+                    resetPasswordViewModel.resetPassword(email: resetPasswordViewModel.email)
+                    resetPasswordViewModel.resetOk = true
                 } label: {
                     Text("Reset")
                 }
@@ -27,18 +27,18 @@ struct ResetPasswordView: View {
                 .buttonBorderShape(.capsule)
             }
             .padding()
-            .alert("Please try again", isPresented: $loginViewModel.forgotError, actions: {
+            .alert("Please try again", isPresented: $resetPasswordViewModel.forgotError, actions: {
                 Button("Ok") { }
             })
-            .navigationDestination(isPresented: $loginViewModel.passwordOk) {
-                LoginView(loginViewModel: loginViewModel)
+            .navigationDestination(isPresented: $resetPasswordViewModel.resetOk) {
+                LoginView(loginViewModel: LoginViewModel())
             }
-        }  
+        }
     }
 }
 
 struct ResetPasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        ResetPasswordView(loginViewModel: LoginViewModel())
+        ResetPasswordView(resetPasswordViewModel: ResetPasswordViewModel())
     }
 }

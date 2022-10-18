@@ -9,7 +9,8 @@
 import Foundation
 
 class RegisterViewModel: ObservableObject {
-    var registerClient: LoginViewModel
+    
+    var authClient = AppDependencyContainer.shared.firebaseAuthClient
     
     @Published var email: String = ""
     @Published var password: String = ""
@@ -18,14 +19,11 @@ class RegisterViewModel: ObservableObject {
     @Published var isRegistered: Bool = false
     @Published var registeringError: Bool = false
     
-    init(registerClient: LoginViewModel) {
-        self.registerClient = registerClient
-    }
     
     func register() {
         isRegistering = true
         
-        registerClient.authClient.createUser(user: email, password: password) {
+        authClient.createUser(user: email, password: password) {
             //onSuccess
             self.isRegistering = false
             self.isRegistered = true

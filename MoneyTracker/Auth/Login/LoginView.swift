@@ -55,7 +55,7 @@ struct LoginView: View {
                 .buttonBorderShape(.capsule)
                 
                 Button {
-                    loginViewModel.forgotPassword = true
+                    forgotPassword = true
                 } label: {
                     Text("Forgot Password")
                         .font(.system(size: 18, weight: .bold, design: .serif))
@@ -74,10 +74,10 @@ struct LoginView: View {
                 Text("All good")
             }
             .navigationDestination(isPresented: $toRegister) {
-                RegisterView(viewModel: RegisterViewModel(registerClient: LoginViewModel()))
+                RegisterView(viewModel: RegisterViewModel())
             }
-            .navigationDestination(isPresented: $loginViewModel.forgotPassword) {
-                ResetPasswordView(loginViewModel: loginViewModel)
+            .navigationDestination(isPresented: $forgotPassword) {
+                ResetPasswordView(resetPasswordViewModel: ResetPasswordViewModel())
             }
         }    
     }
