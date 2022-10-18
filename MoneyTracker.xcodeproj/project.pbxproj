@@ -19,7 +19,8 @@
 		3E6EE3B228EF6D10009ECBF6 /* FirebaseAuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6EE3B128EF6D10009ECBF6 /* FirebaseAuthClient.swift */; };
 		3EE3BA1228F03E590001F751 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3BA1128F03E590001F751 /* LoginViewModel.swift */; };
 		3EE3BA1428F03E670001F751 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3BA1328F03E670001F751 /* LoginView.swift */; };
-		3EE3BA1D28F1F4370001F751 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3BA1C28F1F4370001F751 /* ResetPasswordView.swift */; };
+		3EE3BA5E28FF260A0001F751 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3BA5D28FF260A0001F751 /* ResetPasswordView.swift */; };
+		3EE3BA6028FF26590001F751 /* ResetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3BA5F28FF26590001F751 /* ResetPasswordViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +34,8 @@
 		3E6EE3B128EF6D10009ECBF6 /* FirebaseAuthClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthClient.swift; sourceTree = "<group>"; };
 		3EE3BA1128F03E590001F751 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		3EE3BA1328F03E670001F751 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		3EE3BA1C28F1F4370001F751 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
+		3EE3BA5D28FF260A0001F751 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
+		3EE3BA5F28FF26590001F751 /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 		3E6EE3A728EF6688009ECBF6 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				3EE3BA5C28FF25B50001F751 /* ResetPassword */,
 				3EE3BA1028F03E3C0001F751 /* Login */,
 				3E6EE3B028EF6CF1009ECBF6 /* Users */,
 				3E6EE3A828EF6696009ECBF6 /* Register */,
@@ -118,9 +121,17 @@
 			children = (
 				3EE3BA1128F03E590001F751 /* LoginViewModel.swift */,
 				3EE3BA1328F03E670001F751 /* LoginView.swift */,
-				3EE3BA1C28F1F4370001F751 /* ResetPasswordView.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		3EE3BA5C28FF25B50001F751 /* ResetPassword */ = {
+			isa = PBXGroup;
+			children = (
+				3EE3BA5D28FF260A0001F751 /* ResetPasswordView.swift */,
+				3EE3BA5F28FF26590001F751 /* ResetPasswordViewModel.swift */,
+			);
+			path = ResetPassword;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,9 +214,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E6EE3AF28EF67B4009ECBF6 /* RegisterViewModel.swift in Sources */,
+				3EE3BA6028FF26590001F751 /* ResetPasswordViewModel.swift in Sources */,
 				3EE3BA1228F03E590001F751 /* LoginViewModel.swift in Sources */,
 				3E6EE3AD28EF66E6009ECBF6 /* RegisterView.swift in Sources */,
-				3EE3BA1D28F1F4370001F751 /* ResetPasswordView.swift in Sources */,
+				3EE3BA5E28FF260A0001F751 /* ResetPasswordView.swift in Sources */,
 				3EE3BA1428F03E670001F751 /* LoginView.swift in Sources */,
 				3E6EE3B228EF6D10009ECBF6 /* FirebaseAuthClient.swift in Sources */,
 				3E17C26428EF5B8B00EC5B70 /* MoneyTrackerApp.swift in Sources */,

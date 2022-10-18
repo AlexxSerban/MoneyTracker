@@ -13,11 +13,6 @@ struct RegisterView: View {
     
     @ObservedObject var viewModel: RegisterViewModel
     
-    
-    init(viewModel: RegisterViewModel) {
-        self.viewModel = viewModel
-    }
-    
     var body: some View {
         
         NavigationStack{
@@ -61,10 +56,10 @@ struct RegisterView: View {
                 Button("Ok") { }
             })
             .navigationDestination(isPresented: $viewModel.isRegistered) {
-                LoginView(loginViewModel: LoginViewModel(loginAuthClient: FirebaseAuthClient()))
+                LoginView(loginViewModel: LoginViewModel())
             }
             .navigationDestination(isPresented: $toLogin) {
-                LoginView(loginViewModel: LoginViewModel(loginAuthClient: FirebaseAuthClient()))
+                LoginView(loginViewModel: LoginViewModel())
             }
         }
     }
@@ -72,6 +67,6 @@ struct RegisterView: View {
 
 struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
-        RegisterView(viewModel: RegisterViewModel.example)
+        RegisterView(viewModel: RegisterViewModel())
     }
 }

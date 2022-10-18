@@ -9,7 +9,8 @@
 import Foundation
 
 class RegisterViewModel: ObservableObject {
-    var firebaseAuthClient: FirebaseAuthClient
+    
+    var authClient = AppDependencyContainer.shared.firebaseAuthClient
     
     @Published var email: String = ""
     @Published var password: String = ""
@@ -18,14 +19,11 @@ class RegisterViewModel: ObservableObject {
     @Published var isRegistered: Bool = false
     @Published var registeringError: Bool = false
     
-    init(firebaseAuthClient: FirebaseAuthClient) {
-        self.firebaseAuthClient = firebaseAuthClient
-    }
     
     func register() {
         isRegistering = true
         
-        firebaseAuthClient.createUser(user: email, password: password) {
+        authClient.createUser(user: email, password: password) {
             //onSuccess
             self.isRegistering = false
             self.isRegistered = true
@@ -37,6 +35,4 @@ class RegisterViewModel: ObservableObject {
     }
 }
 
-extension RegisterViewModel {
-    static let example = RegisterViewModel(firebaseAuthClient: FirebaseAuthClient())
-}
+
