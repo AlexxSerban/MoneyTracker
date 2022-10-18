@@ -8,7 +8,7 @@
 import Foundation
 
 class LoginViewModel: ObservableObject {
-    var loginAuthClient: FirebaseAuthClient
+    var authClient: FirebaseAuthClient = AppDependencyContainer.shared.firebaseAuthClient
     
     @Published var email: String = ""
     @Published var password: String = ""
@@ -19,15 +19,11 @@ class LoginViewModel: ObservableObject {
     @Published var forgotPassword: Bool = false
     @Published var forgotError: Bool = false
     @Published var passwordOk: Bool = false
-
-    init(loginAuthClient: FirebaseAuthClient) {
-        self.loginAuthClient = loginAuthClient
-    }
     
     func login() {
         isLogging = true
         
-        loginAuthClient.loginUser(user: email, password: password) {
+        authClient.loginUser(user: email, password: password) {
             //onSuccess
             self.isLogging = false
             self.isLogged = true
@@ -36,22 +32,17 @@ class LoginViewModel: ObservableObject {
             self.isLogging = false
             self.loggingError = true
         }
-
     }
     
     func resetPassword(email: String) {
         forgotPassword = true
         
-        loginAuthClient.resetPassword(email: email) {
+        authClient.resetPassword(email: email) {
             self.forgotPassword = false
             self.passwordOk = true
         } onFailure: {
             self.forgotError = true
         }
-
     }
 }
 
-extension LoginViewModel {
-    static let example = LoginViewModel(loginAuthClient: FirebaseAuthClient())
-}

@@ -10,14 +10,10 @@ import SwiftUI
 struct LoginView: View {
     
     @State var toRegister: Bool = false
+    @State var forgotPassword: Bool = false
     
     @ObservedObject var loginViewModel: LoginViewModel
-   
-    
-    init(loginViewModel: LoginViewModel) {
-        self.loginViewModel = loginViewModel
-    }
-    
+
     var body: some View {
         NavigationStack{
             VStack(spacing: 16) {
@@ -48,7 +44,7 @@ struct LoginView: View {
                 .disabled(loginViewModel.isLogging)
                 
                 Button() {
-                    
+                    toRegister = true
                 } label: {
                     Text("Register")
                         .font(.system(size: 18, weight: .bold, design: .serif))
@@ -78,19 +74,17 @@ struct LoginView: View {
                 Text("All good")
             }
             .navigationDestination(isPresented: $toRegister) {
-                RegisterView(viewModel: RegisterViewModel(firebaseAuthClient: FirebaseAuthClient()))
+                RegisterView(viewModel: RegisterViewModel(registerClient: LoginViewModel()))
             }
             .navigationDestination(isPresented: $loginViewModel.forgotPassword) {
                 ResetPasswordView(loginViewModel: loginViewModel)
             }
-        }
-        
-        
+        }    
     }
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(loginViewModel: LoginViewModel.example)
+        LoginView(loginViewModel: LoginViewModel())
     }
 }

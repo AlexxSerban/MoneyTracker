@@ -10,12 +10,14 @@ import FirebaseCore
 import Firebase
 
 final class AppDependencyContainer {
+    static let shared = AppDependencyContainer()
+
     var firebaseAuthClient = FirebaseAuthClient()
     
+    private init() {}
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-    var dependencyContainer = AppDependencyContainer()
     
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
@@ -33,10 +35,7 @@ struct MoneyTracker: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-
-                LoginView(loginViewModel: LoginViewModel(loginAuthClient: delegate.dependencyContainer.firebaseAuthClient))
-//                SignUpView(viewModel: SignUpViewModel(firebaseAuthClient: delegate.dependencyContainer.firebaseAuthClient))
-                
+                LoginView(loginViewModel: LoginViewModel())
             }
         }
     }

@@ -33,13 +33,12 @@ struct ResetPasswordView: View {
             .navigationDestination(isPresented: $loginViewModel.passwordOk) {
                 LoginView(loginViewModel: loginViewModel)
             }
-        }
-        
+        }  
     }
 }
 
 struct ResetPasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        ResetPasswordView(loginViewModel: LoginViewModel(loginAuthClient: FirebaseAuthClient()))
+        ResetPasswordView(loginViewModel: LoginViewModel())
     }
 }
