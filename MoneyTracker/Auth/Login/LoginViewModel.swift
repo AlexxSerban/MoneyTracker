@@ -8,7 +8,8 @@
 import Foundation
 
 class LoginViewModel: ObservableObject {
-    var authClient: FirebaseAuthClient = AppDependencyContainer.shared.firebaseAuthClient
+    
+    let container = DIContainer.shared.resolve(type: FirebaseAuthClient.self)
     
     @Published var email: String = ""
     @Published var password: String = ""
@@ -22,7 +23,9 @@ class LoginViewModel: ObservableObject {
     func login() {
         isLogging = true
         
-        authClient.loginUser(user: email, password: password) {
+        container.loginUser(user: email, password: password) {
+        
+//        authClient.loginUser(user: email, password: password) {
             //onSuccess
             self.isLogging = false
             self.isLogged = true

@@ -21,6 +21,7 @@
 		3EE3BA1428F03E670001F751 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3BA1328F03E670001F751 /* LoginView.swift */; };
 		3EE3BA5E28FF260A0001F751 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3BA5D28FF260A0001F751 /* ResetPasswordView.swift */; };
 		3EE3BA6028FF26590001F751 /* ResetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3BA5F28FF26590001F751 /* ResetPasswordViewModel.swift */; };
+		3EE3BA66290C01640001F751 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3BA65290C01640001F751 /* DIContainer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		3EE3BA1328F03E670001F751 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		3EE3BA5D28FF260A0001F751 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		3EE3BA5F28FF26590001F751 /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
+		3EE3BA65290C01640001F751 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 			children = (
 				3E6EE3A728EF6688009ECBF6 /* Auth */,
 				3E17C26328EF5B8B00EC5B70 /* MoneyTrackerApp.swift */,
+				3EE3BA65290C01640001F751 /* DIContainer.swift */,
 				3E17C27328EF5F3300EC5B70 /* GoogleService-Info.plist */,
 				3E17C26728EF5B8C00EC5B70 /* Assets.xcassets */,
 				3E17C26928EF5B8C00EC5B70 /* Preview Content */,
@@ -220,6 +223,7 @@
 				3EE3BA5E28FF260A0001F751 /* ResetPasswordView.swift in Sources */,
 				3EE3BA1428F03E670001F751 /* LoginView.swift in Sources */,
 				3E6EE3B228EF6D10009ECBF6 /* FirebaseAuthClient.swift in Sources */,
+				3EE3BA66290C01640001F751 /* DIContainer.swift in Sources */,
 				3E17C26428EF5B8B00EC5B70 /* MoneyTrackerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

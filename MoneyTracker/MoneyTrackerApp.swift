@@ -9,19 +9,14 @@ import SwiftUI
 import FirebaseCore
 import Firebase
 
-final class AppDependencyContainer {
-    static let shared = AppDependencyContainer()
-
-    var firebaseAuthClient = FirebaseAuthClient()
-    
-    private init() {}
-}
-
 class AppDelegate: NSObject, UIApplicationDelegate {
     
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         FirebaseApp.configure()
+        
+        let container = DIContainer.shared
+        container.register(type: FirebaseAuthClient.self, component: FirebaseAuthClient())
         
         return true
     }
