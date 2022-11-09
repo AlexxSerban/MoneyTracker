@@ -19,8 +19,6 @@ class RepositoryUser {
  
     
     func getData(userData: UserData) async throws -> DocumentSnapshot {
-       return try await dataBase.collection("Users").document().getDocument()
+        return try await dataBase.collection("Users").document(userData.email).getDocument()
     }
-    
-
 }
