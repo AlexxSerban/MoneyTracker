@@ -9,33 +9,34 @@ import Foundation
 
 class LoginViewModel: ObservableObject {
     
-    let container = DIContainer.shared.resolve(type: FirebaseAuthClient.self)
+    let authClient = DIContainer.shared.resolve(type: AuthClient.self)
     
     @Published var email: String = ""
     @Published var password: String = ""
-    
     @Published var isLogging: Bool = false
     @Published var isLogged: Bool = false
     @Published var loggingError: Bool = false
-    
-    
+
     
     func login() {
         isLogging = true
         
-        container.loginUser(user: email, password: password) {
-        
-//        authClient.loginUser(user: email, password: password) {
-            //onSuccess
-            self.isLogging = false
-            self.isLogged = true
-        } onFailure: {
-            //onFailure
-            self.isLogging = false
-            self.loggingError = true
+        Task{
+            do {
+                let authResult = try await authClient.loginUser(email: email, password: password)
+                
+                await MainActor.run {
+                    
+                    self.isLogging = false
+                    self.isLogged = true
+                }
+            } catch {
+                print(error)
+                
+                self.isLogging = false
+                self.loggingError = true
+            }
         }
     }
-    
-   
 }
 

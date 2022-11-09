@@ -56,10 +56,10 @@ struct RegisterView: View {
                 Button("Ok") { }
             })
             .navigationDestination(isPresented: $viewModel.isRegistered) {
-                LoginView(loginViewModel: LoginViewModel())
+                LoginView(viewModel: LoginViewModel())
             }
             .navigationDestination(isPresented: $toLogin) {
-                LoginView(loginViewModel: LoginViewModel())
+                LoginView(viewModel: LoginViewModel())
             }
         }
     }

@@ -12,7 +12,7 @@ struct LoginView: View {
     @State var toRegister: Bool = false
     @State var forgotPassword: Bool = false
     
-    @ObservedObject var loginViewModel: LoginViewModel
+    @ObservedObject var viewModel: LoginViewModel
 
     var body: some View {
         NavigationStack{
@@ -21,15 +21,15 @@ struct LoginView: View {
                 Text("Log In")
                 
                 Group{
-                    TextField("Email", text: $loginViewModel.email)
+                    TextField("Email", text: $viewModel.email)
                         .keyboardType(.emailAddress)
-                    SecureField("Password", text: $loginViewModel.password)
+                    SecureField("Password", text: $viewModel.password)
                 }
                 
                 Button {
-                    loginViewModel.login()
+                    viewModel.login()
                 } label: {
-                    if loginViewModel.isLogging {
+                    if viewModel.isLogging {
                         HStack(spacing: 16){
                             ProgressView()
                                 .progressViewStyle(CircularProgressViewStyle(tint: .orange))
@@ -41,7 +41,7 @@ struct LoginView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .buttonBorderShape(.capsule)
-                .disabled(loginViewModel.isLogging)
+                .disabled(viewModel.isLogging)
                 
                 Button() {
                     toRegister = true
@@ -67,17 +67,17 @@ struct LoginView: View {
                 
             }
             .padding()
-            .alert("Wrong email", isPresented: $loginViewModel.loggingError, actions: {
+            .alert("Wrong email", isPresented: $viewModel.loggingError, actions: {
                 Button("Ok") { }
             })
-            .navigationDestination(isPresented: $loginViewModel.isLogged) {
+            .navigationDestination(isPresented: $viewModel.isLogged) {
                 Text("All good")
             }
             .navigationDestination(isPresented: $toRegister) {
                 RegisterView(viewModel: RegisterViewModel())
             }
             .navigationDestination(isPresented: $forgotPassword) {
-                ResetPasswordView(resetPasswordViewModel: ResetPasswordViewModel())
+                ResetPasswordView(viewModel: ResetPasswordViewModel())
             }
         }    
     }
@@ -85,6 +85,6 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(loginViewModel: LoginViewModel())
+        LoginView(viewModel: LoginViewModel())
     }
 }
