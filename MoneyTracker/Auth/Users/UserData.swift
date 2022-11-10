@@ -9,36 +9,20 @@ import Foundation
 
 class UserData: ObservableObject {
     
-    var id: String
-    var email: String
     var name: String
-//    var firstName: String = ""
-//    var lastName: String = ""
     var phoneNumber: String
+    var country: String
     
     var dictionary: [String: AnyHashable] {
-        return ["id": id,
-                "email": email,
-                "name": name,
-//                "firstName": firstName,
-//                "lastName": lastName,
-                "phoneNumber": phoneNumber]
+        return ["name": name,
+                "phoneNumber": phoneNumber,
+                "country": country]
     }
     
-    init(id: String, email: String, name: String, phoneNumber: String) {
-        self.id = id
-        self.email = email
+    init(name: String, phoneNumber: String, country: String) {
         self.name = name
         self.phoneNumber = phoneNumber
+        self.country = country
     }
-//
-//    init(document : DocumentSnapshot) {
-//        self.id = document.documentID
-//        self.email = document.get("email") as! String
-//        self.password = document.get("password") as! String
-//        self.name = document.get("name") as! String
-////        self.firstName = document.get("firstName") as! String
-////        self.lastName = document.get("lastName") as! String
-//        self.phoneNumber = document.get("phoneNumber") as! String
-//    }
+
 }

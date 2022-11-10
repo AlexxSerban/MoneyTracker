@@ -21,4 +21,8 @@ class AuthClient {
     func resetPassword(email: String) async throws -> Void {
          try await Auth.auth().sendPasswordReset(withEmail: email)
     }
+    
+    func getUserId() async throws -> String {
+        return try await Auth.auth().currentUser!.uid
+    }
 }

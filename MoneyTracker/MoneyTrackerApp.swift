@@ -17,7 +17,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         let container = DIContainer.shared
         container.register(type: AuthClient.self, component: AuthClient())
-        container.register(type: RepositoryUser.self, component: RepositoryUser())
+        container.register(type: UserRepository.self, component: UserRepository())
         
         return true
     }
