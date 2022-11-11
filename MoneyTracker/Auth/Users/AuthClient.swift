@@ -22,7 +22,7 @@ class AuthClient {
          try await Auth.auth().sendPasswordReset(withEmail: email)
     }
     
-    func getUserId() async throws -> String {
-        return try await Auth.auth().currentUser!.uid
+    func getUserId() -> String? {
+        return Auth.auth().currentUser?.uid
     }
 }

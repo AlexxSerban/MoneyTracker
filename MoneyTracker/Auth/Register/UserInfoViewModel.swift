@@ -15,7 +15,7 @@ class UserInfoViewModel: ObservableObject {
     func addInfoProfile(name: String, phoneNumber: String, country: String) {
         Task {
             do {
-                let addInfoResult = try await userRepository.addUser(userData: UserData(name: name, phoneNumber: phoneNumber, country: country))
+                try await userRepository.addUser(userData: UserData(name: name, phoneNumber: phoneNumber, country: country))
                 await MainActor.run {
                     print("All good")
                 }
