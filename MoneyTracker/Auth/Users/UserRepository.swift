@@ -14,11 +14,7 @@ class UserRepository: ObservableObject {
     let dataBase = Firestore.firestore()
     let authClient = DIContainer.shared.resolve(type: AuthClient.self)
     
-    enum UserRepositoryError: Error{
-        case missingUserId(String)
-    }
-    
-    func addUser(userData: UserData) async throws -> Void {
+    func addUser(userData: UserData) async throws {
         guard let userId = authClient.getUserId() else {
             return
         }
@@ -26,11 +22,13 @@ class UserRepository: ObservableObject {
         try await dataBase.collection("Users").document(userId).setData(userData.dictionary)
     }
     
-    func getUser(userData: UserData) async throws -> DocumentSnapshot {
-        guard let userId = authClient.getUserId() else {
-            throw UserRepositoryError.missingUserId("Missing user id")
-        }
+    func getUser(userId: String) async throws -> UserData {
+        let document = try await dataBase.collection("Users").document(userId).getDocument()
         
-        return try await dataBase.collection("Users").document(userId).getDocument()
+        return UserData(
+            name: document.get("name") as! String,
+            phoneNumber: document.get("phoneNumber") as! String,
+            country: document.get("country") as! String
+        )
     }
 }

@@ -71,7 +71,7 @@ struct LoginView: View {
                 Button("Ok") { }
             })
             .navigationDestination(isPresented: $viewModel.isLogged) {
-                Text("All good")
+                ProfileView()
             }
             .navigationDestination(isPresented: $toRegister) {
                 RegisterView(viewModel: RegisterViewModel())
