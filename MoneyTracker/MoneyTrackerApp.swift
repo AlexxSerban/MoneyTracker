@@ -16,7 +16,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         FirebaseApp.configure()
         
         let container = DIContainer.shared
-        container.register(type: FirebaseAuthClient.self, component: FirebaseAuthClient())
+        container.register(type: AuthClient.self, component: AuthClient())
+        container.register(type: UserRepository.self, component: UserRepository())
         
         return true
     }
@@ -30,7 +31,7 @@ struct MoneyTracker: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                LoginView(loginViewModel: LoginViewModel())
+                LoginView(viewModel: LoginViewModel())
             }
         }
     }

@@ -9,22 +9,27 @@ import Foundation
 
 class ResetPasswordViewModel: ObservableObject {
     
-    let container = DIContainer.shared.resolve(type: FirebaseAuthClient.self)
+    let authClient = DIContainer.shared.resolve(type: AuthClient.self)
     
     @Published var email: String = ""
     @Published var forgotPassword: Bool = false
     @Published var forgotError: Bool = false
     @Published var resetOk: Bool = false
     
-    func resetPassword(email: String) {
+    func resetPassword() {
         forgotPassword = true
         
-        container.resetPassword(email: email) {
-        
-//        authClient.resetPassword(email: email) {
-            self.forgotPassword = false
-        } onFailure: {
-            self.forgotError = true
+        Task {
+            do {
+                let resetResult = try await authClient.resetPassword(email: email)
+                
+                await MainActor.run {
+                    self.forgotPassword = false
+                }
+            } catch {
+                print(error)
+                self.forgotError = true
+            }
         }
     }
 }

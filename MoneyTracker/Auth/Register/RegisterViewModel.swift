@@ -10,8 +10,9 @@ import Foundation
 
 class RegisterViewModel: ObservableObject {
     
-    let container = DIContainer.shared.resolve(type: FirebaseAuthClient.self)
+    let authClient = DIContainer.shared.resolve(type: AuthClient.self)
     
+
     @Published var email: String = ""
     @Published var password: String = ""
     
@@ -20,20 +21,27 @@ class RegisterViewModel: ObservableObject {
     @Published var registeringError: Bool = false
     
     func register() {
-        isRegistering = true
+        self.isRegistering = true
         
-        container.createUser(user: email, password: password) {
-        
-//        authClient.createUser(user: email, password: password) {
-            //onSuccess
-            self.isRegistering = false
-            self.isRegistered = true
-        } onFailure: {
-            //onFailure
-            self.isRegistering = false
-            self.registeringError = true
+        Task {
+            do {
+                let authResult = try await authClient.createUser(email: email, password: password)
+                
+                await MainActor.run {
+                    self.isRegistering = false
+                    self.isRegistered = true
+                }
+            } catch {
+                print(error)
+                
+                await MainActor.run {
+                    self.isRegistering = false
+                    self.registeringError = true
+                }
+            }
         }
     }
+    
 }
 
 

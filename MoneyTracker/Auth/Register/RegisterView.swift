@@ -11,6 +11,7 @@ struct RegisterView: View {
     
     @State var toLogin: Bool = false
     
+    
     @ObservedObject var viewModel: RegisterViewModel
     
     var body: some View {
@@ -49,17 +50,17 @@ struct RegisterView: View {
                     Text("Log In")
                         .font(.system(size: 18, weight: .bold, design: .serif))
                         .foregroundColor(Color.orange)
-                }
+                }  
             }
             .padding()
             .alert("Wrong email", isPresented: $viewModel.registeringError, actions: {
                 Button("Ok") { }
             })
             .navigationDestination(isPresented: $viewModel.isRegistered) {
-                LoginView(loginViewModel: LoginViewModel())
+                UserInfoView(viewModel: UserInfoViewModel())
             }
             .navigationDestination(isPresented: $toLogin) {
-                LoginView(loginViewModel: LoginViewModel())
+                LoginView(viewModel: LoginViewModel())
             }
         }
     }
