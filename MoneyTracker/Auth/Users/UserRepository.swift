@@ -28,7 +28,7 @@ class UserRepository: ObservableObject {
         return UserData(
             name: document.get("name") as! String,
             phoneNumber: document.get("phoneNumber") as! String,
-            country: document.get("country") as! String
-        )
+            country: document.get("country") as! String )
+        
     }
 }

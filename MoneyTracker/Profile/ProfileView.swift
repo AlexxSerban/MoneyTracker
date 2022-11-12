@@ -7,8 +7,7 @@ import SwiftUI
 
 struct ProfileView: View {
     
-    @ObservedObject var viewModel = ProfileViewModel()
-    
+    @StateObject var viewModel = ProfileViewModel()
     
     var body: some View {
         NavigationStack{
@@ -17,26 +16,18 @@ struct ProfileView: View {
                     .font(.system(size: 18, weight: .bold, design: .serif))
                     .foregroundColor(Color.blue)
                 
-                HStack(spacing: 12){
-                    Text("Name:")
-                    Text("\(viewModel.userData.name)")
-                }
-                HStack(spacing: 12){
-                    Text("Phone Number:")
-                    Text("\(viewModel.userData.phoneNumber)")
-                }
-                HStack(spacing: 12){
-                    Text("Country:")
-                    Text("\(viewModel.userData.country)")
-                }
-                
-            }
-            .padding()
-            .onAppear() {
-                self.viewModel.getData()
+                Text("Name: \(viewModel.userData.name)")
+                Text("Phone Number: \(viewModel.userData.phoneNumber)")
+                Text("Country: \(viewModel.userData.country)")
             }
         }
+        .onAppear() {
+            print("A mers onAppear in NavigationStack")
+            self.viewModel.getData()
+        }
     }
+        
+    
 }
 
 struct UserProfileView_Previews: PreviewProvider {

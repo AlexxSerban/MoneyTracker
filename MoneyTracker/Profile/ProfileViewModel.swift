@@ -23,6 +23,9 @@ class ProfileViewModel: ObservableObject {
                 }
                 
                 self.userData = try await userRepository.getUser(userId: userId)
+                print("\(userData.name)")
+                print("\(userData.phoneNumber)")
+                print("\(userData.country)")
             } catch {
                 print(error)
             }

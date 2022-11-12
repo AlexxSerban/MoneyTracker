@@ -11,8 +11,6 @@ struct ResetPasswordView: View {
     
     @ObservedObject var viewModel: ResetPasswordViewModel
     
-    
-    
     var body: some View {
         NavigationStack {
             VStack(spacing: 16) {
