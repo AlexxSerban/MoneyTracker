@@ -11,9 +11,8 @@ struct UserInfoView: View {
     
     @State var addOk: Bool = false
     
-    @ObservedObject var userData = UserData(name: "", phoneNumber: "", country: "")
+    @State var userData = UserData(name: "", phoneNumber: "", country: "")
     @ObservedObject var viewModel: UserInfoViewModel
-    
     
     var body: some View {
         

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class UserData: ObservableObject {
+class UserData {
     
     var name: String
     var phoneNumber: String
