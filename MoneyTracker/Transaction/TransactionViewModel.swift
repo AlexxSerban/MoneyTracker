@@ -9,6 +9,7 @@ import Foundation
 
 class TransactionViewModel: ObservableObject {
     
+    @Published var amount : String = ""
     @Published var selection = "RON"
     @Published var currency = ["RON", "EUR", "USD", "GBP", "JPY"]
     @Published var selectionCategory = "Food"
@@ -16,4 +17,5 @@ class TransactionViewModel: ObservableObject {
     @Published var selectionPay = "Pe caiet"
     @Published var howIPay = ["Cash","Card","Pe caiet"]
     @Published var date = Date.now
+    
 }

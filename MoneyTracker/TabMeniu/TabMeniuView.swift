@@ -9,12 +9,10 @@ import SwiftUI
 
 struct TabMeniuView: View {
     
-    @ObservedObject var transactionViewModel = TransactionViewModel()
-    
-   
+    @State var showSheet: Bool = false
     @State private var selectedItem = 1
     @State private var oldSelectedItem = 1
-    @State var showSheet: Bool = false
+    
     
     
     var body: some View {
@@ -52,19 +50,19 @@ struct TabMeniuView: View {
             
             
         }
-        .onChange(of: selectedItem) {    // SwiftUI 2.0 track changes
+        .onChange(of: selectedItem) {
                         if 3 == selectedItem {
-                        self.showSheet = true
+                            self.showSheet = true
                             print("A mers")
                         } else {
                             self.oldSelectedItem = $0
                         }
                     }
-                .sheet(isPresented: $showSheet, onDismiss: {
+        .sheet(isPresented: $showSheet, onDismiss: {
                         self.selectedItem = self.oldSelectedItem
                     }) {
-                    TransactionView()
-                }
+                        TransactionView(showSheet: $showSheet)
+                    }
         
 
         

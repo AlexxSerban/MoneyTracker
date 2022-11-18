@@ -10,7 +10,7 @@ import SwiftUI
 struct TransactionView: View {
     
     @ObservedObject var viewModel = TransactionViewModel()
-    
+    @Binding var showSheet : Bool
     
     
     var body: some View {
@@ -54,28 +54,23 @@ struct TransactionView: View {
                     }
                     
                     DatePicker(selection: $viewModel.date, displayedComponents: .date, label: { Text("Enter date") })
-                    
-                    
-                   
                 }
             }
             .padding()
             
-            
             Button {
-//                transactionViewModel.showSheet = false
+                showSheet.toggle()
             } label: {
                 Text("Back")
             }
             .font(.system(size: 18, weight: .bold, design: .serif))
             .foregroundColor(Color.orange)
         }
-        
     }
 }
 
 struct TransactionView_Previews: PreviewProvider {
     static var previews: some View {
-        TransactionView()
+        TransactionView(showSheet: .constant(true))
     }
 }
