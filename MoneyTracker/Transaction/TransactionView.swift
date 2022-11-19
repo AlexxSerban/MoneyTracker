@@ -24,10 +24,10 @@ struct TransactionView: View {
                     HStack{
                         Picker("Select a currency", selection: $viewModel.selection) {
                             ForEach(viewModel.currency, id: \.self) {
-                                            Text($0)
-                                        }
-                                    }
-                                    .pickerStyle(.menu)
+                                Text($0)
+                            }
+                        }
+                        .pickerStyle(.menu)
                         
                         TextField("0", text: $viewModel.amount)
                             .textFieldStyle(.roundedBorder)
@@ -38,19 +38,19 @@ struct TransactionView: View {
                         Text("Category")
                         Picker("Select a category", selection: $viewModel.selectionCategory) {
                             ForEach(viewModel.category, id: \.self) {
-                                            Text($0)
-                                        }
-                                    }
-                                    .pickerStyle(.menu)
+                                Text($0)
+                            }
+                        }
+                        .pickerStyle(.menu)
                     }
                     HStack{
                         Text("How do you pay?")
                         Picker("Select a category", selection: $viewModel.selectionPay) {
                             ForEach(viewModel.howIPay, id: \.self) {
-                                            Text($0)
-                                        }
-                                    }
-                                    .pickerStyle(.menu)
+                                Text($0)
+                            }
+                        }
+                        .pickerStyle(.menu)
                     }
                     
                     DatePicker(selection: $viewModel.date, displayedComponents: .date, label: { Text("Enter date") })

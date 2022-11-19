@@ -30,11 +30,11 @@ struct TabMeniuView: View {
                     Text("Transactions")
                 }.tag(2)
             
-           Text("")
-               .tabItem {
-                 Image(systemName: "plus.circle.fill")
+            Text("")
+                .tabItem {
+                    Image(systemName: "plus.circle.fill")
                 }.tag(3)
-               
+            
             
             Text("Something")
                 .tabItem {
@@ -51,21 +51,18 @@ struct TabMeniuView: View {
             
         }
         .onChange(of: selectedItem) {
-                        if 3 == selectedItem {
-                            self.showSheet = true
-                            print("A mers")
-                        } else {
-                            self.oldSelectedItem = $0
-                        }
-                    }
+            if 3 == selectedItem {
+                self.showSheet = true
+                print("A mers")
+            } else {
+                self.oldSelectedItem = $0
+            }
+        }
         .sheet(isPresented: $showSheet, onDismiss: {
-                        self.selectedItem = self.oldSelectedItem
-                    }) {
-                        TransactionView(showSheet: $showSheet)
-                    }
-        
-
-        
+            self.selectedItem = self.oldSelectedItem
+        }) {
+            TransactionView(showSheet: $showSheet)
+        }
     }
 }
 
