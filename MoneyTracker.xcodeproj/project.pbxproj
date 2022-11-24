@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E13C10C292907D800805483 /* TransactionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E13C10B292907D800805483 /* TransactionRepository.swift */; };
+		3E13C10E29290CCB00805483 /* TransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E13C10D29290CCB00805483 /* TransactionViewModel.swift */; };
 		3E17C26428EF5B8B00EC5B70 /* MoneyTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E17C26328EF5B8B00EC5B70 /* MoneyTrackerApp.swift */; };
 		3E17C26828EF5B8C00EC5B70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E17C26728EF5B8C00EC5B70 /* Assets.xcassets */; };
 		3E17C26B28EF5B8C00EC5B70 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E17C26A28EF5B8C00EC5B70 /* Preview Assets.xcassets */; };
@@ -20,13 +22,13 @@
 		3E8B8153291D5E8E0081ED79 /* UserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8B8152291D5E8E0081ED79 /* UserInfoViewModel.swift */; };
 		3E8B8164291E9A760081ED79 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8B8163291E9A760081ED79 /* ProfileViewModel.swift */; };
 		3E8B8166291E9A8D0081ED79 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8B8165291E9A8D0081ED79 /* ProfileView.swift */; };
-		3EB608152922814B00B2BE0A /* TabMeniuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB608142922814B00B2BE0A /* TabMeniuView.swift */; };
-		3EB608172922815A00B2BE0A /* TabMeniuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB608162922815A00B2BE0A /* TabMeniuViewModel.swift */; };
+		3EB608152922814B00B2BE0A /* TabMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB608142922814B00B2BE0A /* TabMenuView.swift */; };
+		3EB608172922815A00B2BE0A /* TabMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB608162922815A00B2BE0A /* TabMenuViewModel.swift */; };
 		3EB6081B292284EF00B2BE0A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB6081A292284EF00B2BE0A /* HomeViewModel.swift */; };
 		3EB6081D292284FB00B2BE0A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB6081C292284FB00B2BE0A /* HomeView.swift */; };
 		3EB608202922863D00B2BE0A /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB6081F2922863D00B2BE0A /* JournalView.swift */; };
 		3EB608222922865C00B2BE0A /* JournalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB608212922865C00B2BE0A /* JournalViewModel.swift */; };
-		3EB6082529228B3600B2BE0A /* TransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB6082429228B3600B2BE0A /* TransactionViewModel.swift */; };
+		3EB6082529228B3600B2BE0A /* TransactionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB6082429228B3600B2BE0A /* TransactionData.swift */; };
 		3EB6082729228B4400B2BE0A /* TransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB6082629228B4400B2BE0A /* TransactionView.swift */; };
 		3EC89CBB291D160500914ABD /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC89CBA291D160500914ABD /* UserInfoView.swift */; };
 		3EE3BA1228F03E590001F751 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3BA1128F03E590001F751 /* LoginViewModel.swift */; };
@@ -39,6 +41,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3E13C10B292907D800805483 /* TransactionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionRepository.swift; sourceTree = "<group>"; };
+		3E13C10D29290CCB00805483 /* TransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewModel.swift; sourceTree = "<group>"; };
 		3E17C26028EF5B8B00EC5B70 /* MoneyTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoneyTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E17C26328EF5B8B00EC5B70 /* MoneyTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyTrackerApp.swift; sourceTree = "<group>"; };
 		3E17C26728EF5B8C00EC5B70 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -50,13 +54,13 @@
 		3E8B8152291D5E8E0081ED79 /* UserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewModel.swift; sourceTree = "<group>"; };
 		3E8B8163291E9A760081ED79 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		3E8B8165291E9A8D0081ED79 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		3EB608142922814B00B2BE0A /* TabMeniuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabMeniuView.swift; sourceTree = "<group>"; };
-		3EB608162922815A00B2BE0A /* TabMeniuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabMeniuViewModel.swift; sourceTree = "<group>"; };
+		3EB608142922814B00B2BE0A /* TabMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabMenuView.swift; sourceTree = "<group>"; };
+		3EB608162922815A00B2BE0A /* TabMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabMenuViewModel.swift; sourceTree = "<group>"; };
 		3EB6081A292284EF00B2BE0A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		3EB6081C292284FB00B2BE0A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		3EB6081F2922863D00B2BE0A /* JournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
 		3EB608212922865C00B2BE0A /* JournalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalViewModel.swift; sourceTree = "<group>"; };
-		3EB6082429228B3600B2BE0A /* TransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewModel.swift; sourceTree = "<group>"; };
+		3EB6082429228B3600B2BE0A /* TransactionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionData.swift; sourceTree = "<group>"; };
 		3EB6082629228B4400B2BE0A /* TransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionView.swift; sourceTree = "<group>"; };
 		3EC89CBA291D160500914ABD /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
 		3EE3BA1128F03E590001F751 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -168,8 +172,8 @@
 		3EB608132922812F00B2BE0A /* TabMeniu */ = {
 			isa = PBXGroup;
 			children = (
-				3EB608142922814B00B2BE0A /* TabMeniuView.swift */,
-				3EB608162922815A00B2BE0A /* TabMeniuViewModel.swift */,
+				3EB608142922814B00B2BE0A /* TabMenuView.swift */,
+				3EB608162922815A00B2BE0A /* TabMenuViewModel.swift */,
 			);
 			path = TabMeniu;
 			sourceTree = "<group>";
@@ -195,8 +199,10 @@
 		3EB6082329228A5C00B2BE0A /* Transaction */ = {
 			isa = PBXGroup;
 			children = (
-				3EB6082429228B3600B2BE0A /* TransactionViewModel.swift */,
+				3EB6082429228B3600B2BE0A /* TransactionData.swift */,
 				3EB6082629228B4400B2BE0A /* TransactionView.swift */,
+				3E13C10B292907D800805483 /* TransactionRepository.swift */,
+				3E13C10D29290CCB00805483 /* TransactionViewModel.swift */,
 			);
 			path = Transaction;
 			sourceTree = "<group>";
@@ -300,7 +306,7 @@
 			files = (
 				3E6EE3AF28EF67B4009ECBF6 /* RegisterViewModel.swift in Sources */,
 				3EB6081B292284EF00B2BE0A /* HomeViewModel.swift in Sources */,
-				3EB608172922815A00B2BE0A /* TabMeniuViewModel.swift in Sources */,
+				3EB608172922815A00B2BE0A /* TabMenuViewModel.swift in Sources */,
 				3EB6082729228B4400B2BE0A /* TransactionView.swift in Sources */,
 				3EE3BA6028FF26590001F751 /* ResetPasswordViewModel.swift in Sources */,
 				3EE3BA68290D24510001F751 /* UserRepository.swift in Sources */,
@@ -314,10 +320,12 @@
 				3EE3BA6A290D2A8F0001F751 /* UserData.swift in Sources */,
 				3EE3BA5E28FF260A0001F751 /* ResetPasswordView.swift in Sources */,
 				3EE3BA1428F03E670001F751 /* LoginView.swift in Sources */,
-				3EB6082529228B3600B2BE0A /* TransactionViewModel.swift in Sources */,
+				3EB6082529228B3600B2BE0A /* TransactionData.swift in Sources */,
 				3E6EE3B228EF6D10009ECBF6 /* AuthClient.swift in Sources */,
-				3EB608152922814B00B2BE0A /* TabMeniuView.swift in Sources */,
+				3EB608152922814B00B2BE0A /* TabMenuView.swift in Sources */,
+				3E13C10E29290CCB00805483 /* TransactionViewModel.swift in Sources */,
 				3EE3BA66290C01640001F751 /* DIContainer.swift in Sources */,
+				3E13C10C292907D800805483 /* TransactionRepository.swift in Sources */,
 				3E17C26428EF5B8B00EC5B70 /* MoneyTrackerApp.swift in Sources */,
 				3EB608222922865C00B2BE0A /* JournalViewModel.swift in Sources */,
 				3EB6081D292284FB00B2BE0A /* HomeView.swift in Sources */,

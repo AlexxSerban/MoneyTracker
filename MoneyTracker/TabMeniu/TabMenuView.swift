@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct TabMeniuView: View {
+struct TabMenuView: View {
     
-    @State var showSheet: Bool = false
+    @State private var showSheet = false
     @State private var selectedItem = 1
     @State private var oldSelectedItem = 1
     
@@ -53,7 +53,7 @@ struct TabMeniuView: View {
         .onChange(of: selectedItem) {
             if 3 == selectedItem {
                 self.showSheet = true
-                print("A mers")
+                print("A mers showSheet in true")
             } else {
                 self.oldSelectedItem = $0
             }
@@ -68,6 +68,6 @@ struct TabMeniuView: View {
 
 struct TabMeniuView_Previews: PreviewProvider {
     static var previews: some View {
-        TabMeniuView()
+        TabMenuView()
     }
 }

@@ -2,20 +2,34 @@
 //  TransactionViewModel.swift
 //  MoneyTracker
 //
-//  Created by Alex Serban on 14.11.2022.
+//  Created by Alex Serban on 19.11.2022.
 //
 
 import Foundation
 
 class TransactionViewModel: ObservableObject {
     
-    @Published var amount : String = ""
-    @Published var selection = "RON"
-    @Published var currency = ["RON", "EUR", "USD", "GBP", "JPY"]
-    @Published var selectionCategory = "Food"
-    @Published var category = ["Food","Education","Pets","Fitness"]
-    @Published var selectionPay = "Pe caiet"
-    @Published var howIPay = ["Cash","Card","Pe caiet"]
-    @Published var date = Date.now
+//    var showSheet : Bool = false
+    let transactionRepository = DIContainer.shared.resolve(type: TransactionRepository.self)
+    @Published var transactionData = TransactionData(amount: "", currency: TransactionData.SelectionCurrency.RON, category: TransactionData.SelectionCategory.Food, paymentMethod: TransactionData.SelectionPay.Card, date: Date())
+     
     
+    init(transactionData: TransactionData = TransactionData(amount: "", currency: TransactionData.SelectionCurrency.RON, category: TransactionData.SelectionCategory.Food, paymentMethod: TransactionData.SelectionPay.Card, date: Date()), showSheet: Bool) {
+        self.transactionData = transactionData
+//        self.showSheet = showSheet
+    }
+    
+    func addTransactionInfo(amount: String, currency: TransactionData.SelectionCurrency, category: TransactionData.SelectionCategory, paymentMethod: TransactionData.SelectionPay, date: Date) {
+        Task {
+            do {
+                try await transactionRepository.addTransaction(transactionData: TransactionData(amount: amount, currency: currency, category: category, paymentMethod: paymentMethod, date: date))
+                await MainActor.run {
+                    print("A mers addTransactionInfo")
+                }
+            } catch {
+                print(error)
+                
+            }
+        }
+    }
 }
