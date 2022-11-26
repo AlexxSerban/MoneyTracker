@@ -71,7 +71,7 @@ struct LoginView: View {
                 Button("Ok") { }
             })
             .navigationDestination(isPresented: $viewModel.isLogged) {
-                TabMeniuView()
+                TabMenuView()
             }
             .navigationDestination(isPresented: $toRegister) {
                 RegisterView(viewModel: RegisterViewModel())
