@@ -22,7 +22,16 @@ struct ResetPasswordView: View {
                 Button {
                     viewModel.resetPassword()
                 } label: {
-                    Text("Reset")
+                    if viewModel.isLoading {
+                        HStack(spacing: 16){
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle(tint: .orange))
+                            
+                            Text("Loading")
+                        }
+                    } else {
+                        Text("Reset")
+                    }
                 }
                 .buttonStyle(.borderedProminent)
                 .buttonBorderShape(.capsule)

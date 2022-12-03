@@ -27,7 +27,7 @@ struct LoginView: View {
                 Button {
                     viewModel.login()
                 } label: {
-                    if viewModel.isLogging {
+                    if viewModel.isLoading {
                         HStack(spacing: 16){
                             ProgressView()
                                 .progressViewStyle(CircularProgressViewStyle(tint: .orange))
@@ -40,7 +40,7 @@ struct LoginView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .buttonBorderShape(.capsule)
-                .disabled(viewModel.isLogging)
+                .disabled(viewModel.isLoading)
                 
                 Button() {
                     viewModel.toRegister = true

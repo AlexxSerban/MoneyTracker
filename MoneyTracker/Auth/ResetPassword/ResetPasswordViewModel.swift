@@ -37,7 +37,7 @@ class ResetPasswordViewModel: ObservableObject {
                     self.isLoading = false
                 }
             } catch {
-                print(error)
+                print(error.localizedDescription)
                 self.forgotError = true
             }
         }

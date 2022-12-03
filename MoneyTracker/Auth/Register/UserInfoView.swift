@@ -9,9 +9,6 @@ import SwiftUI
 
 struct UserInfoView: View {
     
-    @State var addOk: Bool = false
-    
-    @State var userData = UserData(name: "", phoneNumber: "", country: "")
     @ObservedObject var viewModel: UserInfoViewModel
     
     var body: some View {
@@ -23,20 +20,17 @@ struct UserInfoView: View {
                     Text("Enter your info")
                    
                     Group{
-                        TextField("Name", text: $userData.name)
+                        TextField("Name", text: $viewModel.userData.name)
                             .keyboardType(.emailAddress)
-                        TextField("Phone number", text: $userData.phoneNumber)
+                        TextField("Phone number", text: $viewModel.userData.phoneNumber)
                             .keyboardType(.emailAddress)
-                        TextField("Country", text: $userData.country)
+                        TextField("Country", text: $viewModel.userData.country)
                             .keyboardType(.emailAddress)
                     }
                     .textInputAutocapitalization(.never)
                     
                     Button {
-                        viewModel.addInfoProfile(name: userData.name, phoneNumber: userData.phoneNumber, country: userData.country)
-                        
-                        addOk = true
-                        
+                        viewModel.addProfileInfo()
                     } label: {
                        Text("Submit")
                     }
@@ -45,8 +39,8 @@ struct UserInfoView: View {
                 }.padding()
             }
         }
-        .navigationDestination(isPresented: $addOk) {
-            Text("A mers cumetre")
+        .navigationDestination(isPresented: $viewModel.isSuccessful) {
+            Text("TODO - Everything worked!")
         }
     }
 }

@@ -9,9 +9,6 @@ import SwiftUI
 
 struct RegisterView: View {
     
-    @State var toLogin: Bool = false
-    
-    
     @ObservedObject var viewModel: RegisterViewModel
     
     var body: some View {
@@ -30,7 +27,7 @@ struct RegisterView: View {
                 Button {
                     viewModel.register()
                 } label: {
-                    if viewModel.isRegistering {
+                    if viewModel.isLoading {
                         HStack(spacing: 16){
                             ProgressView()
                                 .progressViewStyle(CircularProgressViewStyle(tint: .orange))
@@ -42,10 +39,10 @@ struct RegisterView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .buttonBorderShape(.capsule)
-                .disabled(viewModel.isRegistering)
+                .disabled(viewModel.isLoading)
                 
                 Button() {
-                    toLogin = true
+                    viewModel.toLogin = true
                 } label: {
                     Text("Log In")
                         .font(.system(size: 18, weight: .bold, design: .serif))
@@ -59,7 +56,7 @@ struct RegisterView: View {
             .navigationDestination(isPresented: $viewModel.isRegistered) {
                 UserInfoView(viewModel: UserInfoViewModel())
             }
-            .navigationDestination(isPresented: $toLogin) {
+            .navigationDestination(isPresented: $viewModel.toLogin) {
                 LoginView(viewModel: LoginViewModel())
             }
         }

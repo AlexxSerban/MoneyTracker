@@ -9,10 +9,19 @@ import Foundation
 
 class ProfileViewModel: ObservableObject {
     
-    let userRepository = DIContainer.shared.resolve(type: UserRepository.self)
-    let authClient = DIContainer.shared.resolve(type: AuthClient.self)
+    @Published var userData = UserData()
     
-    @Published var userData = UserData(name: "", phoneNumber: "", country: "")
+    // Dependencies
+    let authClient: AuthClient
+    let userRepository: UserRepository
+    
+    init(
+        authClient: AuthClient = DIContainer.shared.resolve(type: AuthClient.self),
+        userRepository: UserRepository = DIContainer.shared.resolve(type: UserRepository.self)
+    ) {
+        self.authClient = authClient
+        self.userRepository = userRepository
+    }
     
     @MainActor
     func getData() {
@@ -23,11 +32,8 @@ class ProfileViewModel: ObservableObject {
                 }
                 
                 self.userData = try await userRepository.getUser(userId: userId)
-                print("\(userData.name)")
-                print("\(userData.phoneNumber)")
-                print("\(userData.country)")
             } catch {
-                print(error)
+                print(error.localizedDescription)
             }
         }
     }

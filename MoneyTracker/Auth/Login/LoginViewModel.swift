@@ -14,7 +14,7 @@ class LoginViewModel: ObservableObject {
     @Published var password: String = ""
     
     // Status
-    @Published var isLogging: Bool = false
+    @Published var isLoading: Bool = false
     @Published var isLogged: Bool = false
     @Published var loggingError: Bool = false
     
@@ -30,20 +30,20 @@ class LoginViewModel: ObservableObject {
     }
     
     func login() {
-        isLogging = true
+        isLoading = true
         
         Task{
             do {
                 let _ = try await authClient.loginUser(email: email, password: password)
                 
                 await MainActor.run {
-                    self.isLogging = false
+                    self.isLoading = false
                     self.isLogged = true
                 }
             } catch {
                 print(error.localizedDescription)
                 
-                self.isLogging = false
+                self.isLoading = false
                 self.loggingError = true
             }
         }
