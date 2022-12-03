@@ -9,34 +9,43 @@ import Foundation
 
 class LoginViewModel: ObservableObject {
     
-    let authClient = DIContainer.shared.resolve(type: AuthClient.self)
-    
+    // User Data
     @Published var email: String = ""
     @Published var password: String = ""
-    @Published var isLogging: Bool = false
+    
+    // Status
+    @Published var isLoading: Bool = false
     @Published var isLogged: Bool = false
     @Published var loggingError: Bool = false
+    
+    // Navigation
+    @Published var toRegister: Bool = false
+    @Published var forgotPassword: Bool = false
+    
+    // Dependencies
+    let authClient: AuthClient
 
+    init(authClient: AuthClient = DIContainer.shared.resolve(type: AuthClient.self)) {
+        self.authClient = authClient
+    }
     
     func login() {
-        isLogging = true
+        isLoading = true
         
         Task{
             do {
-                let authResult = try await authClient.loginUser(email: email, password: password)
+                let _ = try await authClient.loginUser(email: email, password: password)
                 
                 await MainActor.run {
-                    
-                    self.isLogging = false
+                    self.isLoading = false
                     self.isLogged = true
                 }
             } catch {
-                print(error)
+                print(error.localizedDescription)
                 
-                self.isLogging = false
+                self.isLoading = false
                 self.loggingError = true
             }
         }
     }
 }
-

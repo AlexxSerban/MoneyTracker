@@ -11,16 +11,22 @@ import Firebase
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     
-    func application(_ application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        // Firebase Init
         FirebaseApp.configure()
         
+        // Dependencies
+        setupDependencies()
+        
+        return true
+    }
+    
+    func setupDependencies() {
         let container = DIContainer.shared
+        
         container.register(type: AuthClient.self, component: AuthClient())
         container.register(type: UserRepository.self, component: UserRepository())
         container.register(type: TransactionRepository.self, component: TransactionRepository())
-        
-        return true
     }
 }
 

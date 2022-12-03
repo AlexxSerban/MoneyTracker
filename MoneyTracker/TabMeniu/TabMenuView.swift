@@ -9,11 +9,12 @@ import SwiftUI
 
 struct TabMenuView: View {
     
-    @State private var showSheet = false
+    // Selected Item
     @State private var selectedItem = 1
     @State private var oldSelectedItem = 1
     
-    
+    // Status
+    @State private var showSheet = false
     
     var body: some View {
         TabView(selection: $selectedItem) {
@@ -53,6 +54,7 @@ struct TabMenuView: View {
         .onChange(of: selectedItem) {
             if 3 == selectedItem {
                 self.showSheet = true
+                
                 print("A mers showSheet in true")
             } else {
                 self.oldSelectedItem = $0

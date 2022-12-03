@@ -10,32 +10,41 @@ import Foundation
 
 class RegisterViewModel: ObservableObject {
     
-    let authClient = DIContainer.shared.resolve(type: AuthClient.self)
-    
-
+    // User Data
     @Published var email: String = ""
     @Published var password: String = ""
     
-    @Published var isRegistering: Bool = false
+    // Status
+    @Published var isLoading: Bool = false
     @Published var isRegistered: Bool = false
     @Published var registeringError: Bool = false
     
+    // Navigation
+    @Published var toLogin: Bool = false
+    
+    // Dependencies
+    let authClient: AuthClient
+    
+    init(authClient: AuthClient = DIContainer.shared.resolve(type: AuthClient.self)) {
+        self.authClient = authClient
+    }
+    
     func register() {
-        self.isRegistering = true
+        self.isLoading = true
         
         Task {
             do {
-                let authResult = try await authClient.createUser(email: email, password: password)
+                let _ = try await authClient.createUser(email: email, password: password)
                 
                 await MainActor.run {
-                    self.isRegistering = false
+                    self.isLoading = false
                     self.isRegistered = true
                 }
             } catch {
-                print(error)
+                print(error.localizedDescription)
                 
                 await MainActor.run {
-                    self.isRegistering = false
+                    self.isLoading = false
                     self.registeringError = true
                 }
             }

@@ -9,9 +9,6 @@ import SwiftUI
 
 struct LoginView: View {
     
-    @State var toRegister: Bool = false
-    @State var forgotPassword: Bool = false
-    
     @ObservedObject var viewModel: LoginViewModel
 
     var body: some View {
@@ -23,16 +20,18 @@ struct LoginView: View {
                 Group{
                     TextField("Email", text: $viewModel.email)
                         .keyboardType(.emailAddress)
+                    
                     SecureField("Password", text: $viewModel.password)
                 }
                 
                 Button {
                     viewModel.login()
                 } label: {
-                    if viewModel.isLogging {
+                    if viewModel.isLoading {
                         HStack(spacing: 16){
                             ProgressView()
                                 .progressViewStyle(CircularProgressViewStyle(tint: .orange))
+                            
                             Text("Logging")
                         }
                     } else {
@@ -41,10 +40,10 @@ struct LoginView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .buttonBorderShape(.capsule)
-                .disabled(viewModel.isLogging)
+                .disabled(viewModel.isLoading)
                 
                 Button() {
-                    toRegister = true
+                    viewModel.toRegister = true
                 } label: {
                     Text("Register")
                         .font(.system(size: 18, weight: .bold, design: .serif))
@@ -55,7 +54,7 @@ struct LoginView: View {
                 .buttonBorderShape(.capsule)
                 
                 Button {
-                    forgotPassword = true
+                    viewModel.forgotPassword = true
                 } label: {
                     Text("Forgot Password")
                         .font(.system(size: 18, weight: .bold, design: .serif))
@@ -73,10 +72,10 @@ struct LoginView: View {
             .navigationDestination(isPresented: $viewModel.isLogged) {
                 TabMenuView()
             }
-            .navigationDestination(isPresented: $toRegister) {
+            .navigationDestination(isPresented: $viewModel.toRegister) {
                 RegisterView(viewModel: RegisterViewModel())
             }
-            .navigationDestination(isPresented: $forgotPassword) {
+            .navigationDestination(isPresented: $viewModel.forgotPassword) {
                 ResetPasswordView(viewModel: ResetPasswordViewModel())
             }
         }    

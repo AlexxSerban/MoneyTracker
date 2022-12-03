@@ -19,10 +19,13 @@ class UserData {
                 "country": country]
     }
     
-    init(name: String, phoneNumber: String, country: String) {
+    init(
+        name: String = "",
+        phoneNumber: String = "",
+        country: String = ""
+    ) {
         self.name = name
         self.phoneNumber = phoneNumber
         self.country = country
     }
-
 }

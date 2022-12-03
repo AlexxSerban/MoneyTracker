@@ -22,7 +22,6 @@ struct ProfileView: View {
             }
         }
         .onAppear() {
-            print("A mers onAppear in NavigationStack")
             self.viewModel.getData()
         }
     }

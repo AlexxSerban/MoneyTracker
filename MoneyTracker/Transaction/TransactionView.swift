@@ -9,8 +9,10 @@ import SwiftUI
 
 struct TransactionView: View {
     
+    @StateObject var viewModel = TransactionViewModel()
+    
+    // View Init
     @Binding var showSheet : Bool
-    @StateObject var viewModel = TransactionViewModel(showSheet: true)
     
     var body: some View {
         
@@ -23,7 +25,7 @@ struct TransactionView: View {
                     
                     HStack{
                         Picker("Select a currency", selection: $viewModel.transactionData.currency) {
-                            ForEach(TransactionData.SelectionCurrency.allCases, id: \.self) {
+                            ForEach(SelectionCurrency.allCases, id: \.self) {
                                 Text($0.rawValue)
                                     .tag($0)
                             }
@@ -34,21 +36,24 @@ struct TransactionView: View {
                             .textFieldStyle(.roundedBorder)
                             .foregroundColor(Color.blue)
                     }
+                    
                     HStack{
                         Image(systemName: "folder.circle.fill")
                         Text("Category")
+                        
                         Picker("Select a category", selection: $viewModel.transactionData.category) {
-                            ForEach(TransactionData.SelectionCategory.allCases, id: \.self) {
+                            ForEach(SelectionCategory.allCases, id: \.self) {
                                 Text($0.rawValue)
                                     .tag($0)
                             }
                         }
                         .pickerStyle(.menu)
                     }
+                    
                     HStack{
                         Text("How do you pay?")
                         Picker("Select a category", selection: $viewModel.transactionData.paymentMethod) {
-                            ForEach(TransactionData.SelectionPay.allCases, id: \.self) {
+                            ForEach(SelectionPay.allCases, id: \.self) {
                                 Text($0.rawValue)
                                     .tag($0)
                             }
@@ -62,12 +67,10 @@ struct TransactionView: View {
             .padding()
             
             Button {
-                showSheet = false
-                viewModel.addTransactionInfo(amount: viewModel.transactionData.amount, currency: viewModel.transactionData.currency, category: viewModel.transactionData.category, paymentMethod: viewModel.transactionData.paymentMethod, date: viewModel.transactionData.date)
-                if showSheet == false{
-                    print("showSheet s a setat pe false")
-                }
+                viewModel.addTransactionInfo()
                 
+                // Closes the sheet
+                showSheet = false
             } label: {
                 Text("Save")
             }

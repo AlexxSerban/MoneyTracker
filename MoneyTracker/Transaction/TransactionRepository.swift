@@ -11,10 +11,13 @@ import Firebase
 
 class TransactionRepository: ObservableObject {
     
-    let dataBase = Firestore.firestore()
-    let authClient = DIContainer.shared.resolve(type: AuthClient.self)
-    var date = Date.now
+    let dataBase: Firestore
+    let authClient: AuthClient
     
+    init(dataBase: Firestore = Firestore.firestore(), authClient: AuthClient = DIContainer.shared.resolve(type: AuthClient.self)) {
+        self.dataBase = dataBase
+        self.authClient = authClient
+    }
     
     func addTransaction(transactionData: TransactionData) async throws {
         guard let userId = authClient.getUserId() else {
@@ -23,5 +26,4 @@ class TransactionRepository: ObservableObject {
         
         try await dataBase.collection("UserData").document(userId).collection("Transactions").document().setData(transactionData.dictionary)
     }
-    
 }

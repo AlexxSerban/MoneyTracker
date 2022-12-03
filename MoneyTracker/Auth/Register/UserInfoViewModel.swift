@@ -9,19 +9,29 @@ import Foundation
 
 class UserInfoViewModel: ObservableObject {
     
-    let userRepository = DIContainer.shared.resolve(type: UserRepository.self)
-    let userData = UserData(name: "", phoneNumber: "", country: "")
+    // User Data
+    @Published var userData = UserData()
     
-    func addInfoProfile(name: String, phoneNumber: String, country: String) {
+    // Status
+    @Published var isSuccessful: Bool = false
+    
+    // Dependencies
+    let userRepository: UserRepository
+    
+    init(userRepository: UserRepository = DIContainer.shared.resolve(type: UserRepository.self)) {
+        self.userRepository = userRepository
+    }
+    
+    func addProfileInfo() {
         Task {
             do {
-                try await userRepository.addUser(userData: UserData(name: name, phoneNumber: phoneNumber, country: country))
+                try await userRepository.addUser(userData: userData)
+                
                 await MainActor.run {
                     print("All good")
                 }
             } catch {
-                print(error)
-                
+                print(error.localizedDescription)
             }
         }
     }

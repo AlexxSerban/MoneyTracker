@@ -15,13 +15,23 @@ struct ResetPasswordView: View {
         NavigationStack {
             VStack(spacing: 16) {
                 Text("Please enter your email.")
+                
                 TextField("Your email", text: $viewModel.email)
                     .keyboardType(.emailAddress)
+                
                 Button {
                     viewModel.resetPassword()
-                    viewModel.resetOk = true
                 } label: {
-                    Text("Reset")
+                    if viewModel.isLoading {
+                        HStack(spacing: 16){
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle(tint: .orange))
+                            
+                            Text("Loading")
+                        }
+                    } else {
+                        Text("Reset")
+                    }
                 }
                 .buttonStyle(.borderedProminent)
                 .buttonBorderShape(.capsule)
@@ -30,7 +40,7 @@ struct ResetPasswordView: View {
             .alert("Please try again", isPresented: $viewModel.forgotError, actions: {
                 Button("Ok") { }
             })
-            .navigationDestination(isPresented: $viewModel.resetOk) {
+            .navigationDestination(isPresented: $viewModel.resetSuccessful) {
                 LoginView(viewModel: LoginViewModel())
             }
         }

@@ -9,25 +9,35 @@ import Foundation
 
 class ResetPasswordViewModel: ObservableObject {
     
-    let authClient = DIContainer.shared.resolve(type: AuthClient.self)
-    
+    // User Data
     @Published var email: String = ""
-    @Published var forgotPassword: Bool = false
+    
+    // Status
+    @Published var isLoading: Bool = false
     @Published var forgotError: Bool = false
-    @Published var resetOk: Bool = false
+    
+    // Navigation
+    @Published var resetSuccessful: Bool = false
+    
+    // Dependencies
+    let authClient: AuthClient
+    
+    init(authClient: AuthClient = DIContainer.shared.resolve(type: AuthClient.self)) {
+        self.authClient = authClient
+    }
     
     func resetPassword() {
-        forgotPassword = true
+        isLoading = true
         
         Task {
             do {
-                let resetResult = try await authClient.resetPassword(email: email)
+                let _ = try await authClient.resetPassword(email: email)
                 
                 await MainActor.run {
-                    self.forgotPassword = false
+                    self.isLoading = false
                 }
             } catch {
-                print(error)
+                print(error.localizedDescription)
                 self.forgotError = true
             }
         }
