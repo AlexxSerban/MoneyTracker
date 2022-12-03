@@ -15,11 +15,12 @@ struct ResetPasswordView: View {
         NavigationStack {
             VStack(spacing: 16) {
                 Text("Please enter your email.")
+                
                 TextField("Your email", text: $viewModel.email)
                     .keyboardType(.emailAddress)
+                
                 Button {
                     viewModel.resetPassword()
-                    viewModel.resetOk = true
                 } label: {
                     Text("Reset")
                 }
@@ -30,7 +31,7 @@ struct ResetPasswordView: View {
             .alert("Please try again", isPresented: $viewModel.forgotError, actions: {
                 Button("Ok") { }
             })
-            .navigationDestination(isPresented: $viewModel.resetOk) {
+            .navigationDestination(isPresented: $viewModel.resetSuccessful) {
                 LoginView(viewModel: LoginViewModel())
             }
         }
