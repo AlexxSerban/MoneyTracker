@@ -1,16 +1,16 @@
 //
-//  TransactionViewModel.swift
+//  HomeViewModel.swift
 //  MoneyTracker
 //
-//  Created by Alex Serban on 19.11.2022.
+//  Created by Alex Serban on 03.12.2022.
 //
 
 import Foundation
 
-class TransactionViewModel: ObservableObject {
+class HomeViewModel: ObservableObject {
     
     // Transaction Data
-    var transactionData = TransactionData()
+    @Published var transactionData = [TransactionData()]
     
     // Dependencies
     let transactionRepository: TransactionRepository
@@ -19,14 +19,11 @@ class TransactionViewModel: ObservableObject {
         self.transactionRepository = transactionRepository
     }
     
-    func addTransactionInfo() {
-        Task {
+    @MainActor
+    func getLastTransactions() {
+        Task{
             do {
-                try await transactionRepository.addTransaction(transactionData: transactionData)
-                
-                await MainActor.run {
-                    print("A mers addTransactionInfo")
-                }
+                self.transactionData = try await transactionRepository.getTransactions(transactionNumber: 5)
             } catch {
                 print(error.localizedDescription)
             }

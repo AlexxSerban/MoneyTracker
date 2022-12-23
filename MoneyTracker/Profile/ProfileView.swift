@@ -25,8 +25,6 @@ struct ProfileView: View {
             self.viewModel.getData()
         }
     }
-        
-    
 }
 
 struct UserProfileView_Previews: PreviewProvider {

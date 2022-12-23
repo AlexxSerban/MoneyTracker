@@ -29,6 +29,5 @@ class UserRepository: ObservableObject {
             name: document.get("name") as! String,
             phoneNumber: document.get("phoneNumber") as! String,
             country: document.get("country") as! String )
-        
     }
 }

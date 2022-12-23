@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
 enum SelectionCurrency: String, CaseIterable, Identifiable {
     case RON, EUR, USD, GBP, JPY
@@ -25,13 +26,16 @@ enum SelectionPay: String, CaseIterable, Identifiable {
     var id: Self {self}
 }
 
-class TransactionData {
-    
+
+
+class TransactionData: Identifiable {
+    var id = UUID()
     var amount : String
     var currency : SelectionCurrency
     var category : SelectionCategory
     var paymentMethod : SelectionPay
-    var date: Date
+    var date : Date
+    var timestamp: Timestamp
     
     var dictionary: [String: AnyHashable] {
         return [
@@ -39,22 +43,27 @@ class TransactionData {
             "currency": currency.rawValue,
             "category": category.rawValue,
             "paymentMethod": paymentMethod.rawValue,
-            "date": date
+            "date": date,
+            "timestamp": timestamp
         ]
     }
     
     init(
         amount: String = "",
-        currency: SelectionCurrency = .RON,
+        currency: SelectionCurrency = .USD,
         category: SelectionCategory = .Food,
         paymentMethod: SelectionPay = .Card,
-        date: Date = Date.now
+        date: Date = Date(),
+        timestamp: Timestamp = .init()
     ) {
         self.amount = amount
         self.currency = currency
         self.category = category
         self.paymentMethod = paymentMethod
         self.date = date
+        self.timestamp = timestamp
     }
 }
+
+
 

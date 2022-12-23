@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
+import Combine
 
 struct TransactionView: View {
     
@@ -14,7 +16,9 @@ struct TransactionView: View {
     // View Init
     @Binding var showSheet : Bool
     
+    
     var body: some View {
+        
         
         VStack(spacing: 30){
             
@@ -62,6 +66,8 @@ struct TransactionView: View {
                     }
                     
                     DatePicker(selection: $viewModel.transactionData.date, label: { Text("Enter date") })
+                   
+        
                 }
             }
             .padding()
@@ -85,3 +91,5 @@ struct TransactionView_Previews: PreviewProvider {
         TransactionView(showSheet: .constant(true))
     }
 }
+
+
