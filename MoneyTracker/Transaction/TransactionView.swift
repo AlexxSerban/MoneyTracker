@@ -16,9 +16,7 @@ struct TransactionView: View {
     // View Init
     @Binding var showSheet : Bool
     
-    
     var body: some View {
-        
         
         VStack(spacing: 30){
             
@@ -66,8 +64,17 @@ struct TransactionView: View {
                     }
                     
                     DatePicker(selection: $viewModel.transactionData.date, label: { Text("Enter date") })
-                   
-        
+                    
+                    HStack{
+                        Text("Transaction Type")
+                        Picker("Select a category", selection: $viewModel.transactionData.transactionType) {
+                            ForEach(TransactionType.allCases, id: \.self) {
+                                Text($0.rawValue)
+                                    .tag($0)
+                            }
+                        }
+                        .pickerStyle(.menu)
+                    }
                 }
             }
             .padding()

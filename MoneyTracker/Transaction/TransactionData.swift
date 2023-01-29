@@ -26,16 +26,21 @@ enum SelectionPay: String, CaseIterable, Identifiable {
     var id: Self {self}
 }
 
+enum TransactionType: String, CaseIterable, Identifiable {
+    case Spend, Income
+    
+    var id: Self {self}
+}
 
-
-class TransactionData: Identifiable {
+class TransactionData: Identifiable, ObservableObject{
     var id = UUID()
     var amount : String
-    var currency : SelectionCurrency
-    var category : SelectionCategory
-    var paymentMethod : SelectionPay
+    @Published var currency : SelectionCurrency
+    @Published var category : SelectionCategory
+    @Published var paymentMethod : SelectionPay
     var date : Date
     var timestamp: Timestamp
+   @Published var transactionType : TransactionType
     
     var dictionary: [String: AnyHashable] {
         return [
@@ -44,7 +49,8 @@ class TransactionData: Identifiable {
             "category": category.rawValue,
             "paymentMethod": paymentMethod.rawValue,
             "date": date,
-            "timestamp": timestamp
+            "timestamp": timestamp,
+            "transactionType": transactionType.rawValue
         ]
     }
     
@@ -54,7 +60,8 @@ class TransactionData: Identifiable {
         category: SelectionCategory = .Food,
         paymentMethod: SelectionPay = .Card,
         date: Date = Date(),
-        timestamp: Timestamp = .init()
+        timestamp: Timestamp = .init(),
+        transactionType : TransactionType = .Spend
     ) {
         self.amount = amount
         self.currency = currency
@@ -62,8 +69,10 @@ class TransactionData: Identifiable {
         self.paymentMethod = paymentMethod
         self.date = date
         self.timestamp = timestamp
+        self.transactionType = transactionType
     }
 }
+
 
 
 

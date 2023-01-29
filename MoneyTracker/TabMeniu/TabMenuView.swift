@@ -48,8 +48,6 @@ struct TabMenuView: View {
                     Image(systemName: "person.crop.circle.fill")
                     Text("Profile")
                 }.tag(5)
-            
-            
         }
         .onChange(of: selectedItem) {
             if 3 == selectedItem {

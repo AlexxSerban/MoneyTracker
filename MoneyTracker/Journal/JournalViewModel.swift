@@ -25,8 +25,6 @@ class JournalViewModel: ObservableObject {
     var startDate : Date = Date()
     var endDate : Date = Date()
     
-    
-    
     // Dependencies
     let transactionRepository: TransactionRepository
     
@@ -36,7 +34,6 @@ class JournalViewModel: ObservableObject {
     
     @MainActor
     func fetchTransactions() {
-        
         Task{
             do {
                 if (segmentationSelection == .day) {
@@ -52,7 +49,6 @@ class JournalViewModel: ObservableObject {
                     startDate = model.startOfYear
                     endDate = model.endOfYear
                 }
-                
                 self.transactionData = try await transactionRepository.getFilteredTransaction(startDate: startDate, endDate: endDate)
             } catch {
                 print(error.localizedDescription)

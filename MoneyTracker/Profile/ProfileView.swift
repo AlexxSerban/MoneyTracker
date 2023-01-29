@@ -15,7 +15,6 @@ struct ProfileView: View {
                 Text("User Profile")
                     .font(.system(size: 18, weight: .bold, design: .serif))
                     .foregroundColor(Color.blue)
-                
                 Text("Name: \(viewModel.userData.name)")
                 Text("Phone Number: \(viewModel.userData.phoneNumber)")
                 Text("Country: \(viewModel.userData.country)")
