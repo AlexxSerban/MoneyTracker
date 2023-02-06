@@ -30,7 +30,6 @@ class ProfileViewModel: ObservableObject {
                 guard let userId = authClient.getUserId() else {
                     return
                 }
-                
                 self.userData = try await userRepository.getUser(userId: userId)
             } catch {
                 print(error.localizedDescription)

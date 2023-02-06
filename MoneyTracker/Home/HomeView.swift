@@ -15,6 +15,7 @@ struct HomeView: View {
     var body: some View {
         ZStack{
             VStack(spacing: 26) {
+                
                 Text("Spending")
                     .font(.headline).bold().italic()
                 
@@ -32,6 +33,7 @@ struct HomeView: View {
                         Text("\(viewModel.totalIncome)$")
                             .font(.headline).bold().italic()
                     }
+                    
                     VStack(alignment: .leading, spacing: 15){
                         Text("Total Spending")
                             .font(.headline).bold().italic()
@@ -41,7 +43,6 @@ struct HomeView: View {
                 }
                 Spacer()
                 if viewModel.transactionData.isEmpty {
-                    Spacer()
                     Text("No transactions found.")
                 } else {
                     List(viewModel.transactionData){ transaction in
@@ -73,7 +74,6 @@ struct HomeView: View {
             self.viewModel.calculateMonthlyIncome()
             self.viewModel.calculateMonthlySpend()
         }
-        
     }
 }
 

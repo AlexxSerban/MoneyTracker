@@ -28,7 +28,7 @@ struct TabMenuView: View {
             JournalView()
                 .tabItem {
                     Image(systemName: "dollarsign.circle.fill")
-                    Text("Transactions")
+                    Text("Journal")
                 }.tag(2)
             
             Text("")
@@ -36,11 +36,10 @@ struct TabMenuView: View {
                     Image(systemName: "plus.circle.fill")
                 }.tag(3)
             
-            
-            Text("Something")
+            HistoryView()
                 .tabItem {
-                    Image(systemName: "command.circle.fill")
-                    Text("Something")
+                    Image(systemName: "hourglass.circle.fill")
+                    Text("History")
                 }.tag(4)
             
             ProfileView()

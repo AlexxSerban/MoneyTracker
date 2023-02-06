@@ -12,39 +12,42 @@ struct JournalView: View {
     @StateObject var viewModel = JournalViewModel()
     
     var body: some View {
-        VStack{
-            Picker("", selection: $viewModel.segmentationSelection) {
-                ForEach(JournalViewModel.PeriodSection.allCases, id: \.self) { selection in
-                    Text(selection.rawValue)
+        ZStack{
+            VStack{
+                Picker("", selection: $viewModel.segmentationSelection) {
+                    ForEach(JournalViewModel.PeriodSection.allCases, id: \.self) { selection in
+                        Text(selection.rawValue)
+                    }
                 }
-            }
-            .pickerStyle(SegmentedPickerStyle())
-            .padding()
-            
-            if viewModel.transactionData.isEmpty {
-                Text("No transactions found.")
-            } else {
-                List(viewModel.transactionData){ transaction in
-                    HStack(spacing: 15){
-                        Image(systemName: "cart.fill")
-                        VStack(alignment: .leading, spacing: 5){
-                            Text("\(transaction.category.rawValue)")
-                                .minimumScaleFactor(0.5)
-                            Text("\(transaction.paymentMethod.rawValue)")
-                                .minimumScaleFactor(0.5)
-                            Text("\(transaction.transactionType.rawValue)")
+                .pickerStyle(SegmentedPickerStyle())
+                .padding()
+                
+                if viewModel.transactionData.isEmpty {
+                    Text("No transactions found.")
+                } else {
+                    List(viewModel.transactionData){ transaction in
+                        HStack(spacing: 15){
+                            Image(systemName: "cart.fill")
+                            VStack(alignment: .leading, spacing: 5){
+                                Text("\(transaction.category.rawValue)")
+                                    .minimumScaleFactor(0.5)
+                                Text("\(transaction.paymentMethod.rawValue)")
+                                    .minimumScaleFactor(0.5)
+                                Text("\(transaction.transactionType.rawValue)")
+                                    .font(.headline).bold().italic()
+                            }
+                            Text("\(transaction.timestamp.dateValue().formatted(date: .numeric, time: .omitted))")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                            Text("\(transaction.amount)")
+                                .font(.headline).bold().italic()
+                            Text("\(transaction.currency.rawValue)")
                                 .font(.headline).bold().italic()
                         }
-                        Text("\(transaction.timestamp.dateValue().formatted(date: .numeric, time: .omitted))")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                        Text("\(transaction.amount)")
-                            .font(.headline).bold().italic()
-                        Text("\(transaction.currency.rawValue)")
-                            .font(.headline).bold().italic()
+                        .padding(.vertical, 5)
                     }
-                    .padding(.vertical, 5)
                 }
+                Spacer()
             }
         }
         .onChange(of: viewModel.segmentationSelection) { value in

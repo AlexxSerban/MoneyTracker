@@ -20,7 +20,6 @@ class JournalViewModel: ObservableObject {
     }
     
     @Published var transactionData = [TransactionData()]
-    @Published var filteredTransactions: [TransactionData] = []
     @Published var segmentationSelection : PeriodSection = .day
     var startDate : Date = Date()
     var endDate : Date = Date()

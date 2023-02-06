@@ -14,7 +14,6 @@ class TransactionRepository: ObservableObject {
     let dataBase: Firestore
     let authClient: AuthClient
     
-    
     init(dataBase: Firestore = Firestore.firestore(), authClient: AuthClient = DIContainer.shared.resolve(type: AuthClient.self)) {
         self.dataBase = dataBase
         self.authClient = authClient
@@ -73,7 +72,6 @@ class TransactionRepository: ObservableObject {
                     transactionType : TransactionType(rawValue: document["transactionType"] as! String) ?? .Spend
                 )
             }
-            
         } catch {
             print(error.localizedDescription)
             return []
@@ -125,6 +123,39 @@ class TransactionRepository: ObservableObject {
                 .whereField("date", isGreaterThanOrEqualTo: startDate)
                 .whereField("date", isLessThanOrEqualTo: endDate)
                 .whereField("transactionType", isEqualTo: "Spend")
+                .getDocuments()
+            
+            if querySnapshot.documents.isEmpty {
+                return 0
+            }
+            for document in querySnapshot.documents {
+                if let amount = document.data()["amount"] as? String {
+                    if let amountInt = Int(amount) {
+                        sum += amountInt
+                    }
+                }
+            }
+            return sum
+        } catch {
+            print(error.localizedDescription)
+            return 0
+        }
+    }
+    
+    func calculateCategorySum(startDate: Date, endDate: Date, category: SelectionCategory) async throws -> Int {
+        do {
+            guard let userId = authClient.getUserId() else {
+                return 0
+            }
+            
+            var sum: Int = 0
+            
+            let querySnapshot = try await dataBase.collection("UserData").document(userId).collection("Transactions")
+                .order(by: "date", descending: true)
+                .whereField("category", isEqualTo: category.rawValue)
+                .whereField("transactionType", isEqualTo: "Spend")
+                .whereField("date", isGreaterThanOrEqualTo: startDate)
+                .whereField("date", isLessThanOrEqualTo: endDate)
                 .getDocuments()
             
             if querySnapshot.documents.isEmpty {

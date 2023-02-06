@@ -24,7 +24,6 @@ struct TransactionView: View {
             
             ZStack{
                 VStack(alignment:.leading){
-                    
                     HStack{
                         Picker("Select a currency", selection: $viewModel.transactionData.currency) {
                             ForEach(SelectionCurrency.allCases, id: \.self) {
@@ -41,6 +40,7 @@ struct TransactionView: View {
                     
                     HStack{
                         Image(systemName: "folder.circle.fill")
+                        
                         Text("Category")
                         
                         Picker("Select a category", selection: $viewModel.transactionData.category) {
@@ -86,6 +86,14 @@ struct TransactionView: View {
                 showSheet = false
             } label: {
                 Text("Save")
+            }
+            .font(.system(size: 18, weight: .bold, design: .serif))
+            .foregroundColor(Color.orange)
+            
+            Button {
+                showSheet = false
+            } label: {
+                Text("Cancel")
             }
             .font(.system(size: 18, weight: .bold, design: .serif))
             .foregroundColor(Color.orange)
