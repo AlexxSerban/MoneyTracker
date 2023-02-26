@@ -54,7 +54,7 @@ class HistoryViewModel: ObservableObject {
     }
     
     @MainActor
-    func MonthlyIncome() {
+    func monthlyIncome() {
         Task{
             do {
                 self.totalMonthlyIncome = try await transactionRepository.calculateIncomeSum(startDate: dateRange.lowerBound, endDate: dateRange.upperBound)
@@ -65,7 +65,7 @@ class HistoryViewModel: ObservableObject {
     }
     
     @MainActor
-    func MonthlySpend() {
+    func monthlySpend() {
         Task{
             do {
                 self.totalMonthlySpend = try await transactionRepository.calculateSpendSum(startDate: dateRange.lowerBound, endDate: dateRange.upperBound)
@@ -76,13 +76,23 @@ class HistoryViewModel: ObservableObject {
     }
     
     @MainActor
-    func CategorySum() {
+    func categorySum() {
         Task{
             do {
                 self.totalCategorySum = try await transactionRepository.calculateCategorySum(startDate: dateRange.lowerBound, endDate: dateRange.upperBound, category: SelectionCategory(rawValue: selectCategory.rawValue) ?? .Food)
             } catch {
                 print(error.localizedDescription)
             }
+        }
+    }
+
+    func updateMonthlyData(selectedMonth: String) {
+        setMonthPeriod(selectedMonth: selectedMonth)
+        Task {
+            await fetchMonthlyTransactions()
+            await monthlyIncome()
+            await monthlySpend()
+            await categorySum()
         }
     }
 

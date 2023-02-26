@@ -25,4 +25,13 @@ class AuthClient {
     func resetPassword(email: String) async throws {
          try await Auth.auth().sendPasswordReset(withEmail: email)
     }
+    
+    func signOut() async throws {
+        try Auth.auth().signOut()
+    }
+    
+    func deleteAccount() async throws {
+        try await Auth.auth().currentUser?.delete()
+    }
+    
 }

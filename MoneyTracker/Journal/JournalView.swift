@@ -6,21 +6,41 @@
 //
 
 import SwiftUI
+import Charts
 
 struct JournalView: View {
     
-    @StateObject var viewModel = JournalViewModel()
+    @ObservedObject var viewModel = JournalViewModel()
+    
+    init() {
+        self.viewModel.fetchTransactions()
+        self.viewModel.fetchSpendTransactions()
+    }
     
     var body: some View {
         ZStack{
             VStack{
-                Picker("", selection: $viewModel.segmentationSelection) {
+                Picker("", selection: $viewModel.periodSection) {
                     ForEach(JournalViewModel.PeriodSection.allCases, id: \.self) { selection in
                         Text(selection.rawValue)
                     }
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding()
+                Divider()
+                
+                VStack{
+                    Chart {
+                        ForEach(viewModel.transactionDataFiltered.sorted(by: { $0.amount > $1.amount })) { transaction in
+                            BarMark(
+                                x: .value("Period", transaction.timestamp.dateValue(), unit: viewModel.periodSection == .day ? .hour : viewModel.periodSection == .week ? .day : viewModel.periodSection == .month ? .weekOfMonth : .month),
+                                y: .value("Amount", transaction.amount)
+                            )
+                            .cornerRadius(10)
+                        }
+                    }
+                    .frame(height: 190)
+                }.padding()
                 
                 if viewModel.transactionData.isEmpty {
                     Text("No transactions found.")
@@ -50,11 +70,9 @@ struct JournalView: View {
                 Spacer()
             }
         }
-        .onChange(of: viewModel.segmentationSelection) { value in
+        .onChange(of: viewModel.periodSection) { value in
             self.viewModel.fetchTransactions()
-        }
-        .onAppear() {
-            self.viewModel.fetchTransactions()
+            self.viewModel.fetchSpendTransactions()
         }
     }
 }

@@ -9,8 +9,6 @@ import Foundation
 
 class ProfileViewModel: ObservableObject {
     
-    @Published var userData = UserData()
-    
     // Dependencies
     let authClient: AuthClient
     let userRepository: UserRepository
@@ -22,18 +20,30 @@ class ProfileViewModel: ObservableObject {
         self.authClient = authClient
         self.userRepository = userRepository
     }
-    
-    @MainActor
-    func getData() {
-        Task {
+
+    func signOutUser() {
+        Task{
             do {
-                guard let userId = authClient.getUserId() else {
-                    return
-                }
-                self.userData = try await userRepository.getUser(userId: userId)
+                let _ = try await authClient.signOut()
+                
             } catch {
                 print(error.localizedDescription)
+                
+            }
+        }
+    }
+    
+    func deleteUser() {
+        Task{
+            do {
+                let _ = try await authClient.deleteAccount()
+                
+            } catch {
+                print(error.localizedDescription)
+                
             }
         }
     }
 }
+
+

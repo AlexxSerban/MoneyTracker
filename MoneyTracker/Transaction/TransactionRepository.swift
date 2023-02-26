@@ -34,7 +34,7 @@ class TransactionRepository: ObservableObject {
             let querySnapshot = try await dataBase.collection("UserData").document(userId).collection("Transactions")
                 .order(by: "date", descending: true)
                 .limit(to: transactionNumber).getDocuments()
-
+            
             return querySnapshot.documents.map { document in
                 TransactionData(
                     amount: document["amount"] as! String,
@@ -77,6 +77,162 @@ class TransactionRepository: ObservableObject {
             return []
         }
     }
+    
+    func getSpendDailyTransaction(startDate: Date, endDate: Date ) async throws -> [TransactionData] {
+        do {
+            guard let userId = authClient.getUserId() else {
+                return []
+            }
+            
+            let querySnapshot = try await dataBase.collection("UserData").document(userId).collection("Transactions")
+                .order(by: "date", descending: true)
+                .whereField("date", isGreaterThanOrEqualTo: startDate)
+                .whereField("date", isLessThanOrEqualTo: endDate)
+                .whereField("transactionType", isEqualTo: "Spend")
+                .getDocuments()
+            
+            if querySnapshot.documents.isEmpty {
+                return []
+            } else {
+                let groupedTransactions = Dictionary(grouping: querySnapshot.documents) { (document) -> Date in
+                    let timestamp = document["date"] as! Timestamp
+                    let date = timestamp.dateValue()
+                    let calendar = Calendar.current
+                    let components = calendar.dateComponents([.year, .month, .day, .hour], from: date)
+                    return calendar.date(from: components)!
+                }
+                let transactionData = groupedTransactions.map { (key, value) -> TransactionData in
+                    let amount = value.reduce(0) { (result, document) -> Int in
+                        let transactionAmount = Int(document["amount"] as! String)
+                        return result + (transactionAmount ?? 0)
+                    }
+                    return TransactionData(amount: String(amount), timestamp: Timestamp(date: key))
+                }
+                return transactionData
+            }
+        } catch {
+            print(error.localizedDescription)
+            return []
+        }
+    }
+    
+    
+    func getSpendWeeklyTransaction(startDate: Date, endDate: Date) async throws -> [TransactionData] {
+        do {
+            guard let userId = authClient.getUserId() else {
+                return []
+            }
+            
+            let querySnapshot = try await dataBase.collection("UserData").document(userId).collection("Transactions")
+                .order(by: "date", descending: true)
+                .whereField("date", isGreaterThanOrEqualTo: startDate)
+                .whereField("date", isLessThanOrEqualTo: endDate)
+                .whereField("transactionType", isEqualTo: "Spend")
+                .getDocuments()
+            
+            if querySnapshot.documents.isEmpty {
+                return []
+            } else {
+                let groupedTransactions = Dictionary(grouping: querySnapshot.documents) { (document) -> Date in
+                    let timestamp = document["date"] as! Timestamp
+                    let date = timestamp.dateValue()
+                    let calendar = Calendar.current
+                    let components = calendar.dateComponents([.year, .month, .day], from: date)
+                    return calendar.date(from: components)!
+                }
+                let transactionData = groupedTransactions.map { (key, value) -> TransactionData in
+                    let amount = value.reduce(0) { (result, document) -> Int in
+                        let transactionAmount = Int(document["amount"] as! String)
+                        return result + (transactionAmount ?? 0)
+                    }
+                    return TransactionData(amount: String(amount), timestamp: Timestamp(date: key))
+                }
+                return transactionData
+            }
+        } catch {
+            print(error.localizedDescription)
+            return []
+        }
+    }
+    
+    
+    func getSpendMonthlyTransaction(startDate: Date, endDate: Date) async throws -> [TransactionData] {
+        do {
+            guard let userId = authClient.getUserId() else {
+                return []
+            }
+            
+            let querySnapshot = try await dataBase.collection("UserData").document(userId).collection("Transactions")
+                .order(by: "date", descending: true)
+                .whereField("date", isGreaterThanOrEqualTo: startDate)
+                .whereField("date", isLessThanOrEqualTo: endDate)
+                .whereField("transactionType", isEqualTo: "Spend")
+                .getDocuments()
+            
+            if querySnapshot.documents.isEmpty {
+                return []
+            } else {
+                let groupedTransactions = Dictionary(grouping: querySnapshot.documents) { (document) -> Date in
+                    let timestamp = document["date"] as! Timestamp
+                    let date = timestamp.dateValue()
+                    let calendar = Calendar.current
+                    let components = calendar.dateComponents([.year, .month, .weekday], from: date)
+                    return calendar.date(from: components)!
+                }
+                let transactionData = groupedTransactions.map { (key, value) -> TransactionData in
+                    let amount = value.reduce(0) { (result, document) -> Int in
+                        let transactionAmount = Int(document["amount"] as! String)
+                        return result + (transactionAmount ?? 0)
+                    }
+                    return TransactionData(amount: String(amount), timestamp: Timestamp(date: key))
+                }
+                return transactionData
+            }
+        } catch {
+            print(error.localizedDescription)
+            return []
+        }
+    }
+    
+    func getSpendYearTransaction(startDate: Date, endDate: Date) async throws -> [TransactionData] {
+        do {
+            guard let userId = authClient.getUserId() else {
+                return []
+            }
+            
+            let querySnapshot = try await dataBase.collection("UserData").document(userId).collection("Transactions")
+                .order(by: "date", descending: true)
+                .whereField("date", isGreaterThanOrEqualTo: startDate)
+                .whereField("date", isLessThanOrEqualTo: endDate)
+                .whereField("transactionType", isEqualTo: "Spend")
+                .getDocuments()
+            
+            if querySnapshot.documents.isEmpty {
+                return []
+            } else{
+                let groupedTransactions = Dictionary(grouping: querySnapshot.documents) { (document) -> Date in
+                    let timestamp = document["date"] as! Timestamp
+                    let date = timestamp.dateValue()
+                    let calendar = Calendar.current
+                    let components = calendar.dateComponents([.year, .month], from: date)
+                    return calendar.date(from: components)!
+                }
+                let transactionData = groupedTransactions.map { (key, value) -> TransactionData in
+                    let amount = value.reduce(0) { (result, document) -> Int in
+                        let transactionAmount = Int(document["amount"] as! String)
+                        return result + (transactionAmount ?? 0)
+                    }
+                    return TransactionData(amount: String(amount), timestamp: Timestamp(date: key))
+                }
+                return transactionData
+            }
+        } catch {
+            print(error.localizedDescription)
+            return []
+        }
+    }
+    
+    // Sum
     
     func calculateIncomeSum(startDate: Date, endDate: Date) async throws -> Int {
         do {
@@ -175,3 +331,4 @@ class TransactionRepository: ObservableObject {
         }
     }
 }
+

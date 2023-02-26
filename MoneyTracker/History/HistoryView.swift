@@ -12,11 +12,7 @@ struct HistoryView: View {
     @ObservedObject var viewModel = HistoryViewModel()
     
     init() {
-        self.viewModel.setMonthPeriod(selectedMonth: viewModel.selectedMonth)
-        self.viewModel.fetchMonthlyTransactions()
-        self.viewModel.MonthlyIncome()
-        self.viewModel.MonthlySpend()
-        self.viewModel.CategorySum()
+        self.viewModel.updateMonthlyData(selectedMonth: viewModel.selectedMonth)
     }
     
     var body: some View {
@@ -26,11 +22,7 @@ struct HistoryView: View {
                     HStack{
                         Button(action: {
                             self.viewModel.selectedYear -= 1
-                            self.viewModel.setMonthPeriod(selectedMonth: viewModel.selectedMonth)
-                            self.viewModel.fetchMonthlyTransactions()
-                            self.viewModel.MonthlyIncome()
-                            self.viewModel.MonthlySpend()
-                            self.viewModel.CategorySum()
+                            self.viewModel.updateMonthlyData(selectedMonth: viewModel.selectedMonth)
                         }) {
                             Image(systemName: "chevron.left")
                                 .foregroundColor(.white)
@@ -43,14 +35,11 @@ struct HistoryView: View {
                         
                         Button(action: {
                             self.viewModel.selectedYear += 1
-                            self.viewModel.setMonthPeriod(selectedMonth: viewModel.selectedMonth)
-                            self.viewModel.fetchMonthlyTransactions()
-                            self.viewModel.MonthlyIncome()
-                            self.viewModel.MonthlySpend()
-                            self.viewModel.CategorySum()
+                            self.viewModel.updateMonthlyData(selectedMonth: viewModel.selectedMonth)
                         }) {
                             Image(systemName: "chevron.right")
                                 .foregroundColor(.white)
+                            
                         }
                     }
                     .padding(.all, 12.0)
@@ -80,6 +69,8 @@ struct HistoryView: View {
                         Text("\(viewModel.totalMonthlyIncome)$")
                             .font(.headline).bold().italic()
                     }
+                    .pickerStyle(.menu)
+                    
                     
                     VStack{
                         Text("Balance")
@@ -107,8 +98,6 @@ struct HistoryView: View {
                         }
                         .pickerStyle(.menu)
                         
-                        
-                        
                         VStack{
                             Text("\(viewModel.selectCategory.rawValue)")
                             Text("\(viewModel.totalCategorySum)")
@@ -117,6 +106,8 @@ struct HistoryView: View {
                     .padding()
                 }
                 Divider()
+                
+                
                 
                 Group{
                     VStack(spacing: 3){
@@ -156,21 +147,18 @@ struct HistoryView: View {
                         }
                     }
                     Divider()
-                    Spacer()
                 }
             }
         }
         .onChange(of: viewModel.selectedMonth) { value in
-            self.viewModel.setMonthPeriod(selectedMonth: viewModel.selectedMonth)
-            self.viewModel.fetchMonthlyTransactions()
-            self.viewModel.MonthlyIncome()
-            self.viewModel.MonthlySpend()
-            self.viewModel.CategorySum()
+            self.viewModel.updateMonthlyData(selectedMonth: viewModel.selectedMonth)
         }
         .onChange(of: viewModel.selectCategory) { value in
-            self.viewModel.CategorySum()
+            self.viewModel.categorySum()
         }
     }
+        
+    
 }
 
 struct HistoryView_Previews: PreviewProvider {
@@ -178,3 +166,4 @@ struct HistoryView_Previews: PreviewProvider {
         HistoryView()
     }
 }
+
