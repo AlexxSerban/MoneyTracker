@@ -37,6 +37,7 @@ class TransactionRepository: ObservableObject {
             
             return querySnapshot.documents.map { document in
                 TransactionData(
+                    id: document.documentID,
                     amount: document["amount"] as! String,
                     currency: SelectionCurrency(rawValue: document["currency"] as! String) ?? .RON,
                     category: SelectionCategory(rawValue: document["category"] as! String) ?? .Food,
@@ -64,6 +65,7 @@ class TransactionRepository: ObservableObject {
             
             return querySnapshot.documents.map { document in
                 TransactionData(
+                    id: document.documentID,
                     amount: document["amount"] as! String,
                     currency: SelectionCurrency(rawValue: document["currency"] as! String) ?? .RON,
                     category: SelectionCategory(rawValue: document["category"] as! String) ?? .Food,
@@ -71,6 +73,7 @@ class TransactionRepository: ObservableObject {
                     timestamp: document["date"] as! Timestamp,
                     transactionType : TransactionType(rawValue: document["transactionType"] as! String) ?? .Spend
                 )
+                
             }
         } catch {
             print(error.localizedDescription)
@@ -330,5 +333,40 @@ class TransactionRepository: ObservableObject {
             return 0
         }
     }
+    
+    func deleteTransactionFromFirestore(at indexSet: IndexSet, transactionData: [TransactionData]) {
+        
+        let validIndices = indexSet.filter { $0 < transactionData.count }
+        validIndices.forEach { index in
+            let transactions = transactionData[index]
+            guard let userId = authClient.getUserId() else {
+                return
+            }
+            dataBase.collection("UserData").document(userId).collection("Transactions").document("\(transactions.id)").delete { error in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    print("A mers DeleteTransacation")
+                }
+                
+            }
+        }
+        
+//        for index in validIndices {
+//            let transactions = transactionData[index]
+//            guard let userId = authClient.getUserId() else {
+//                return
+//            }
+//            dataBase.collection("UserData").document(userId).collection("Transactions").document("\(transactions.id)").delete { error in
+//                if let error = error {
+//                    print(error.localizedDescription)
+//                } else {
+//                    print("A mers DeleteTransacation")
+//                }
+//
+//            }
+//        }
+    }
+    
 }
 

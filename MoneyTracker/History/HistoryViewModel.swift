@@ -16,9 +16,10 @@ class HistoryViewModel: ObservableObject {
     @Published var transactionData = [TransactionData()]
     @Published var totalMonthlyIncome: Int = 0
     @Published var totalMonthlySpend: Int = 0
+    @Published var totalCategorySum: Int = 0
     @Published var showAllTransactions = false
     @Published var selectCategory: SelectionCategory = .Food
-    @Published var totalCategorySum: Int = 0
+    
     
     let transactionRepository: TransactionRepository
     
@@ -95,5 +96,4 @@ class HistoryViewModel: ObservableObject {
             await categorySum()
         }
     }
-
 }

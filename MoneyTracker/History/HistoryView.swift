@@ -123,26 +123,28 @@ struct HistoryView: View {
                         if viewModel.transactionData.isEmpty {
                             Text("No transactions found.")
                         } else {
-                            List(viewModel.showAllTransactions ? viewModel.transactionData : viewModel.transactionData.suffix(5)){ transaction in
-                                HStack(spacing: 15){
-                                    Image(systemName: "cart.fill")
-                                    VStack(alignment: .leading, spacing: 5){
-                                        Text("\(transaction.category.rawValue)")
-                                            .minimumScaleFactor(0.5)
-                                        Text("\(transaction.paymentMethod.rawValue)")
-                                            .minimumScaleFactor(0.5)
+                            List{
+                                ForEach(viewModel.showAllTransactions ? viewModel.transactionData : viewModel.transactionData.suffix(5)){ transaction in
+                                    HStack(spacing: 15){
+                                        Image(systemName: "cart.fill")
+                                        VStack(alignment: .leading, spacing: 5){
+                                            Text("\(transaction.category.rawValue)")
+                                                .minimumScaleFactor(0.5)
+                                            Text("\(transaction.paymentMethod.rawValue)")
+                                                .minimumScaleFactor(0.5)
+                                        }
+                                        Text("\(transaction.timestamp.dateValue().formatted(date: .numeric, time: .omitted))")
+                                            .font(.subheadline)
+                                            .foregroundColor(.secondary)
+                                        Text("\(transaction.amount)")
+                                            .font(.headline).bold().italic()
+                                        Text("\(transaction.currency.rawValue)")
+                                            .font(.headline).bold().italic()
+                                        Text("\(transaction.transactionType.rawValue)")
+                                            .font(.headline).bold().italic()
                                     }
-                                    Text("\(transaction.timestamp.dateValue().formatted(date: .numeric, time: .omitted))")
-                                        .font(.subheadline)
-                                        .foregroundColor(.secondary)
-                                    Text("\(transaction.amount)")
-                                        .font(.headline).bold().italic()
-                                    Text("\(transaction.currency.rawValue)")
-                                        .font(.headline).bold().italic()
-                                    Text("\(transaction.transactionType.rawValue)")
-                                        .font(.headline).bold().italic()
+                                    .padding(.vertical, 5)
                                 }
-                                .padding(.vertical, 5)
                             }
                         }
                     }

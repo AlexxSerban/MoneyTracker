@@ -29,7 +29,7 @@ enum TransactionType: String, CaseIterable, Identifiable {
 }
 
 class TransactionData: Identifiable, ObservableObject{
-    var id = UUID()
+    var id : String
     var amount : String
     @Published var currency : SelectionCurrency
     @Published var category : SelectionCategory
@@ -51,6 +51,7 @@ class TransactionData: Identifiable, ObservableObject{
     }
     
     init(
+        id: String? = nil,
         amount: String = "",
         currency: SelectionCurrency = .USD,
         category: SelectionCategory = .Food,
@@ -59,6 +60,7 @@ class TransactionData: Identifiable, ObservableObject{
         timestamp: Timestamp = .init(),
         transactionType : TransactionType = .Spend
     ) {
+        self.id = id ?? UUID().uuidString
         self.amount = amount
         self.currency = currency
         self.category = category

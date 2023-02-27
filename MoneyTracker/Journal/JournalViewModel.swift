@@ -58,18 +58,18 @@ class JournalViewModel: ObservableObject {
                 print(error.localizedDescription)
             }
         }
-//        print("Calendar: \(model.calendar)")
-//        print("Date: \(model.date)")
-//        print("Start of day: \(model.startOfDay)")
-//        print("End of day: \(model.endOfDay)")
-//        print("Current day: \(model.currentDay)")
-//        print("Start of week: \(model.startOfWeek)")
-//        print("End of week \(model.endOfWeek)")
-//        print("Start of month: \(model.startOfMonth)")
-//        print("End of month \(model.endOfMonth)")
-//        print("Start of year: \(model.startOfYear)")
-//        print("End of year \(model.endOfYear)")
-//        print("Date components\(model.dateComponents)")
+        //        print("Calendar: \(model.calendar)")
+        //        print("Date: \(model.date)")
+        //        print("Start of day: \(model.startOfDay)")
+        //        print("End of day: \(model.endOfDay)")
+        //        print("Current day: \(model.currentDay)")
+        //        print("Start of week: \(model.startOfWeek)")
+        //        print("End of week \(model.endOfWeek)")
+        //        print("Start of month: \(model.startOfMonth)")
+        //        print("End of month \(model.endOfMonth)")
+        //        print("Start of year: \(model.startOfYear)")
+        //        print("End of year \(model.endOfYear)")
+        //        print("Date components\(model.dateComponents)")
     }
     
     @MainActor
@@ -99,4 +99,14 @@ class JournalViewModel: ObservableObject {
             }
         }
     }
+    
+    @MainActor
+    func deleteTransactionJournalView(at indexSet: IndexSet)  {
+        transactionRepository.deleteTransactionFromFirestore(at: indexSet, transactionData: transactionData)
+        fetchTransactions()
+        fetchSpendTransactions()
+    }
+    
+    
+    
 }
