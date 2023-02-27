@@ -351,21 +351,6 @@ class TransactionRepository: ObservableObject {
                 
             }
         }
-        
-//        for index in validIndices {
-//            let transactions = transactionData[index]
-//            guard let userId = authClient.getUserId() else {
-//                return
-//            }
-//            dataBase.collection("UserData").document(userId).collection("Transactions").document("\(transactions.id)").delete { error in
-//                if let error = error {
-//                    print(error.localizedDescription)
-//                } else {
-//                    print("A mers DeleteTransacation")
-//                }
-//
-//            }
-//        }
     }
     
 }
