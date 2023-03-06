@@ -19,6 +19,7 @@ class HistoryViewModel: ObservableObject {
     @Published var totalCategorySum: Int = 0
     @Published var showAllTransactions = false
     @Published var selectCategory: SelectionCategory = .Food
+    @Published var isLoadingTransactions: Bool = false
     
     
     let transactionRepository: TransactionRepository
@@ -89,11 +90,15 @@ class HistoryViewModel: ObservableObject {
 
     func updateMonthlyData(selectedMonth: String) {
         setMonthPeriod(selectedMonth: selectedMonth)
+        isLoadingTransactions = true
         Task {
             await fetchMonthlyTransactions()
             await monthlyIncome()
             await monthlySpend()
             await categorySum()
+            await MainActor.run {
+                isLoadingTransactions = false
+            }
         }
     }
 }

@@ -81,8 +81,6 @@ struct TransactionView: View {
             
             Button {
                 viewModel.addTransactionInfo()
-                
-                // Closes the sheet
                 showSheet = false
             } label: {
                 Text("Save")

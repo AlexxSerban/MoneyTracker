@@ -39,7 +39,6 @@ struct HistoryView: View {
                         }) {
                             Image(systemName: "chevron.right")
                                 .foregroundColor(.white)
-                            
                         }
                     }
                     .padding(.all, 12.0)
@@ -107,8 +106,6 @@ struct HistoryView: View {
                 }
                 Divider()
                 
-                
-                
                 Group{
                     VStack(spacing: 3){
                         HStack{
@@ -123,33 +120,40 @@ struct HistoryView: View {
                         if viewModel.transactionData.isEmpty {
                             Text("No transactions found.")
                         } else {
-                            List{
-                                ForEach(viewModel.showAllTransactions ? viewModel.transactionData : viewModel.transactionData.suffix(5)){ transaction in
-                                    HStack(spacing: 15){
-                                        Image(systemName: "cart.fill")
-                                        VStack(alignment: .leading, spacing: 5){
-                                            Text("\(transaction.category.rawValue)")
-                                                .minimumScaleFactor(0.5)
-                                            Text("\(transaction.paymentMethod.rawValue)")
-                                                .minimumScaleFactor(0.5)
+                            if viewModel.isLoadingTransactions{
+                                ProgressView("Processing")
+                                    .tint(.orange)
+                                    .foregroundColor(.gray)
+                            } else {
+                                List{
+                                    ForEach(viewModel.showAllTransactions ? viewModel.transactionData : viewModel.transactionData.suffix(5)){ transaction in
+                                        HStack(spacing: 15){
+                                            Image(systemName: "cart.fill")
+                                            VStack(alignment: .leading, spacing: 5){
+                                                Text("\(transaction.category.rawValue)")
+                                                    .minimumScaleFactor(0.5)
+                                                Text("\(transaction.paymentMethod.rawValue)")
+                                                    .minimumScaleFactor(0.5)
+                                            }
+                                            Text("\(transaction.timestamp.dateValue().formatted(date: .numeric, time: .omitted))")
+                                                .font(.subheadline)
+                                                .foregroundColor(.secondary)
+                                            Text("\(transaction.amount)")
+                                                .font(.headline).bold().italic()
+                                            Text("\(transaction.currency.rawValue)")
+                                                .font(.headline).bold().italic()
+                                            Text("\(transaction.transactionType.rawValue)")
+                                                .font(.headline).bold().italic()
                                         }
-                                        Text("\(transaction.timestamp.dateValue().formatted(date: .numeric, time: .omitted))")
-                                            .font(.subheadline)
-                                            .foregroundColor(.secondary)
-                                        Text("\(transaction.amount)")
-                                            .font(.headline).bold().italic()
-                                        Text("\(transaction.currency.rawValue)")
-                                            .font(.headline).bold().italic()
-                                        Text("\(transaction.transactionType.rawValue)")
-                                            .font(.headline).bold().italic()
+                                        .padding(.vertical, 5)
                                     }
-                                    .padding(.vertical, 5)
                                 }
                             }
                         }
                     }
                     Divider()
                 }
+                Spacer()
             }
         }
         .onChange(of: viewModel.selectedMonth) { value in
@@ -159,8 +163,6 @@ struct HistoryView: View {
             self.viewModel.categorySum()
         }
     }
-        
-    
 }
 
 struct HistoryView_Previews: PreviewProvider {

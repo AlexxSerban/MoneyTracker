@@ -73,7 +73,6 @@ class TransactionRepository: ObservableObject {
                     timestamp: document["date"] as! Timestamp,
                     transactionType : TransactionType(rawValue: document["transactionType"] as! String) ?? .Spend
                 )
-                
             }
         } catch {
             print(error.localizedDescription)
@@ -118,7 +117,6 @@ class TransactionRepository: ObservableObject {
             return []
         }
     }
-    
     
     func getSpendWeeklyTransaction(startDate: Date, endDate: Date) async throws -> [TransactionData] {
         do {
@@ -348,10 +346,8 @@ class TransactionRepository: ObservableObject {
                 } else {
                     print("A mers DeleteTransacation")
                 }
-                
             }
         }
     }
-    
 }
 

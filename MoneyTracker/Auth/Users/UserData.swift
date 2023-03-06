@@ -7,7 +7,7 @@
 
 import Foundation
 
-class UserData {
+class UserData: ObservableObject {
     
     var name: String
     var phoneNumber: String
@@ -16,7 +16,8 @@ class UserData {
     var dictionary: [String: AnyHashable] {
         return ["name": name,
                 "phoneNumber": phoneNumber,
-                "country": country]
+                "country": country
+            ]
     }
     
     init(

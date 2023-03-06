@@ -51,7 +51,6 @@ struct TabMenuView: View {
         .onChange(of: selectedItem) {
             if 3 == selectedItem {
                 self.showSheet = true
-                
                 print("A mers showSheet in true")
             } else {
                 self.oldSelectedItem = $0

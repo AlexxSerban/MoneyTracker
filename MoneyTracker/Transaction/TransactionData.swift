@@ -14,7 +14,7 @@ enum SelectionCurrency: String, CaseIterable, Identifiable {
 }
 
 enum SelectionCategory: String, CaseIterable, Identifiable {
-    case Food, Education, Pets, Fitness
+    case Food, Education, Pets, Fitness, Salary, Business, Gifts 
     var id: Self {self}
 }
 

@@ -22,7 +22,6 @@
 		3E6EE3AD28EF66E6009ECBF6 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6EE3AC28EF66E6009ECBF6 /* RegisterView.swift */; };
 		3E6EE3AF28EF67B4009ECBF6 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6EE3AE28EF67B4009ECBF6 /* RegisterViewModel.swift */; };
 		3E6EE3B228EF6D10009ECBF6 /* AuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6EE3B128EF6D10009ECBF6 /* AuthClient.swift */; };
-		3E8B8153291D5E8E0081ED79 /* UserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8B8152291D5E8E0081ED79 /* UserInfoViewModel.swift */; };
 		3E8B8164291E9A760081ED79 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8B8163291E9A760081ED79 /* ProfileViewModel.swift */; };
 		3E8B8166291E9A8D0081ED79 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8B8165291E9A8D0081ED79 /* ProfileView.swift */; };
 		3EB608152922814B00B2BE0A /* TabMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB608142922814B00B2BE0A /* TabMenuView.swift */; };
@@ -32,7 +31,6 @@
 		3EB6082729228B4400B2BE0A /* TransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB6082629228B4400B2BE0A /* TransactionView.swift */; };
 		3EC2C82D2986EEC800B4C5C0 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC2C82C2986EEC800B4C5C0 /* HistoryView.swift */; };
 		3EC2C82F2986F28000B4C5C0 /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC2C82E2986F28000B4C5C0 /* HistoryViewModel.swift */; };
-		3EC89CBB291D160500914ABD /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC89CBA291D160500914ABD /* UserInfoView.swift */; };
 		3EE3BA1228F03E590001F751 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3BA1128F03E590001F751 /* LoginViewModel.swift */; };
 		3EE3BA1428F03E670001F751 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3BA1328F03E670001F751 /* LoginView.swift */; };
 		3EE3BA5E28FF260A0001F751 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3BA5D28FF260A0001F751 /* ResetPasswordView.swift */; };
@@ -40,6 +38,7 @@
 		3EE3BA66290C01640001F751 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3BA65290C01640001F751 /* DIContainer.swift */; };
 		3EE3BA68290D24510001F751 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3BA67290D24510001F751 /* UserRepository.swift */; };
 		3EE3BA6A290D2A8F0001F751 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3BA69290D2A8F0001F751 /* UserData.swift */; };
+		3EEA3F2C29B48A780017F2D9 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 3EEA3F2B29B48A780017F2D9 /* FirebaseStorage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,7 +55,6 @@
 		3E6EE3AC28EF66E6009ECBF6 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		3E6EE3AE28EF67B4009ECBF6 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		3E6EE3B128EF6D10009ECBF6 /* AuthClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthClient.swift; sourceTree = "<group>"; };
-		3E8B8152291D5E8E0081ED79 /* UserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewModel.swift; sourceTree = "<group>"; };
 		3E8B8163291E9A760081ED79 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		3E8B8165291E9A8D0081ED79 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		3EB608142922814B00B2BE0A /* TabMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabMenuView.swift; sourceTree = "<group>"; };
@@ -66,7 +64,6 @@
 		3EB6082629228B4400B2BE0A /* TransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionView.swift; sourceTree = "<group>"; };
 		3EC2C82C2986EEC800B4C5C0 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		3EC2C82E2986F28000B4C5C0 /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
-		3EC89CBA291D160500914ABD /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
 		3EE3BA1128F03E590001F751 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		3EE3BA1328F03E670001F751 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		3EE3BA5D28FF260A0001F751 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
@@ -82,6 +79,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E6EE3A228EF6133009ECBF6 /* FirebaseAnalytics in Frameworks */,
+				3EEA3F2C29B48A780017F2D9 /* FirebaseStorage in Frameworks */,
 				3E6EE3A428EF6133009ECBF6 /* FirebaseAuth in Frameworks */,
 				3E6EE3A628EF6133009ECBF6 /* FirebaseFirestore in Frameworks */,
 			);
@@ -95,6 +93,7 @@
 			children = (
 				3E17C26228EF5B8B00EC5B70 /* MoneyTracker */,
 				3E17C26128EF5B8B00EC5B70 /* Products */,
+				3EEA3F2A29B48A780017F2D9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -149,8 +148,6 @@
 			children = (
 				3E6EE3AC28EF66E6009ECBF6 /* RegisterView.swift */,
 				3E6EE3AE28EF67B4009ECBF6 /* RegisterViewModel.swift */,
-				3EC89CBA291D160500914ABD /* UserInfoView.swift */,
-				3E8B8152291D5E8E0081ED79 /* UserInfoViewModel.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -239,6 +236,13 @@
 			path = ResetPassword;
 			sourceTree = "<group>";
 		};
+		3EEA3F2A29B48A780017F2D9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -259,6 +263,7 @@
 				3E6EE3A128EF6133009ECBF6 /* FirebaseAnalytics */,
 				3E6EE3A328EF6133009ECBF6 /* FirebaseAuth */,
 				3E6EE3A528EF6133009ECBF6 /* FirebaseFirestore */,
+				3EEA3F2B29B48A780017F2D9 /* FirebaseStorage */,
 			);
 			productName = MoneyTracker;
 			productReference = 3E17C26028EF5B8B00EC5B70 /* MoneyTracker.app */;
@@ -325,13 +330,11 @@
 				3EE3BA68290D24510001F751 /* UserRepository.swift in Sources */,
 				3EB608202922863D00B2BE0A /* JournalView.swift in Sources */,
 				3E430F18293BA9BF00ACAA6E /* HomeViewModel.swift in Sources */,
-				3EC89CBB291D160500914ABD /* UserInfoView.swift in Sources */,
 				3E028A11294FC67B00D74A24 /* JournalModel.swift in Sources */,
 				3EE3BA1228F03E590001F751 /* LoginViewModel.swift in Sources */,
 				3E6EE3AD28EF66E6009ECBF6 /* RegisterView.swift in Sources */,
 				3E8B8164291E9A760081ED79 /* ProfileViewModel.swift in Sources */,
 				3E8B8166291E9A8D0081ED79 /* ProfileView.swift in Sources */,
-				3E8B8153291D5E8E0081ED79 /* UserInfoViewModel.swift in Sources */,
 				3EE3BA6A290D2A8F0001F751 /* UserData.swift in Sources */,
 				3EE3BA5E28FF260A0001F751 /* ResetPasswordView.swift in Sources */,
 				3EE3BA1428F03E670001F751 /* LoginView.swift in Sources */,
@@ -572,6 +575,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3E6EE3A028EF6133009ECBF6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		3EEA3F2B29B48A780017F2D9 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3E6EE3A028EF6133009ECBF6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

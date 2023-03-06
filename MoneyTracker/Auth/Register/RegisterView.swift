@@ -53,9 +53,6 @@ struct RegisterView: View {
             .alert("Wrong email", isPresented: $viewModel.registeringError, actions: {
                 Button("Ok") { }
             })
-            .navigationDestination(isPresented: $viewModel.isRegistered) {
-                UserInfoView(viewModel: UserInfoViewModel())
-            }
             .navigationDestination(isPresented: $viewModel.toLogin) {
                 LoginView(viewModel: LoginViewModel())
             }

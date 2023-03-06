@@ -30,46 +30,58 @@ struct JournalView: View {
                 Divider()
                 
                 VStack{
-                    Chart {
-                        ForEach(viewModel.transactionDataFiltered.sorted(by: { $0.amount > $1.amount })) { transaction in
-                            BarMark(
-                                x: .value("Period", transaction.timestamp.dateValue(), unit: viewModel.periodSection == .day ? .hour : viewModel.periodSection == .week ? .day : viewModel.periodSection == .month ? .weekOfMonth : .month),
-                                y: .value("Amount", transaction.amount)
-                            )
-                            .cornerRadius(10)
+                    if viewModel.isLoadingChart {
+                        ProgressView("Processing", value: 0, total: 100)
+                            .progressViewStyle(LinearProgressViewStyle())
+                            .padding()
+                    } else {
+                        Chart {
+                            ForEach(viewModel.transactionDataFiltered.sorted(by: { $0.amount > $1.amount })) { transaction in
+                                BarMark(
+                                    x: .value("Period", transaction.timestamp.dateValue(), unit: viewModel.periodSection == .day ? .hour : viewModel.periodSection == .week ? .day : viewModel.periodSection == .month ? .weekOfMonth : .month),
+                                    y: .value("Amount", transaction.amount)
+                                )
+                                .cornerRadius(10)
+                            }
                         }
+                        .frame(height: 190)
                     }
-                    .frame(height: 190)
                 }.padding()
                 
                 if viewModel.transactionData.isEmpty {
                     Text("No transactions found.")
                 } else {
-                    List{
-                        ForEach(viewModel.transactionData){ transaction in
-                            HStack(spacing: 15){
-                                Image(systemName: "cart.fill")
-                                VStack(alignment: .leading, spacing: 5){
-                                    Text("\(transaction.category.rawValue)")
-                                        .minimumScaleFactor(0.5)
-                                    Text("\(transaction.paymentMethod.rawValue)")
-                                        .minimumScaleFactor(0.5)
-                                    Text("\(transaction.transactionType.rawValue)")
+                    if viewModel.isLoadingTransaction {
+                        ProgressView("Processing")
+                            .tint(.orange)
+                            .foregroundColor(.gray)
+                    } else {
+                        List{
+                            ForEach(viewModel.transactionData){ transaction in
+                                HStack(spacing: 15){
+                                    Image(systemName: "cart.fill")
+                                    VStack(alignment: .leading, spacing: 5){
+                                        Text("\(transaction.category.rawValue)")
+                                            .minimumScaleFactor(0.5)
+                                        Text("\(transaction.paymentMethod.rawValue)")
+                                            .minimumScaleFactor(0.5)
+                                        Text("\(transaction.transactionType.rawValue)")
+                                            .font(.headline).bold().italic()
+                                    }
+                                    Text("\(transaction.timestamp.dateValue().formatted(date: .numeric, time: .omitted))")
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
+                                    Text("\(transaction.amount)")
+                                        .font(.headline).bold().italic()
+                                    Text("\(transaction.currency.rawValue)")
                                         .font(.headline).bold().italic()
                                 }
-                                Text("\(transaction.timestamp.dateValue().formatted(date: .numeric, time: .omitted))")
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
-                                Text("\(transaction.amount)")
-                                    .font(.headline).bold().italic()
-                                Text("\(transaction.currency.rawValue)")
-                                    .font(.headline).bold().italic()
+                                .padding(.vertical, 5)
                             }
-                            .padding(.vertical, 5)
+                            .onDelete(perform: { indexSet in
+                                viewModel.deleteTransactionJournalView(at: indexSet)
+                            })
                         }
-                        .onDelete(perform: { indexSet in
-                            viewModel.deleteTransactionJournalView(at: indexSet)
-                        })
                     }
                 }
                 Spacer()
@@ -81,9 +93,6 @@ struct JournalView: View {
         }
     }
 }
-
-
-
 
 struct JournalView_Previews: PreviewProvider {
     static var previews: some View {

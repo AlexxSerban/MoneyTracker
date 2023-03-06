@@ -23,7 +23,6 @@ final class DIContainer: DIContainerProtocol {
         if components.keys.contains("\(type)") {
             print("\(type) was already registered in DIContainer! Old component was replaced!")
         }
-        
         components["\(type)"] = component
     }
     
@@ -31,7 +30,6 @@ final class DIContainer: DIContainerProtocol {
         guard let component = components["\(type)"] as? Component else {
             fatalError("Component \(type) not registered in DIContainter!")
         }
-        
         return component
     }
 }

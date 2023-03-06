@@ -31,7 +31,6 @@ class LoginViewModel: ObservableObject {
     
     func login() {
         isLoading = true
-        
         Task{
             do {
                 let _ = try await authClient.loginUser(email: email, password: password)

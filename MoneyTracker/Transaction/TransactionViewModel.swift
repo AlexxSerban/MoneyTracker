@@ -10,7 +10,7 @@ import Foundation
 class TransactionViewModel: ObservableObject {
     
     // Transaction Data
-    var transactionData = TransactionData()
+    @Published var transactionData = TransactionData()
     
     // Dependencies
     let transactionRepository: TransactionRepository

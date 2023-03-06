@@ -27,7 +27,8 @@ class JournalViewModel: ObservableObject {
     @Published var transactionDataFiltered : [TransactionData] = []
     var startDate : Date = Date()
     var endDate : Date = Date()
-    
+    @Published var isLoadingTransaction: Bool = false
+    @Published var isLoadingChart: Bool = false
     
     // Dependencies
     let transactionRepository: TransactionRepository
@@ -40,6 +41,7 @@ class JournalViewModel: ObservableObject {
     func fetchTransactions() {
         Task{
             do {
+                isLoadingTransaction = true
                 if (periodSection == .day) {
                     startDate = model.startOfDay
                     endDate = model.endOfDay
@@ -54,28 +56,21 @@ class JournalViewModel: ObservableObject {
                     endDate = model.endOfYear
                 }
                 self.transactionData = try await transactionRepository.getFilteredTransaction(startDate: startDate, endDate: endDate)
+                
+                await MainActor.run {
+                    isLoadingTransaction = false
+                }
             } catch {
                 print(error.localizedDescription)
             }
         }
-        //        print("Calendar: \(model.calendar)")
-        //        print("Date: \(model.date)")
-        //        print("Start of day: \(model.startOfDay)")
-        //        print("End of day: \(model.endOfDay)")
-        //        print("Current day: \(model.currentDay)")
-        //        print("Start of week: \(model.startOfWeek)")
-        //        print("End of week \(model.endOfWeek)")
-        //        print("Start of month: \(model.startOfMonth)")
-        //        print("End of month \(model.endOfMonth)")
-        //        print("Start of year: \(model.startOfYear)")
-        //        print("End of year \(model.endOfYear)")
-        //        print("Date components\(model.dateComponents)")
     }
     
     @MainActor
     func fetchSpendTransactions() {
         Task{
             do {
+                isLoadingChart = true
                 if (periodSection == .day) {
                     startDate = model.startOfDay
                     endDate = model.endOfDay
@@ -94,6 +89,9 @@ class JournalViewModel: ObservableObject {
                     endDate = model.endOfYear
                     self.transactionDataFiltered = try await transactionRepository.getSpendYearTransaction(startDate: startDate, endDate: endDate)
                 }
+                await MainActor.run {
+                    isLoadingChart = false
+                }
             } catch {
                 print(error.localizedDescription)
             }
@@ -106,7 +104,4 @@ class JournalViewModel: ObservableObject {
         fetchTransactions()
         fetchSpendTransactions()
     }
-    
-    
-    
 }
