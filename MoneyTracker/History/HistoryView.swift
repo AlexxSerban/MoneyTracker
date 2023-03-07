@@ -11,12 +11,8 @@ struct HistoryView: View {
     
     @ObservedObject var viewModel = HistoryViewModel()
     
-    init() {
-        self.viewModel.updateMonthlyData(selectedMonth: viewModel.selectedMonth)
-    }
-    
     var body: some View {
-        ZStack(alignment: .center){
+        ZStack(alignment: .center) {
             VStack(spacing: 16){
                 Group{
                     HStack{
@@ -27,10 +23,12 @@ struct HistoryView: View {
                             Image(systemName: "chevron.left")
                                 .foregroundColor(.white)
                         }
+                        
                         Spacer()
                         
                         Text(String(viewModel.selectedYear)).foregroundColor(.white)
                             .transition(.move(edge: .trailing))
+                        
                         Spacer()
                         
                         Button(action: {
@@ -155,6 +153,9 @@ struct HistoryView: View {
                 }
                 Spacer()
             }
+        }
+        .onAppear {
+            self.viewModel.updateMonthlyData(selectedMonth: viewModel.selectedMonth)
         }
         .onChange(of: viewModel.selectedMonth) { value in
             self.viewModel.updateMonthlyData(selectedMonth: viewModel.selectedMonth)

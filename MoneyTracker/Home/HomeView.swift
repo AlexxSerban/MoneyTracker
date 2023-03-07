@@ -28,7 +28,10 @@ struct HomeView: View {
                 HStack(spacing: 25){
                     VStack(alignment: .leading, spacing: 15){
                         Text("Total Income")
-                            .font(.headline).bold().italic()
+                            .font(.headline)
+                            .bold()
+                            .italic()
+                        
                         Text("\(viewModel.totalIncome)$")
                             .font(.headline).bold().italic()
                     }
@@ -76,7 +79,7 @@ struct HomeView: View {
                 Spacer()
             }
         }
-        .onAppear() {
+        .onAppear {
             self.viewModel.getLastTransactions()
             self.viewModel.calculateMonthlyIncome()
             self.viewModel.calculateMonthlySpend()
@@ -89,7 +92,3 @@ struct HomeView_Previews: PreviewProvider {
         HomeView()
     }
 }
-
-
-
-
