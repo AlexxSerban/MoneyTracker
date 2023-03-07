@@ -10,7 +10,7 @@ import SwiftUI
 struct LoginView: View {
     
     @ObservedObject var viewModel: LoginViewModel
-
+    
     var body: some View {
         NavigationStack{
             VStack(spacing: 16) {
@@ -48,7 +48,7 @@ struct LoginView: View {
                     Text("Register")
                         .font(.system(size: 18, weight: .bold, design: .serif))
                         .foregroundColor(Color.orange)
-                        
+                    
                 }
                 .buttonStyle(.borderedProminent)
                 .buttonBorderShape(.capsule)
@@ -62,8 +62,6 @@ struct LoginView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .buttonBorderShape(.capsule)
-
-                
             }
             .padding()
             .alert("Wrong email", isPresented: $viewModel.loggingError, actions: {

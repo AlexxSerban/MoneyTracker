@@ -31,18 +31,15 @@ class RegisterViewModel: ObservableObject {
     
     func register() {
         self.isLoading = true
-        
         Task {
             do {
                 let _ = try await authClient.createUser(email: email, password: password)
-                
                 await MainActor.run {
                     self.isLoading = false
                     self.isRegistered = true
                 }
             } catch {
                 print(error.localizedDescription)
-                
                 await MainActor.run {
                     self.isLoading = false
                     self.registeringError = true
@@ -50,7 +47,6 @@ class RegisterViewModel: ObservableObject {
             }
         }
     }
-    
 }
 
 

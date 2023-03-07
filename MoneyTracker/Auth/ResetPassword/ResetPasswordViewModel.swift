@@ -27,8 +27,7 @@ class ResetPasswordViewModel: ObservableObject {
     }
     
     func resetPassword() {
-        isLoading = true
-        
+        isLoading = true        
         Task {
             do {
                 let _ = try await authClient.resetPassword(email: email)

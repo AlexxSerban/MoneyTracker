@@ -35,10 +35,27 @@ struct MoneyTracker: App {
     // Register app delegate for Firebase setup
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
+    @State private var isUserAuthenticated = false
+    
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                LoginView(viewModel: LoginViewModel())
+                if isUserAuthenticated {
+                    TabMenuView()
+                } else {
+                    LoginView(viewModel: LoginViewModel())
+                }
+            }
+            .onAppear {
+                let handle = Auth.auth().addStateDidChangeListener { auth, user in
+                    if let user = user {
+                        isUserAuthenticated = true
+                        print("Utilizatorul este logat cu adresa de email \(user.email ?? "")")
+                    } else {
+                        isUserAuthenticated = false
+                        print("Utilizatorul nu este logat")
+                    }
+                }
             }
         }
     }

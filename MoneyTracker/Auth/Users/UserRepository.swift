@@ -18,17 +18,20 @@ class UserRepository: ObservableObject {
         guard let userId = authClient.getUserId() else {
             return
         }
-        
         try await dataBase.collection("Users").document(userId).setData(userData.dictionary)
     }
     
-    func getUser(userId: String) async throws -> UserData {
+    func getUser() async throws -> UserData {
+        guard let userId = authClient.getUserId() else {
+            return UserData(name: "", phoneNumber: "", country: "")
+        }
+        
         let document = try await dataBase.collection("Users").document(userId).getDocument()
         
         return UserData(
-            name: document.get("name") as! String,
-            phoneNumber: document.get("phoneNumber") as! String,
-            country: document.get("country") as! String )
-        
-    }
+            name: document.get("name") as? String ?? "",
+            phoneNumber: document.get("phoneNumber") as? String ?? "",
+            country: document.get("country") as? String ?? ""
+        )
+    } 
 }

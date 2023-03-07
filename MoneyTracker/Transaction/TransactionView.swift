@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
+import Combine
 
 struct TransactionView: View {
     
@@ -22,7 +24,6 @@ struct TransactionView: View {
             
             ZStack{
                 VStack(alignment:.leading){
-                    
                     HStack{
                         Picker("Select a currency", selection: $viewModel.transactionData.currency) {
                             ForEach(SelectionCurrency.allCases, id: \.self) {
@@ -39,6 +40,7 @@ struct TransactionView: View {
                     
                     HStack{
                         Image(systemName: "folder.circle.fill")
+                        
                         Text("Category")
                         
                         Picker("Select a category", selection: $viewModel.transactionData.category) {
@@ -62,17 +64,34 @@ struct TransactionView: View {
                     }
                     
                     DatePicker(selection: $viewModel.transactionData.date, label: { Text("Enter date") })
+                    
+                    HStack{
+                        Text("Transaction Type")
+                        Picker("Select a category", selection: $viewModel.transactionData.transactionType) {
+                            ForEach(TransactionType.allCases, id: \.self) {
+                                Text($0.rawValue)
+                                    .tag($0)
+                            }
+                        }
+                        .pickerStyle(.menu)
+                    }
                 }
             }
             .padding()
             
             Button {
                 viewModel.addTransactionInfo()
-                
-                // Closes the sheet
                 showSheet = false
             } label: {
                 Text("Save")
+            }
+            .font(.system(size: 18, weight: .bold, design: .serif))
+            .foregroundColor(Color.orange)
+            
+            Button {
+                showSheet = false
+            } label: {
+                Text("Cancel")
             }
             .font(.system(size: 18, weight: .bold, design: .serif))
             .foregroundColor(Color.orange)
@@ -85,3 +104,5 @@ struct TransactionView_Previews: PreviewProvider {
         TransactionView(showSheet: .constant(true))
     }
 }
+
+
