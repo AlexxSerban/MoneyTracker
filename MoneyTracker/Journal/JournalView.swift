@@ -35,14 +35,12 @@ struct JournalView: View {
                             .progressViewStyle(LinearProgressViewStyle())
                             .padding()
                     } else {
-                        Chart {
-                            ForEach(viewModel.transactionDataFiltered.sorted(by: { $0.amount > $1.amount })) { transaction in
-                                BarMark(
-                                    x: .value("Period", transaction.timestamp.dateValue(), unit: viewModel.periodSection == .day ? .hour : viewModel.periodSection == .week ? .day : viewModel.periodSection == .month ? .weekOfMonth : .month),
-                                    y: .value("Amount", transaction.amount)
-                                )
-                                .cornerRadius(10)
-                            }
+                        Chart(viewModel.transactionDataFiltered.sorted(by: { $0.amount > $1.amount })) { transaction in
+                            BarMark(
+                                x: .value("Period", transaction.timestamp.dateValue(), unit: viewModel.periodSection == .day ? .hour : viewModel.periodSection == .week ? .day : viewModel.periodSection == .month ? .weekOfMonth : .month),
+                                y: .value("Amount", Int(transaction.amount) ?? 0)
+                            )
+                            
                         }
                         .frame(height: 190)
                     }
