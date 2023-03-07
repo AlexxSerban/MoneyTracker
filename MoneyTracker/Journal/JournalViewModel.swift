@@ -9,18 +9,16 @@ import Foundation
 import FirebaseFirestore
 import Charts
 
-
+enum PeriodSection : String, CaseIterable {
+    case day = "Day"
+    case week = "Week"
+    case month = "Month"
+    case year = "Year"
+}
 
 class JournalViewModel: ObservableObject {
     
     @Published var model = JournalModel()
-    
-    enum PeriodSection : String, CaseIterable {
-        case day = "Day"
-        case week = "Week"
-        case month = "Month"
-        case year = "Year"
-    }
     
     @Published var transactionData = [TransactionData()]
     @Published var periodSection : PeriodSection = .day
@@ -42,19 +40,25 @@ class JournalViewModel: ObservableObject {
         Task{
             do {
                 isLoadingTransaction = true
-                if (periodSection == .day) {
+                
+                switch periodSection {
+                case .day:
                     startDate = model.startOfDay
                     endDate = model.endOfDay
-                } else if (periodSection == .week) {
+                
+                case .week:
                     startDate = model.startOfWeek
                     endDate = model.endOfWeek
-                } else if(periodSection == .month) {
+                    
+                case .month:
                     startDate = model.startOfMonth
                     endDate = model.endOfMonth
-                } else if(periodSection == .year) {
+                    
+                case .year:
                     startDate = model.startOfYear
                     endDate = model.endOfYear
                 }
+                
                 self.transactionData = try await transactionRepository.getFilteredTransaction(startDate: startDate, endDate: endDate)
                 
                 await MainActor.run {
@@ -74,21 +78,19 @@ class JournalViewModel: ObservableObject {
                 if (periodSection == .day) {
                     startDate = model.startOfDay
                     endDate = model.endOfDay
-                    self.transactionDataFiltered = try await transactionRepository.getSpendDailyTransaction(startDate: startDate, endDate: endDate)
-                }
-                else if (periodSection == .week) {
+                } else if (periodSection == .week) {
                     startDate = model.startOfWeek
                     endDate = model.endOfWeek
-                    self.transactionDataFiltered = try await transactionRepository.getSpendWeeklyTransaction(startDate: startDate, endDate: endDate)
                 } else if(periodSection == .month) {
                     startDate = model.startOfMonth
                     endDate = model.endOfMonth
-                    self.transactionDataFiltered = try await transactionRepository.getSpendMonthlyTransaction(startDate: startDate, endDate: endDate)
                 } else if(periodSection == .year) {
                     startDate = model.startOfYear
                     endDate = model.endOfYear
-                    self.transactionDataFiltered = try await transactionRepository.getSpendYearTransaction(startDate: startDate, endDate: endDate)
                 }
+                
+                self.transactionDataFiltered = try await transactionRepository.getSpendTransactions(periodSection: periodSection, startDate: startDate, endDate: endDate)
+                
                 await MainActor.run {
                     isLoadingChart = false
                 }
@@ -101,6 +103,7 @@ class JournalViewModel: ObservableObject {
     @MainActor
     func deleteTransactionJournalView(at indexSet: IndexSet)  {
         transactionRepository.deleteTransactionFromFirestore(at: indexSet, transactionData: transactionData)
+        
         fetchTransactions()
         fetchSpendTransactions()
     }

@@ -203,8 +203,8 @@
 			children = (
 				3EB6082429228B3600B2BE0A /* TransactionData.swift */,
 				3EB6082629228B4400B2BE0A /* TransactionView.swift */,
-				3E13C10B292907D800805483 /* TransactionRepository.swift */,
 				3E13C10D29290CCB00805483 /* TransactionViewModel.swift */,
+				3E13C10B292907D800805483 /* TransactionRepository.swift */,
 			);
 			path = Transaction;
 			sourceTree = "<group>";

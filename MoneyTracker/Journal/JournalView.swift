@@ -21,7 +21,7 @@ struct JournalView: View {
         ZStack{
             VStack{
                 Picker("", selection: $viewModel.periodSection) {
-                    ForEach(JournalViewModel.PeriodSection.allCases, id: \.self) { selection in
+                    ForEach(PeriodSection.allCases, id: \.self) { selection in
                         Text(selection.rawValue)
                     }
                 }

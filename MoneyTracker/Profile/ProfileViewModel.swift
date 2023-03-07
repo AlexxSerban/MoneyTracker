@@ -163,16 +163,19 @@ class ProfileViewModel: ObservableObject {
         storageRef.downloadURL { (url, error) in
             if let error = error {
                 print("Nu s-a putut obține URL-ul fotografiei: \(error.localizedDescription)")
+                self.isLoadingPhoto = false
             } else if let url = url {
                 // Download profile picture data
                 let storageRefPhoto = Storage.storage().reference(forURL: url.absoluteString)
+                
                 storageRefPhoto.getData(maxSize: 10 * 1024 * 1024) { data, error in
                     if let error = error {
                         print("Eroare la descărcarea imaginii: \(error.localizedDescription)")
                     } else if let imageData = data {
                         self.data = imageData
-                        print("A mers descarcarea fotografiei de profil")
                         self.isLoadingPhoto = false
+                        
+                        print("A mers descarcarea fotografiei de profil")
                     }
                 }
             }
