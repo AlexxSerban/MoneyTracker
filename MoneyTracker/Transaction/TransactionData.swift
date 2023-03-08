@@ -31,12 +31,12 @@ enum TransactionType: String, CaseIterable, Identifiable {
 class TransactionData: Identifiable, ObservableObject{
     var id : String
     var amount : String
-    @Published var currency : SelectionCurrency
-    @Published var category : SelectionCategory
-    @Published var paymentMethod : SelectionPay
+    var currency : SelectionCurrency
+    var category : SelectionCategory
+    var paymentMethod : SelectionPay
     var date : Date
     var timestamp: Timestamp
-    @Published var transactionType : TransactionType
+    var transactionType : TransactionType
     
     var dictionary: [String: AnyHashable] {
         return [
