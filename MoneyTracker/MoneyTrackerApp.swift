@@ -47,7 +47,7 @@ struct MoneyTracker: App {
                 }
             }
             .onAppear {
-                let handle = Auth.auth().addStateDidChangeListener { auth, user in
+                _ = Auth.auth().addStateDidChangeListener { auth, user in
                     if let user = user {
                         isUserAuthenticated = true
                         print("Utilizatorul este logat cu adresa de email \(user.email ?? "")")

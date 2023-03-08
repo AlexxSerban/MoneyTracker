@@ -12,75 +12,122 @@ class JournalModel {
     
     let date: Date
     var calendar: Calendar
-    let currentDay : Date
-    let dateComponents : DateComponents
+    
     let startOfDay : Date
-    var startOfDayComponents: DateComponents
     let endOfDay : Date
-    var endOfDayComponents : DateComponents
+    
     let startOfWeek : Date
     let endOfWeek : Date
+    
     let startOfMonth : Date
     let endOfMonth : Date
+    
     let startOfYear : Date
     let endOfYear : Date
     
     init() {
         self.date = Date.now
-        self.calendar = Calendar.current
-        self.dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
-        self.currentDay = calendar.date(from: dateComponents)!
-        self.startOfDayComponents = DateComponents()
-        startOfDayComponents.hour = 02
-        startOfDayComponents.minute = 00
-        startOfDayComponents.second = 00
-        self.startOfDay = calendar.date(byAdding: startOfDayComponents, to: currentDay)!
-        self.endOfDayComponents = DateComponents()
-        endOfDayComponents.hour = 23
-        endOfDayComponents.minute = 59
-        endOfDayComponents.second = 59
-        self.endOfDay = calendar.date(byAdding: endOfDayComponents, to: startOfDay)!
-        self.startOfWeek = calendar.startOfWeek(Date())
-        self.endOfWeek = calendar.endOfWeek(Date())
-        self.startOfMonth = calendar.startOfMonth(Date())
-        self.endOfMonth = calendar.endOfMonth(Date())
-        self.startOfYear = calendar.startOfYear(Date())
-        self.endOfYear = calendar.endOfYear(Date())
+        self.calendar = Calendar(identifier: .gregorian)
+        self.calendar.timeZone = TimeZone(identifier: "GMT")!
+        //self.calendar.firstWeekday = 2
+
+        self.startOfDay = Date().startOfDay(using: self.calendar)
+        self.endOfDay = Date().endOfDay(using: self.calendar)
+        
+        self.startOfWeek = Date().startOfWeek(using: self.calendar)
+        self.endOfWeek = Date().endOfWeek(using: self.calendar)
+        
+        self.startOfMonth = Date().startOfMonth(using: self.calendar)
+        self.endOfMonth = Date().endOfMonth(using: self.calendar)
+        
+        self.startOfYear = Date().startOfYear(using: self.calendar)
+        self.endOfYear = Date().endOfYear(using: self.calendar)
+        
+        print("AICI")
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.timeZone = TimeZone(identifier: "GMT")!
+        
+        print("Azi")
+        print(dateFormatter.string(from: self.date))
+        
+        print("Inceput zi")
+        print(dateFormatter.string(from: self.startOfDay))
+        
+        print("Sfarsit zi")
+        print(dateFormatter.string(from: self.endOfDay))
+        
+        print("Inceput saptamana")
+        print(dateFormatter.string(from: self.startOfWeek))
+        
+        print("Sfarsit saptamana")
+        print(dateFormatter.string(from: self.endOfWeek))
+        
+        print("Inceput luna")
+        print(dateFormatter.string(from: self.startOfMonth))
+        
+        print("Sfarsit luna")
+        print(dateFormatter.string(from: self.endOfMonth))
+        
+        print("Inceput an")
+        print(dateFormatter.string(from: self.startOfYear))
+        
+        print("Sfarsit an")
+        print(dateFormatter.string(from: self.endOfYear))
     }
 }
 
-extension Calendar {
+extension Date {
+    func startOfDay(using calendar: Calendar = Calendar.current) -> Date {
+        return calendar.startOfDay(for: self)
+    }
     
-    func dayOfWeek(_ date: Date) -> Int {
-        var dayOfWeek = self.component(.weekday, from: date) - 1 - self.firstWeekday
+    func endOfDay(using calendar: Calendar = Calendar.current) -> Date {
+        var components = DateComponents()
+        components.day = 1
+        components.second = -1
+        return calendar.date(byAdding: components, to: startOfDay(using: calendar))!
+    }
+    
+    func startOfWeek(using calendar: Calendar = Calendar.current) -> Date {
+        var components = DateComponents()
+        components.day = 1 //Temporary fix for having Monday as the first day of the week
+
+        let initialStartOfWeek = calendar.dateComponents([.calendar, .yearForWeekOfYear, .weekOfYear], from: self).date!
+        return calendar.date(byAdding: components, to: initialStartOfWeek)!
         
-        if dayOfWeek <= 0 {
-            dayOfWeek += 7
-        }
-        return dayOfWeek
+        //TODO: Resolve this
+        //calendar.dateComponents([.calendar, .yearForWeekOfYear, .weekOfYear], from: self).date!
     }
     
-    func startOfWeek(_ date: Date) -> Date {
-        return self.date(byAdding: DateComponents(day: -self.dayOfWeek(date)), to: date)!
+    func endOfWeek(using calendar: Calendar = Calendar.current) -> Date {
+        var components = DateComponents()
+        components.weekOfYear = 1
+        components.second = -1
+        return calendar.date(byAdding: components, to: startOfWeek(using: calendar))!
     }
     
-    func endOfWeek(_ date: Date) -> Date {
-        return self.date(byAdding: DateComponents(day: 7), to: self.startOfWeek(date))!
+    func startOfMonth(using calendar: Calendar = Calendar.current) -> Date {
+        let components = calendar.dateComponents([.year, .month], from: startOfDay(using: calendar))
+        return calendar.date(from: components)!
     }
     
-    func startOfMonth(_ date: Date) -> Date {
-        return self.date(from: self.dateComponents([.year, .month], from: date))!
+    func endOfMonth(using calendar: Calendar = Calendar.current) -> Date {
+        var components = DateComponents()
+        components.month = 1
+        components.second = -1
+        return calendar.date(byAdding: components, to: startOfMonth(using: calendar))!
     }
     
-    func endOfMonth(_ date: Date) -> Date {
-        return self.date(byAdding: DateComponents(month: 1, day: -1), to: self.startOfMonth(date))!
+    func startOfYear(using calendar: Calendar = Calendar.current) -> Date {
+        let components = Calendar.current.dateComponents([.year], from: startOfDay(using: calendar))
+        return calendar.date(from: components)!
     }
     
-    func startOfYear(_ date: Date) -> Date {
-        return self.date(from: self.dateComponents([.year], from: date))!
-    }
-    
-    func endOfYear(_ date: Date) -> Date {
-        return self.date(from: DateComponents(year: self.component(.year, from: date), month: 12, day: 31))!
+    func endOfYear(using calendar: Calendar = Calendar.current) -> Date {
+        var components = DateComponents()
+        components.year = 1
+        components.second = -1
+        return calendar.date(byAdding: components, to: startOfYear(using: calendar))!
     }
 }

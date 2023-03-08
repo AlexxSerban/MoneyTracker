@@ -13,7 +13,7 @@ class HistoryViewModel: ObservableObject {
     @Published var selectedYear = Calendar.current.component(.year, from: Date())
     @Published var selectedMonth = Calendar.current.shortMonthSymbols[Calendar.current.component(.month, from: Date())-1]
     @Published var months : [String] = Calendar.current.shortMonthSymbols
-    @Published var dateRange = Calendar.current.startOfMonth(Date())...Calendar.current.endOfMonth(Date())
+    @Published var dateRange = Date().startOfMonth()...Date().endOfMonth()
     
     // Status
     @Published var isLoadingTransactions: Bool = false
