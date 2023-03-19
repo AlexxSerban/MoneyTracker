@@ -34,6 +34,7 @@ class HistoryViewModel: ObservableObject {
     }
     
     func setMonthPeriod(selectedMonth: String) {
+        
         self.selectedMonth = selectedMonth
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MMM/yyy"
@@ -89,10 +90,12 @@ class HistoryViewModel: ObservableObject {
     func categorySum() {
         Task{
             do {
+                
                 self.totalCategorySum = try await transactionRepository.calculateCategorySum(
                     startDate: dateRange.lowerBound,
                     endDate: dateRange.upperBound,
                     category: SelectionCategory(rawValue: selectCategory.rawValue) ?? .Food
+                    
                 )
             } catch {
                 print(error.localizedDescription)
@@ -101,6 +104,7 @@ class HistoryViewModel: ObservableObject {
     }
 
     func updateMonthlyData(selectedMonth: String) {
+        
         setMonthPeriod(selectedMonth: selectedMonth)
         isLoadingTransactions = true
         

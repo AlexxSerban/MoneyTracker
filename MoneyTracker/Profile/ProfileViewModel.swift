@@ -26,15 +26,22 @@ class ProfileViewModel: ObservableObject {
     @Published var photoURL: String = ""
     @Published var isLoadingPhoto: Bool = false
     @Published var isLoadingInfo: Bool = false
+    @Published var isDeleteActionSheet = false
+    @Published var isSignOutActionSheet = false
+    @Published var transactionData = TransactionData()
+    @Published var selectedCurrency: SelectionCurrency
+    
     
     init(
-        authClient: AuthClient = DIContainer.shared.resolve(type: AuthClient.self),
-        userRepository: UserRepository = DIContainer.shared.resolve(type: UserRepository.self)
-        
-    ) {
-        self.authClient = authClient
-        self.userRepository = userRepository
-    }
+            authClient: AuthClient = DIContainer.shared.resolve(type: AuthClient.self),
+            userRepository: UserRepository = DIContainer.shared.resolve(type: UserRepository.self)
+            
+        ) {
+            self.authClient = authClient
+            self.userRepository = userRepository
+            self.transactionData = TransactionData()
+            self.selectedCurrency = TransactionData().currency
+        }
     
     @MainActor
     func addProfileInfo() {

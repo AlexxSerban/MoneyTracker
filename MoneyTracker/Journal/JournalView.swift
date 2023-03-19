@@ -19,70 +19,192 @@ struct JournalView: View {
     
     var body: some View {
         ZStack{
+            
+            Color("Background")
+                .ignoresSafeArea(.all)
+            
             VStack{
+                
                 Picker("", selection: $viewModel.periodSection) {
+                    
                     ForEach(PeriodSection.allCases, id: \.self) { selection in
+                        
                         Text(selection.rawValue)
+                            .font(.system(size: 14))
+                            .foregroundColor(viewModel.periodSection == selection ? Color("MainColor") : .secondary)
+                            .padding(.vertical, 8)
+                            .padding(.horizontal, 16)
+                            .background(Color("SecondColor"))
+                            .clipShape(Capsule())
+                        
                     }
                 }
                 .pickerStyle(SegmentedPickerStyle())
+                .frame(height: 60)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
                 .padding()
+                
+                
                 Divider()
                 
                 VStack{
+                    
                     if viewModel.isLoadingChart {
+                        
                         ProgressView("Processing", value: 0, total: 100)
                             .progressViewStyle(LinearProgressViewStyle())
                             .padding()
+                        
                     } else {
-                        Chart(viewModel.transactionDataFiltered.sorted(by: { $0.amount > $1.amount })) { transaction in
-                            BarMark(
-                                x: .value("Period", transaction.timestamp.dateValue(), unit: viewModel.periodSection == .day ? .hour : viewModel.periodSection == .week ? .day : viewModel.periodSection == .month ? .weekOfMonth : .month),
-                                y: .value("Amount", Int(transaction.amount) ?? 0)
-                            )
+                        
+                        Chart{
+                            
+                            ForEach(viewModel.transactionDataFiltered.sorted(by: { $0.amount > $1.amount })) { transaction in
+                                
+                                BarMark(
+                                    x: .value("Period", transaction.timestamp.dateValue(),
+                                              unit: viewModel.periodSection == .day ? .hour : viewModel.periodSection == .week ? .day : viewModel.periodSection == .month ? .weekOfMonth : .month),
+                                    y: .value("Amount", Int(transaction.amount) ?? 0)
+                                    
+                                )
+                                .foregroundStyle(Color("MainColor"))
+                                .cornerRadius(10)
+                                
+                            }
+                        }
+                        .animation(.easeIn(duration: 0.3))
+                        .chartXAxis {
+                            
+                            AxisMarks(values: .automatic) { _ in
+                                AxisValueLabel()
+                                
+                            }
+                        }
+                        .chartYAxis {
+                            
+                            AxisMarks(position: .leading, values: .automatic) { value in
+                                
+                                AxisValueLabel() {
+                                    
+                                    if let intValue = value.as(Int.self) {
+                                        if intValue < 1000 {
+                                            Text("\(intValue)")
+                                                .font(.body)
+                                                .foregroundColor(Color("Text"))
+                                        } else {
+                                            Text("\(intValue/1000)\(intValue == 0 ? "" : "k")")
+                                                .font(.body)
+                                                .foregroundColor(Color("Text"))
+                                        }
+                                    }
+                                    
+                                }
+                            }
                             
                         }
-                        .frame(height: 190)
+                        .transition(.scale)
+                        .frame(minHeight: 200)
+                        .padding()
+                        
                     }
                 }.padding()
                 
-                if viewModel.transactionData.isEmpty {
-                    Text("No transactions found.")
-                } else {
-                    if viewModel.isLoadingTransaction {
-                        ProgressView("Processing")
-                            .tint(.orange)
-                            .foregroundColor(.gray)
+                VStack {
+                    
+                    if viewModel.transactionData.isEmpty {
+                        Text("No transactions found.")
+                            .foregroundColor(Color("Text"))
                     } else {
-                        List{
-                            ForEach(viewModel.transactionData){ transaction in
-                                HStack(spacing: 15){
-                                    Image(systemName: "cart.fill")
-                                    VStack(alignment: .leading, spacing: 5){
-                                        Text("\(transaction.category.rawValue)")
-                                            .minimumScaleFactor(0.5)
-                                        Text("\(transaction.paymentMethod.rawValue)")
-                                            .minimumScaleFactor(0.5)
-                                        Text("\(transaction.transactionType.rawValue)")
-                                            .font(.headline).bold().italic()
+                        
+                        if viewModel.isLoadingTransaction {
+                            ProgressView("Processing")
+                                .tint(.orange)
+                                .foregroundColor(.gray)
+                            
+                        } else {
+                            
+                            List{
+                                
+                                Section{
+                                    
+                                    ForEach(viewModel.transactionData){ transaction in
+                                        
+                                        HStack(spacing: 20){
+                                            
+                                            (
+                                                transaction.transactionType == .Spend ?
+                                                Image(systemName: "cart.fill.badge.minus") :
+                                                Image(systemName: "banknote")
+                                            )
+                                            .resizable()
+                                            .frame(width: 24.0, height: 26.0)
+                                            .foregroundColor(Color("MainColor"))
+                                            
+                                            VStack(alignment: .leading, spacing: 5){
+                                                
+                                                Text("\(transaction.category.rawValue)")
+                                                    .minimumScaleFactor(0.5)
+                                                    .font(.headline).bold().italic()
+                                                    .foregroundColor(Color("Text"))
+                                                
+                                                Text("\(transaction.timestamp.dateValue().formatted(date: .long , time: .omitted))")
+                                                    .font(.subheadline)
+                                                    .font(.headline).bold().italic()
+                                                    .foregroundColor(Color("Text"))
+                                                
+                                            }
+                                            
+                                            VStack( spacing: 5){
+                                                
+                                                Text("\(transaction.amount) \(transaction.currency.rawValue)")
+                                                    .fixedSize(horizontal: true, vertical: false)
+                                                    .font(.headline).bold().italic()
+                                                    .foregroundColor(transaction.transactionType == .Spend ? Color.red : Color.green)
+                                                    .foregroundColor(Color("Text"))
+                                                    .frame(maxWidth: .infinity)
+                                                
+                                            }
+                                            .offset(x: 50)
+                                        }
+                                        .padding(.vertical, 5)
                                     }
-                                    Text("\(transaction.timestamp.dateValue().formatted(date: .numeric, time: .omitted))")
-                                        .font(.subheadline)
-                                        .foregroundColor(.secondary)
-                                    Text("\(transaction.amount)")
-                                        .font(.headline).bold().italic()
-                                    Text("\(transaction.currency.rawValue)")
-                                        .font(.headline).bold().italic()
+                                    .onDelete(perform: { indexSet in
+                                        viewModel.deleteTransactionJournalView(at: indexSet)
+                                    })
+                                    .frame(height: 80)
+                                    .listRowBackground(
+                                        
+                                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                            .fill(Color("BackgroundBlocks"))
+                                            .opacity(0.8)
+                                            .padding(.vertical, 1)
+                                            .cornerRadius(2)
+                                        
+                                    )
+                                    .listStyle(.insetGrouped)
+                                    .listRowSeparator(.hidden)
+                                    .listRowInsets(.init(top: 0, leading: 40, bottom: 0, trailing: 40))
+                                    
+                                    
+                                } header: {
+                                    
+                                    Text("Transactions")
+                                        .foregroundColor(Color("Text"))
+                                    
                                 }
-                                .padding(.vertical, 5)
+                                .listRowInsets(.init(top: 0, leading: 10, bottom: 0, trailing: 10))
+                                .headerProminence(.increased)
+                               
                             }
-                            .onDelete(perform: { indexSet in
-                                viewModel.deleteTransactionJournalView(at: indexSet)
-                            })
+                            .scrollContentBackground(.hidden)
+                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                            .animation(.spring(response: 0.8, dampingFraction: 0.8))
                         }
                     }
+                        
+                    Spacer()
                 }
-                Spacer()
+                
             }
         }
         .onChange(of: viewModel.periodSection) { value in

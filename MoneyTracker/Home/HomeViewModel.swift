@@ -18,6 +18,8 @@ class HomeViewModel: ObservableObject {
     @Published var isLoadingTotalSpend: Bool = false
     @Published var isLoadingTransactions: Bool = false
     
+
+    
     // Dependencies
     let transactionRepository: TransactionRepository
     
@@ -27,12 +29,15 @@ class HomeViewModel: ObservableObject {
 
     @MainActor
     func getLastTransactions() {
+        
         Task{
             do {
+                
                 isLoadingTransactions = true
                 self.transactionData = try await transactionRepository.getTransactions(transactionNumber: 5)
                 await MainActor.run {
                     isLoadingTransactions = false
+                    
                 }
             } catch {
                 print(error.localizedDescription)

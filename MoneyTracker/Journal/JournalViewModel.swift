@@ -72,8 +72,11 @@ class JournalViewModel: ObservableObject {
     
     @MainActor
     func fetchSpendTransactions() {
+        
         Task{
+            
             do {
+                
                 isLoadingChart = true
                 if (periodSection == .day) {
                     startDate = model.startOfDay
@@ -94,6 +97,7 @@ class JournalViewModel: ObservableObject {
                 await MainActor.run {
                     isLoadingChart = false
                 }
+                
             } catch {
                 print(error.localizedDescription)
             }
@@ -103,7 +107,6 @@ class JournalViewModel: ObservableObject {
     @MainActor
     func deleteTransactionJournalView(at indexSet: IndexSet)  {
         transactionRepository.deleteTransactionFromFirestore(at: indexSet, transactionData: transactionData)
-        
         fetchTransactions()
         fetchSpendTransactions()
     }

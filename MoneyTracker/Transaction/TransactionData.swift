@@ -39,6 +39,7 @@ class TransactionData: Identifiable, ObservableObject{
     @Published var transactionType : TransactionType
     
     var dictionary: [String: AnyHashable] {
+        
         return [
             "amount": amount,
             "currency": currency.rawValue,
@@ -48,9 +49,11 @@ class TransactionData: Identifiable, ObservableObject{
             "timestamp": timestamp,
             "transactionType": transactionType.rawValue
         ]
+        
     }
     
     init(
+        
         id: String? = nil,
         amount: String = "",
         currency: SelectionCurrency = .USD,
@@ -59,7 +62,9 @@ class TransactionData: Identifiable, ObservableObject{
         date: Date = Date(),
         timestamp: Timestamp = .init(),
         transactionType : TransactionType = .Spend
+        
     ) {
+        
         self.id = id ?? UUID().uuidString
         self.amount = amount
         self.currency = currency
@@ -68,7 +73,13 @@ class TransactionData: Identifiable, ObservableObject{
         self.date = date
         self.timestamp = timestamp
         self.transactionType = transactionType
+        
     }
+    
+    func setCurrency(to currency: SelectionCurrency) {
+        self.currency = currency
+    }
+
 }
 
 

@@ -35,6 +35,7 @@ struct MoneyTracker: App {
     // Register app delegate for Firebase setup
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
+    @Environment(\.colorScheme) var colorScheme
     @State private var isUserAuthenticated = false
     
     var body: some Scene {
@@ -42,8 +43,10 @@ struct MoneyTracker: App {
             NavigationView {
                 if isUserAuthenticated {
                     TabMenuView()
+
                 } else {
                     LoginView(viewModel: LoginViewModel())
+                    
                 }
             }
             .onAppear {
