@@ -90,7 +90,7 @@ struct TransactionView: View {
                                         Spacer()
                                         
                                         Picker("Select a category", selection: $viewModel.transactionData.category) {
-                                            ForEach(SelectionCategory.allCases, id: \.self) {
+                                            ForEach(viewModel.transactionData.transactionType == .Spend ? SelectionCategory.spendCategories : SelectionCategory.incomeCategories,  id: \.self) {
                                                 Text($0.rawValue)
                                                     .tag($0)
                                             }

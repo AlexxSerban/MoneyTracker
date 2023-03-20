@@ -57,7 +57,7 @@ struct HomeView: View {
                                 .foregroundColor(Color("Text"))
                             
                         }
-                        .offset(x: -60 + offset.width, y: +50 + offset.height)
+                        .offset(x: -50 + offset.width, y: +50 + offset.height)
                         .rotationEffect(Angle(degrees: 360))
                         
                     }

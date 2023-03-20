@@ -27,8 +27,16 @@ enum SelectionCurrency: String, CaseIterable, Identifiable {
 
 
 enum SelectionCategory: String, CaseIterable, Identifiable {
-    case Food, Education, Pets, Fitness, Salary, Business, Gifts 
+    case Food, Education, Pets, Fitness, Salary, Business, Gifts
     var id: Self {self}
+    
+    static var spendCategories: [SelectionCategory] {
+        return [.Food, .Education, .Pets, .Fitness]
+    }
+
+    static var incomeCategories: [SelectionCategory] {
+        return [.Salary, .Business, .Gifts]
+    }
 }
 
 enum TransactionType: String, CaseIterable, Identifiable {

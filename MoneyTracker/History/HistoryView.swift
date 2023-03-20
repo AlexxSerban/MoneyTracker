@@ -191,7 +191,7 @@ struct HistoryView: View {
                                     Spacer()
                                     
                                     Picker("Select a category", selection: $viewModel.selectCategory) {
-                                        ForEach(SelectionCategory.allCases, id: \.self) {
+                                        ForEach(SelectionCategory.spendCategories, id: \.self) {
                                             Text($0.rawValue)
                                                 .tag($0)
                                             
