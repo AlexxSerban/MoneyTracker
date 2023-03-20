@@ -34,7 +34,7 @@ class HomeViewModel: ObservableObject {
             do {
                 
                 isLoadingTransactions = true
-                self.transactionData = try await transactionRepository.getTransactions(transactionNumber: 5)
+                self.transactionData = try await transactionRepository.getTransactions(transactionNumber: 5, currency: SelectionCurrency(rawValue: SelectionCurrency.defaultCurrency.rawValue) ?? .USD)
                 await MainActor.run {
                     isLoadingTransactions = false
                     
@@ -49,7 +49,7 @@ class HomeViewModel: ObservableObject {
     func calculateMonthlyIncome() {
         Task{
             do {
-                self.totalIncome = try await transactionRepository.calculateIncomeSum(startDate: journalModel.startOfMonth, endDate: journalModel.endOfMonth)
+                self.totalIncome = try await transactionRepository.calculateIncomeSum(startDate: journalModel.startOfMonth, endDate: journalModel.endOfMonth, currency: SelectionCurrency(rawValue: SelectionCurrency.defaultCurrency.rawValue) ?? .USD)
             } catch {
                 print(error.localizedDescription)
             }
@@ -60,7 +60,7 @@ class HomeViewModel: ObservableObject {
     func calculateMonthlySpend() {
         Task{
             do {
-                self.totalSpend = try await transactionRepository.calculateSpendSum(startDate: journalModel.startOfMonth, endDate: journalModel.endOfMonth)
+                self.totalSpend = try await transactionRepository.calculateSpendSum(startDate: journalModel.startOfMonth, endDate: journalModel.endOfMonth, currency: SelectionCurrency(rawValue: SelectionCurrency.defaultCurrency.rawValue) ?? .USD)
             } catch {
                 print(error.localizedDescription)
             }

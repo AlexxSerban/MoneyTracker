@@ -48,7 +48,7 @@ struct HomeView: View {
                         
                         VStack(alignment: .leading, spacing: 16){
                             
-                            Text("\(viewModel.totalIncome - viewModel.totalSpend) $")
+                            Text("\(viewModel.totalIncome - viewModel.totalSpend) \(SelectionCurrency.defaultCurrency.rawValue)")
                                 .font(.system(size: 32, weight: .bold, design: .serif))
                                 .foregroundColor(Color("Text"))
                             
@@ -98,7 +98,7 @@ struct HomeView: View {
                                         
                                         VStack(alignment: .leading, spacing: 8){
                                             
-                                            Text("\(viewModel.totalIncome) $")
+                                            Text("\(viewModel.totalIncome) \(SelectionCurrency.defaultCurrency.rawValue)")
                                                 .font(.system(size: 22, weight: .bold, design: .serif))
                                                 .foregroundColor(Color("Text"))
                                             
@@ -149,7 +149,7 @@ struct HomeView: View {
                                         
                                         VStack(alignment: .leading, spacing: 8){
                                             
-                                            Text("\(viewModel.totalSpend) $")
+                                            Text("\(viewModel.totalSpend) \(SelectionCurrency.defaultCurrency.rawValue)")
                                                 .font(.system(size: 22, weight: .bold, design: .serif))
                                                 .foregroundColor(Color("Text"))
                                             

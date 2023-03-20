@@ -57,7 +57,7 @@ class HistoryViewModel: ObservableObject {
     func fetchMonthlyTransactions() {
         Task{
             do {
-                self.transactionData = try await transactionRepository.getFilteredTransaction(startDate: dateRange.lowerBound, endDate: dateRange.upperBound)
+                self.transactionData = try await transactionRepository.getFilteredTransaction(startDate: dateRange.lowerBound, endDate: dateRange.upperBound, currency: SelectionCurrency(rawValue: SelectionCurrency.defaultCurrency.rawValue) ?? .USD)
             } catch {
                 print(error.localizedDescription)
             }
@@ -68,7 +68,7 @@ class HistoryViewModel: ObservableObject {
     func monthlyIncome() {
         Task{
             do {
-                self.totalMonthlyIncome = try await transactionRepository.calculateIncomeSum(startDate: dateRange.lowerBound, endDate: dateRange.upperBound)
+                self.totalMonthlyIncome = try await transactionRepository.calculateIncomeSum(startDate: dateRange.lowerBound, endDate: dateRange.upperBound, currency: SelectionCurrency(rawValue: SelectionCurrency.defaultCurrency.rawValue) ?? .USD)
             } catch {
                 print(error.localizedDescription)
             }
@@ -79,7 +79,7 @@ class HistoryViewModel: ObservableObject {
     func monthlySpend() {
         Task{
             do {
-                self.totalMonthlySpend = try await transactionRepository.calculateSpendSum(startDate: dateRange.lowerBound, endDate: dateRange.upperBound)
+                self.totalMonthlySpend = try await transactionRepository.calculateSpendSum(startDate: dateRange.lowerBound, endDate: dateRange.upperBound, currency: SelectionCurrency(rawValue: SelectionCurrency.defaultCurrency.rawValue) ?? .USD)
             } catch {
                 print(error.localizedDescription)
             }
@@ -94,7 +94,8 @@ class HistoryViewModel: ObservableObject {
                 self.totalCategorySum = try await transactionRepository.calculateCategorySum(
                     startDate: dateRange.lowerBound,
                     endDate: dateRange.upperBound,
-                    category: SelectionCategory(rawValue: selectCategory.rawValue) ?? .Food
+                    category: SelectionCategory(rawValue: selectCategory.rawValue) ?? .Food,
+                    currency: SelectionCurrency(rawValue: SelectionCurrency.defaultCurrency.rawValue) ?? .USD
                     
                 )
             } catch {

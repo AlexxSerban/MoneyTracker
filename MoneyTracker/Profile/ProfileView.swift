@@ -294,6 +294,12 @@ struct ProfileView: View {
                             
                             HStack{
                                 
+                                Text("Select your currency: ")
+                                    .font(.system(size: 16, weight: .bold, design: .serif))
+                                    .foregroundColor(Color("Text"))
+                                
+                                Spacer()
+                                
                                 Picker("Select Currency", selection: $viewModel.selectedCurrency) {
                                            ForEach(SelectionCurrency.allCases) { currency in
                                                Text(currency.rawValue).tag(currency)
@@ -303,18 +309,14 @@ struct ProfileView: View {
                                        .onAppear {
                                            viewModel.selectedCurrency = viewModel.transactionData.currency
                                        }
-                                       
-                                       
-                                Text("Selected currency: \(viewModel.transactionData.currency.rawValue)")
-                                    .font(.system(size: 16, weight: .bold, design: .serif))
-                                    .foregroundColor(Color("Text"))
                                    }
+                                    .padding()
                                 
                             }
                         }
                     
                     
-                .offset(x: -10, y: 240)
+                .offset(x: 0, y: 240)
                 
                 VStack{
                     

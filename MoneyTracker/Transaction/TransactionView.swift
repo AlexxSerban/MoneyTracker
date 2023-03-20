@@ -59,7 +59,7 @@ struct TransactionView: View {
                                     HStack(alignment: .center){
                                         
                                         TextField("", text: $viewModel.transactionData.amount,
-                                                  prompt: Text("0").foregroundColor(Color("Text")))
+                                                  prompt: Text("\(viewModel.transactionData.currency.rawValue)").foregroundColor(Color("Text")))
                                         .background(Color("BackgroundBlocks"))
                                         .textFieldStyle(.roundedBorder)
                                         .frame(width: 270, height: 40)
@@ -69,20 +69,14 @@ struct TransactionView: View {
                                         
                                         Spacer()
                                         
-                                        Picker("Select a currency",
-                                               selection: $viewModel.transactionData.currency) {
-                                            ForEach(SelectionCurrency.allCases, id: \.self) {
-                                                Text($0.rawValue)
-                                                    .tag($0)
-                                            }.foregroundColor(Color.white)
-                                        }
-                                               .accentColor(Color.white)
-                                               .background(Color("MainColor"))
-                                               .opacity(0.8)
-                                               .foregroundColor(Color.white)
-                                               .cornerRadius(10)
-                                               .shadow(color: Color("MainColor").opacity(0.3), radius: 10, y: 10)
-                                               .pickerStyle(.menu)
+//                                        Text("\(viewModel.transactionData.currency.rawValue)")
+//                                               .accentColor(Color.white)
+//                                               .background(Color("MainColor"), in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+//                                               .opacity(0.8)
+//                                               .foregroundColor(Color.white)
+//                                               .cornerRadius(10)
+//                                               .shadow(color: Color("MainColor").opacity(0.3), radius: 10, y: 10)
+//                                               .pickerStyle(.menu)
                                     }
                                     
                                     Divider()
@@ -112,27 +106,27 @@ struct TransactionView: View {
                                     
                                     Divider()
                                     
-                                    HStack{
-                                        Text("How do you pay?")
-                                            .font(.system(size: 18, weight: .bold, design: .serif))
-                                            .foregroundColor(Color("Text"))
-                                        
-                                        Spacer()
-                                        
-                                        Picker("Select a category", selection: $viewModel.transactionData.paymentMethod) {
-                                            ForEach(SelectionPay.allCases, id: \.self) {
-                                                Text($0.rawValue)
-                                                    .tag($0)
-                                            }
-                                        }
-                                        .accentColor(Color.white)
-                                        .background(Color("MainColor"))
-                                        .opacity(0.8)
-                                        .foregroundColor(Color.white)
-                                        .cornerRadius(10)
-                                        .shadow(color: Color("MainColor").opacity(0.3), radius: 10, y: 10)
-                                        .pickerStyle(.menu)
-                                    }
+//                                    HStack{
+//                                        Text("How do you pay?")
+//                                            .font(.system(size: 18, weight: .bold, design: .serif))
+//                                            .foregroundColor(Color("Text"))
+//                                        
+//                                        Spacer()
+//                                        
+//                                        Picker("Select a category", selection: $viewModel.transactionData.paymentMethod) {
+//                                            ForEach(SelectionPay.allCases, id: \.self) {
+//                                                Text($0.rawValue)
+//                                                    .tag($0)
+//                                            }
+//                                        }
+//                                        .accentColor(Color.white)
+//                                        .background(Color("MainColor"))
+//                                        .opacity(0.8)
+//                                        .foregroundColor(Color.white)
+//                                        .cornerRadius(10)
+//                                        .shadow(color: Color("MainColor").opacity(0.3), radius: 10, y: 10)
+//                                        .pickerStyle(.menu)
+//                                    }
                                     
                                     Divider()
                                     

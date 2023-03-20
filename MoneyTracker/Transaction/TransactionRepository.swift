@@ -28,7 +28,7 @@ class TransactionRepository: ObservableObject {
         
     }
     
-    func getTransactions(transactionNumber: Int = 5) async throws-> [TransactionData] {
+    func getTransactions(transactionNumber: Int = 5, currency: SelectionCurrency) async throws-> [TransactionData] {
         
         do {
             
@@ -38,6 +38,7 @@ class TransactionRepository: ObservableObject {
             
             let querySnapshot = try await dataBase.collection("UserData").document(userId).collection("Transactions")
                 .order(by: "date", descending: true)
+                .whereField("currency", isEqualTo: "\(currency)")
                 .limit(to: transactionNumber).getDocuments()
             
             return querySnapshot.documents.map { document in
@@ -47,7 +48,6 @@ class TransactionRepository: ObservableObject {
                     amount: document["amount"] as! String,
                     currency: SelectionCurrency(rawValue: document["currency"] as! String) ?? .RON,
                     category: SelectionCategory(rawValue: document["category"] as! String) ?? .Food,
-                    paymentMethod: SelectionPay(rawValue: document["paymentMethod"] as! String) ?? .Card,
                     timestamp: document["date"] as! Timestamp,
                     transactionType : TransactionType(rawValue: document["transactionType"] as! String) ?? .Spend
                 )
@@ -59,39 +59,40 @@ class TransactionRepository: ObservableObject {
         }
     }
     
-    func getFilteredTransaction(startDate: Date, endDate: Date) async throws -> [TransactionData] {
-        
-        do {
-            guard let userId = authClient.getUserId() else {
+    func getFilteredTransaction(startDate: Date, endDate: Date, currency: SelectionCurrency) async throws -> [TransactionData] {
+            
+            do {
+                guard let userId = authClient.getUserId() else {
+                    return []
+                }
+                
+                let querySnapshot = try await dataBase.collection("UserData").document(userId).collection("Transactions")
+                    .order(by: "date", descending: true)
+                    .whereField("date", isGreaterThanOrEqualTo: startDate)
+                    .whereField("date", isLessThanOrEqualTo: endDate)
+                    .whereField("currency", isEqualTo: "\(currency)")
+                    .getDocuments()
+                
+                return querySnapshot.documents.map { document in
+                    
+                    TransactionData(
+                        id: document.documentID,
+                        amount: document["amount"] as! String,
+                        currency: SelectionCurrency(rawValue: document["currency"] as! String) ?? .RON,
+                        category: SelectionCategory(rawValue: document["category"] as! String) ?? .Food,
+                        timestamp: document["date"] as! Timestamp,
+                        transactionType : TransactionType(rawValue: document["transactionType"] as! String) ?? .Spend
+                    )
+                    
+                }
+            } catch {
+                print(error.localizedDescription)
                 return []
             }
-            
-            let querySnapshot = try await dataBase.collection("UserData").document(userId).collection("Transactions")
-                .order(by: "date", descending: true)
-                .whereField("date", isGreaterThanOrEqualTo: startDate)
-                .whereField("date", isLessThanOrEqualTo: endDate)
-                .getDocuments()
-            
-            return querySnapshot.documents.map { document in
-                
-                TransactionData(
-                    id: document.documentID,
-                    amount: document["amount"] as! String,
-                    currency: SelectionCurrency(rawValue: document["currency"] as! String) ?? .RON,
-                    category: SelectionCategory(rawValue: document["category"] as! String) ?? .Food,
-                    paymentMethod: SelectionPay(rawValue: document["paymentMethod"] as! String) ?? .Card,
-                    timestamp: document["date"] as! Timestamp,
-                    transactionType : TransactionType(rawValue: document["transactionType"] as! String) ?? .Spend
-                )
-                
-            }
-        } catch {
-            print(error.localizedDescription)
-            return []
         }
-    }
+
     
-    func getSpendTransactions(periodSection: PeriodSection, startDate: Date, endDate: Date) async throws -> [TransactionData] {
+    func getSpendTransactions(periodSection: PeriodSection, startDate: Date, endDate: Date, currency: SelectionCurrency) async throws -> [TransactionData] {
         
         do {
             guard let userId = authClient.getUserId() else {
@@ -119,6 +120,7 @@ class TransactionRepository: ObservableObject {
                 .whereField("date", isGreaterThanOrEqualTo: startDate)
                 .whereField("date", isLessThanOrEqualTo: endDate)
                 .whereField("transactionType", isEqualTo: "Spend")
+                .whereField("currency", isEqualTo: "\(currency)")
                 .getDocuments()
             
             if querySnapshot.documents.isEmpty {
@@ -157,7 +159,7 @@ class TransactionRepository: ObservableObject {
     
     // Sum
     
-    func calculateIncomeSum(startDate: Date, endDate: Date) async throws -> Int {
+    func calculateIncomeSum(startDate: Date, endDate: Date, currency: SelectionCurrency) async throws -> Int {
         
         do {
             guard let userId = authClient.getUserId() else {
@@ -171,6 +173,7 @@ class TransactionRepository: ObservableObject {
                 .whereField("date", isGreaterThanOrEqualTo: startDate)
                 .whereField("date", isLessThanOrEqualTo: endDate)
                 .whereField("transactionType", isEqualTo: "Income")
+                .whereField("currency", isEqualTo: "\(currency)")
                 .getDocuments()
             
             if querySnapshot.documents.isEmpty {
@@ -194,7 +197,7 @@ class TransactionRepository: ObservableObject {
         }
     }
     
-    func calculateSpendSum(startDate: Date, endDate: Date) async throws -> Int {
+    func calculateSpendSum(startDate: Date, endDate: Date, currency: SelectionCurrency) async throws -> Int {
         
         do {
             guard let userId = authClient.getUserId() else {
@@ -208,6 +211,7 @@ class TransactionRepository: ObservableObject {
                 .whereField("date", isGreaterThanOrEqualTo: startDate)
                 .whereField("date", isLessThanOrEqualTo: endDate)
                 .whereField("transactionType", isEqualTo: "Spend")
+                .whereField("currency", isEqualTo: "\(currency)")
                 .getDocuments()
             
             if querySnapshot.documents.isEmpty {
@@ -231,7 +235,7 @@ class TransactionRepository: ObservableObject {
         }
     }
     
-    func calculateCategorySum(startDate: Date, endDate: Date, category: SelectionCategory) async throws -> Int {
+    func calculateCategorySum(startDate: Date, endDate: Date, category: SelectionCategory, currency: SelectionCurrency) async throws -> Int {
         
         do {
             guard let userId = authClient.getUserId() else {
@@ -246,6 +250,7 @@ class TransactionRepository: ObservableObject {
                 .whereField("transactionType", isEqualTo: "Spend")
                 .whereField("date", isGreaterThanOrEqualTo: startDate)
                 .whereField("date", isLessThanOrEqualTo: endDate)
+                .whereField("currency", isEqualTo: "\(currency)")
                 .getDocuments()
             
             if querySnapshot.documents.isEmpty {

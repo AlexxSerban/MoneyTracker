@@ -59,7 +59,7 @@ class JournalViewModel: ObservableObject {
                     endDate = model.endOfYear
                 }
                 
-                self.transactionData = try await transactionRepository.getFilteredTransaction(startDate: startDate, endDate: endDate)
+                self.transactionData = try await transactionRepository.getFilteredTransaction(startDate: startDate, endDate: endDate, currency: SelectionCurrency(rawValue: SelectionCurrency.defaultCurrency.rawValue) ?? .USD)
                 
                 await MainActor.run {
                     isLoadingTransaction = false
@@ -92,7 +92,7 @@ class JournalViewModel: ObservableObject {
                     endDate = model.endOfYear
                 }
                 
-                self.transactionDataFiltered = try await transactionRepository.getSpendTransactions(periodSection: periodSection, startDate: startDate, endDate: endDate)
+                self.transactionDataFiltered = try await transactionRepository.getSpendTransactions(periodSection: periodSection, startDate: startDate, endDate: endDate, currency: SelectionCurrency(rawValue: SelectionCurrency.defaultCurrency.rawValue) ?? .USD)
                 
                 await MainActor.run {
                     isLoadingChart = false

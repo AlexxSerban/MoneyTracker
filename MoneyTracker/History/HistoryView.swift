@@ -100,7 +100,7 @@ struct HistoryView: View {
                                 
                                 VStack(alignment: .leading, spacing: 8){
                                     
-                                    Text("\(viewModel.totalMonthlyIncome) ")
+                                    Text("\(viewModel.totalMonthlyIncome) \(SelectionCurrency.defaultCurrency.rawValue)")
                                         .font(.system(size: 22, weight: .bold, design: .serif))
                                         .foregroundColor(Color("Text"))
                                     Text("Total Income")
@@ -123,7 +123,7 @@ struct HistoryView: View {
                                 
                                 VStack(alignment: .leading, spacing: 8){
                                     
-                                    Text("\(viewModel.totalMonthlyIncome - viewModel.totalMonthlySpend) ")
+                                    Text("\(viewModel.totalMonthlyIncome - viewModel.totalMonthlySpend) \(SelectionCurrency.defaultCurrency.rawValue)")
                                         .font(.system(size: 22, weight: .bold, design: .serif))
                                         .foregroundColor(Color("Text"))
                                     Text("Balance")
@@ -146,7 +146,7 @@ struct HistoryView: View {
                                 
                                 VStack(alignment: .leading, spacing: 8){
                                     
-                                    Text("\(viewModel.totalMonthlySpend) ")
+                                    Text("\(viewModel.totalMonthlySpend) \(SelectionCurrency.defaultCurrency.rawValue)")
                                         .font(.system(size: 22, weight: .bold, design: .serif))
                                         .foregroundColor(Color("Text"))
                                     Text("Total Spending")
@@ -177,12 +177,12 @@ struct HistoryView: View {
                                 
                                 HStack{
                                     
-                                    VStack(alignment: .leading, spacing: 4){
+                                    HStack(spacing: 4){
                                         
-                                        Text("\(viewModel.selectCategory.rawValue)")
+                                        Text("Your total is: ")
                                             .font(.system(size: 16, design: .serif))
                                             .foregroundColor(Color("Text"))
-                                        Text("\(viewModel.totalCategorySum) ")
+                                        Text("\(viewModel.totalCategorySum) \(SelectionCurrency.defaultCurrency.rawValue)")
                                             .font(.headline).bold().italic()
                                             .foregroundColor(Color("Text"))
                                         
