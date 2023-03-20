@@ -153,7 +153,6 @@ struct HistoryView: View {
                                         .font(.system(size: 16, design: .serif))
                                         .foregroundColor(Color("Text"))
                                     
-                                    
                                 }
                             }
                     }
