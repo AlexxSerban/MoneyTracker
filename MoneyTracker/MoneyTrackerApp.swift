@@ -37,19 +37,53 @@ struct MoneyTracker: App {
     
     @Environment(\.colorScheme) var colorScheme
     @State private var isUserAuthenticated = false
+    @State private var showSplashScreen = true
     
     var body: some Scene {
         WindowGroup {
-            NavigationView {
-                if isUserAuthenticated {
-                    TabMenuView()
-
+            
+            ZStack {
+                if showSplashScreen {
+                    SplashScreenView()
+                        .transition(.move(edge: .trailing))
+                        .onAppear {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                withAnimation(.easeInOut(duration: 0.4).delay(0.1)) {
+                                    showSplashScreen = false
+                                }
+                                    
+                            }
+                        }
+                       
+                        
                 } else {
-                    LoginView(viewModel: LoginViewModel())
+                    NavigationView {
+                        if isUserAuthenticated {
+                            TabMenuView()
+                                .onAppear(){
+                                    withAnimation(.easeIn) {
+                                        
+                                    }
+                                }
+                                
+                        } else {
+                            LoginView(viewModel: LoginViewModel())
+                                .onAppear(){
+                                    withAnimation(.easeIn) {
+                                        
+                                    }
+                                }
+
+                        }
+                            
+                    }
                     
                 }
             }
             .onAppear {
+                withAnimation(.easeIn) {
+                    
+                }
                 let handle = Auth.auth().addStateDidChangeListener { auth, user in
                     if let user = user {
                         isUserAuthenticated = true
@@ -60,6 +94,7 @@ struct MoneyTracker: App {
                     }
                 }
             }
+            
         }
     }
 }

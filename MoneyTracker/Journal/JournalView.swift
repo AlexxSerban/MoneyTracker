@@ -211,6 +211,7 @@ struct JournalView: View {
             self.viewModel.fetchTransactions()
             self.viewModel.fetchSpendTransactions()
         }
+        
     }
 }
 
