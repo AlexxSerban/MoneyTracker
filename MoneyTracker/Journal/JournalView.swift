@@ -44,7 +44,6 @@ struct JournalView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 .padding()
                 
-                
                 Divider()
                 
                 VStack{
@@ -105,7 +104,6 @@ struct JournalView: View {
                         .transition(.scale)
                         .frame(minHeight: 200)
                         .padding()
-                        
                     }
                 }.padding()
                 
@@ -134,7 +132,7 @@ struct JournalView: View {
                                             (
                                                 transaction.transactionType == .Spend ?
                                                 Image(systemName: "cart.fill.badge.minus") :
-                                                Image(systemName: "banknote")
+                                                    Image(systemName: "banknote")
                                             )
                                             .resizable()
                                             .frame(width: 24.0, height: 26.0)
@@ -194,14 +192,14 @@ struct JournalView: View {
                                 }
                                 .listRowInsets(.init(top: 0, leading: 10, bottom: 0, trailing: 10))
                                 .headerProminence(.increased)
-                               
+                                
                             }
                             .scrollContentBackground(.hidden)
                             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                             
                         }
                     }
-                        
+                    
                     Spacer()
                 }
                 

@@ -254,16 +254,14 @@ struct HomeView: View {
                         }
                     }
                 }
-              .onAppear(){
-                withAnimation(.spring(response: 0.8, dampingFraction: 0.8)) {}
-            }
-                
+                .onAppear(){
+                    withAnimation(.spring(response: 0.8, dampingFraction: 0.8)) {}
+                }
                 
                 Spacer()
                 
             }
         }
-        
         .onAppear {
             self.viewModel.getLastTransactions()
             self.viewModel.calculateMonthlyIncome()

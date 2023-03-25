@@ -45,7 +45,9 @@ struct MoneyTracker: App {
             
             
             ZStack {
+                
                 if showSplashScreen {
+                    
                     SplashScreenView()
                         .transition(.move(edge: .trailing))
                         .onAppear {
@@ -53,11 +55,11 @@ struct MoneyTracker: App {
                                 withAnimation(.easeInOut(duration: 0.4).delay(0.1)) {
                                     showSplashScreen = false
                                 }
-
                             }
+                            
                         }
-
-
+                    
+                    
                 } else {
                     
                     if isOnbording {
@@ -71,25 +73,20 @@ struct MoneyTracker: App {
                                 TabMenuView()
                                     .onAppear(){
                                         withAnimation(.easeIn) {
-
+                                            
                                         }
                                     }
-
+                                
                             } else {
                                 LoginView(viewModel: LoginViewModel())
                                     .onAppear(){
                                         withAnimation(.easeIn) {
-
+                                            
                                         }
                                     }
                             }
-
                         }
-                        
                     }
-                    
-                    
-
                 }
             }
             .onAppear {
@@ -106,7 +103,6 @@ struct MoneyTracker: App {
                     }
                 }
             }
-            
         }
     }
 }

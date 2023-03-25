@@ -136,7 +136,7 @@ struct TransactionView: View {
                             .padding()
                     }
                 }
-
+                
                 
                 Button {
                     viewModel.addTransactionInfo()

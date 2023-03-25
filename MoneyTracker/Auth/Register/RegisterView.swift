@@ -141,6 +141,7 @@ struct RegisterView: View {
                         .shadow(radius: 1)
                         .offset(x: -170, y: 20)
                         .overlay {
+                            
                             Button() {
                                 viewModel.toLogin = true
                             } label: {
@@ -151,6 +152,7 @@ struct RegisterView: View {
                                 
                             }
                             .offset(x: -170, y: 20)
+                            
                         }
                     }
                     
@@ -172,6 +174,7 @@ struct RegisterView: View {
                         WaveRoundedRectangle()
                             .stroke(
                                 .linearGradient(colors: [
+                                    
                                     Color(.black).opacity(0.3),
                                     Color(.black).opacity(0.3),
                                     Color(.black).opacity(0.3),

@@ -20,11 +20,16 @@ class JournalViewModel: ObservableObject {
     
     @Published var model = JournalModel()
     
+    // Transaction Data
     @Published var transactionData = [TransactionData()]
-    @Published var periodSection : PeriodSection = .day
     @Published var transactionDataFiltered : [TransactionData] = []
+    
+    // Values for the time period
+    @Published var periodSection : PeriodSection = .day
     var startDate : Date = Date()
     var endDate : Date = Date()
+    
+    // Status
     @Published var isLoadingTransaction: Bool = false
     @Published var isLoadingChart: Bool = false
     
@@ -45,7 +50,7 @@ class JournalViewModel: ObservableObject {
                 case .day:
                     startDate = model.startOfDay
                     endDate = model.endOfDay
-                
+                    
                 case .week:
                     startDate = model.startOfWeek
                     endDate = model.endOfWeek

@@ -33,20 +33,16 @@ struct TabMenuView: View {
                     }
                     .tag(1)
                 
-                
                 JournalView()
                     .tabItem {
                         Image(systemName: "dollarsign.circle.fill")
                         Text("Journal")
                     }.tag(2)
                 
-                
                 Text("")
                     .tabItem {
                         Image(systemName: "plus.circle.fill")
                     }.tag(3)
-
-                
                 
                 HistoryView()
                     .tabItem {
@@ -54,13 +50,11 @@ struct TabMenuView: View {
                         Text("History")
                     }.tag(4)
                 
-                
                 ProfileView()
                     .tabItem {
                         Image(systemName: "person.crop.circle.fill")
                         Text("Profile")
                     }.tag(5)
-                
                 
             }
             .accentColor(Color("MainColor"))
@@ -68,7 +62,7 @@ struct TabMenuView: View {
                 
                 if 3 == selectedItem {
                     self.showSheet = true
-                    print("A mers showSheet in true")
+                    print("'showSheet' has worked")
                     
                 } else {
                     

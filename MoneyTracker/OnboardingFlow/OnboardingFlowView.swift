@@ -114,6 +114,4 @@ struct OnboardView: View {
             .padding(.horizontal, 40)
         }
     }
-    
-    
 }

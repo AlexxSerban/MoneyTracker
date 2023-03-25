@@ -185,9 +185,6 @@ struct LoginView: View {
                 }
                 .navigationBarBackButtonHidden(true)
                 
-                
-                
-                
                 RoundedRectangle(cornerRadius: 10, style: .continuous)
                     .foregroundStyle(.linearGradient(colors: [Color("SecondColor")], startPoint: .topLeading, endPoint: .bottomTrailing))
                     .frame(width: 400, height: 680)

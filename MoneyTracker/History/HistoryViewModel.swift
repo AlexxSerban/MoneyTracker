@@ -19,8 +19,10 @@ class HistoryViewModel: ObservableObject {
     @Published var isLoadingTransactions: Bool = false
     @Published var showAllTransactions = false
     
-    // Data
+    // Transaction Data
     @Published var transactionData = [TransactionData()]
+    
+    // Data
     @Published var selectCategory: SelectionCategory = .Food
     @Published var totalMonthlyIncome: Int = 0
     @Published var totalMonthlySpend: Int = 0
@@ -103,7 +105,7 @@ class HistoryViewModel: ObservableObject {
             }
         }
     }
-
+    
     func updateMonthlyData(selectedMonth: String) {
         
         setMonthPeriod(selectedMonth: selectedMonth)

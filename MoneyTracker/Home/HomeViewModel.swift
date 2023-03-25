@@ -12,13 +12,15 @@ class HomeViewModel: ObservableObject {
     // Transaction Data
     @Published var transactionData = [TransactionData()]
     @Published var journalModel = JournalModel()
+    
+    // Values
     @Published var totalIncome: Int = 0
     @Published var totalSpend: Int = 0
+    
+    // Status
     @Published var isLoadingTotalIncome: Bool = false
     @Published var isLoadingTotalSpend: Bool = false
     @Published var isLoadingTransactions: Bool = false
-    
-
     
     // Dependencies
     let transactionRepository: TransactionRepository
@@ -26,7 +28,7 @@ class HomeViewModel: ObservableObject {
     init(transactionRepository: TransactionRepository = DIContainer.shared.resolve(type: TransactionRepository.self)) {
         self.transactionRepository = transactionRepository
     }
-
+    
     @MainActor
     func getLastTransactions() {
         

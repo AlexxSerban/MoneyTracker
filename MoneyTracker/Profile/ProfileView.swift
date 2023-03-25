@@ -13,7 +13,6 @@ struct ProfileView: View {
     
     var body: some View {
         
-        
         NavigationStack{
             
             ZStack{
@@ -76,10 +75,7 @@ struct ProfileView: View {
                     }.padding()
                     
                     
-                    
                     VStack(spacing: 20){
-                        
-                        
                         
                         VStack(spacing: 20) {
                             
@@ -131,24 +127,24 @@ struct ProfileView: View {
                                 } else {
                                     
                                     Section(header:
+                                                
+                                                HStack{
+                                        
+                                        Text("Personal Information")
+                                        
+                                        Spacer()
+                                        
+                                        Button {
                                             
-                                            HStack{
-                                                
-                                                Text("Personal Information")
-                                                
-                                                Spacer()
-                                                
-                                                Button {
-                                                    
-                                                    self.viewModel.addProfileInfo()
-                                                    viewModel.userInfo = true
-                                                    
-                                                } label: {
-                                                    
-                                                    Text("Submit")
-                                                        .foregroundColor(Color("MainColor"))
-                                                    
-                                                } })
+                                            self.viewModel.addProfileInfo()
+                                            viewModel.userInfo = true
+                                            
+                                        } label: {
+                                            
+                                            Text("Submit")
+                                                .foregroundColor(Color("MainColor"))
+                                            
+                                        } })
                                     
                                     {
                                         
@@ -175,8 +171,6 @@ struct ProfileView: View {
                                             .font(.system(size: 16, design: .serif))
                                             .foregroundColor(Color("Text"))
                                         
-                                       
-                                        
                                         Picker("", selection: $viewModel.selectedCurrency) {
                                             ForEach(SelectionCurrency.allCases) { currency in
                                                 Text(currency.rawValue).tag(currency)
@@ -189,10 +183,7 @@ struct ProfileView: View {
                                             viewModel.selectedCurrency = viewModel.transactionData.currency
                                             
                                         }
-                                       
                                     }
-                                    
-                                    
                                     
                                     Button(action: {
                                         
@@ -203,7 +194,6 @@ struct ProfileView: View {
                                         Text("SignOut")
                                             .font(.system(size: 16, design: .serif))
                                             .foregroundColor(Color.red)
-                                            
                                         
                                     }
                                     .actionSheet(isPresented: $viewModel.isSignOutActionSheet) {
@@ -248,11 +238,11 @@ struct ProfileView: View {
         }
         
         .onAppear() {
-                
-                self.viewModel.getUserData()
-                self.viewModel.loadPhoto()
-                self.viewModel.downloadImageFromFirebaseStorage()
-                self.viewModel.selectedCurrency = self.viewModel.transactionData.currency
+            
+            self.viewModel.getUserData()
+            self.viewModel.loadPhoto()
+            self.viewModel.downloadImageFromFirebaseStorage()
+            self.viewModel.selectedCurrency = self.viewModel.transactionData.currency
             
         }
         .onChange(of: viewModel.selectedItems) { item in

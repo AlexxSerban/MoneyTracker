@@ -14,7 +14,7 @@ struct HistoryView: View {
     init() {
         
         self.viewModel.updateMonthlyData(selectedMonth: viewModel.selectedMonth)
-           
+        
     }
     
     var body: some View {
@@ -82,13 +82,11 @@ struct HistoryView: View {
                     
                 }
                 
-                
                 Divider()
                 
                 ScrollView(.horizontal){
                     
                     HStack(spacing: 26){
-                        
                         
                         VStack{}
                             .frame(width: 150, height: 140)
@@ -108,7 +106,6 @@ struct HistoryView: View {
                                     Text("Total Income")
                                         .font(.system(size: 16, design: .serif))
                                         .foregroundColor(Color("Text"))
-                                    
                                     
                                 }
                             }
@@ -131,7 +128,6 @@ struct HistoryView: View {
                                     Text("Balance")
                                         .font(.system(size: 16, design: .serif))
                                         .foregroundColor(Color("Text"))
-                                    
                                     
                                 }
                             }
@@ -224,8 +220,6 @@ struct HistoryView: View {
                                     .foregroundColor(.gray)
                                 
                             } else {
-                                
-                               
                                 
                                 List{
                                     
