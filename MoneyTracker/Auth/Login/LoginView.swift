@@ -71,7 +71,7 @@ struct LoginView: View {
                                         
                                         Image(systemName: "person")
                                             .foregroundColor(Color("MainColor"))
-                                        TextField("Email", text: $viewModel.email, prompt: Text("Email").foregroundColor(Color.black))
+                                        TextField("Email", text: $viewModel.email, prompt: Text("Email").foregroundColor(Color("SecondText")))
                                             .font(.system(size: 18, weight: .bold, design: .serif))
                                             .foregroundColor(Color.black)
                                             .keyboardType(.emailAddress)
@@ -85,7 +85,7 @@ struct LoginView: View {
                                         
                                         Image(systemName: "lock")
                                             .foregroundColor(Color("MainColor"))
-                                        SecureField("", text: $viewModel.password, prompt: Text("Password").foregroundColor(Color.black))
+                                        SecureField("", text: $viewModel.password, prompt: Text("Password").foregroundColor(Color("SecondText")))
                                             .font(.system(size: 18, weight: .bold, design: .serif))
                                             .foregroundColor(Color.black)
                                             

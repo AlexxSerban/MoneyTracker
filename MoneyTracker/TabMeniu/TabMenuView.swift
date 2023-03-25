@@ -45,11 +45,6 @@ struct TabMenuView: View {
                     .tabItem {
                         Image(systemName: "plus.circle.fill")
                     }.tag(3)
-//                    .onTapGesture {
-//                        withAnimation(.spring(response: 0.5, dampingFraction: 0.7, blendDuration: 0.5)) {
-//                            self.showSheet = true
-//                        }
-//                    }
 
                 
                 
@@ -68,7 +63,6 @@ struct TabMenuView: View {
                 
                 
             }
-            .animation(.easeInOut)
             .accentColor(Color("MainColor"))
             .onChange(of: selectedItem) {
                 

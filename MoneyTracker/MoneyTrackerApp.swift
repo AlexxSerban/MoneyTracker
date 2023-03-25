@@ -38,53 +38,65 @@ struct MoneyTracker: App {
     @Environment(\.colorScheme) var colorScheme
     @State private var isUserAuthenticated = false
     @State private var showSplashScreen = true
+    @AppStorage("isOnbording") var isOnbording : Bool = true
     
     var body: some Scene {
         WindowGroup {
+            
             
             ZStack {
                 if showSplashScreen {
                     SplashScreenView()
                         .transition(.move(edge: .trailing))
                         .onAppear {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                                 withAnimation(.easeInOut(duration: 0.4).delay(0.1)) {
                                     showSplashScreen = false
                                 }
-                                    
+
                             }
                         }
-                       
-                        
+
+
                 } else {
-                    NavigationView {
-                        if isUserAuthenticated {
-                            TabMenuView()
-                                .onAppear(){
-                                    withAnimation(.easeIn) {
-                                        
+                    
+                    if isOnbording {
+                        
+                        OnboardingFlowView()
+                        
+                    } else {
+                        
+                        NavigationView {
+                            if isUserAuthenticated {
+                                TabMenuView()
+                                    .onAppear(){
+                                        withAnimation(.easeIn) {
+
+                                        }
                                     }
-                                }
-                                
-                        } else {
-                            LoginView(viewModel: LoginViewModel())
-                                .onAppear(){
-                                    withAnimation(.easeIn) {
-                                        
+
+                            } else {
+                                LoginView(viewModel: LoginViewModel())
+                                    .onAppear(){
+                                        withAnimation(.easeIn) {
+
+                                        }
                                     }
-                                }
+                            }
 
                         }
-                            
+                        
                     }
                     
+                    
+
                 }
             }
             .onAppear {
                 withAnimation(.easeIn) {
                     
                 }
-                let handle = Auth.auth().addStateDidChangeListener { auth, user in
+                let _ = Auth.auth().addStateDidChangeListener { auth, user in
                     if let user = user {
                         isUserAuthenticated = true
                         print("Utilizatorul este logat cu adresa de email \(user.email ?? "")")

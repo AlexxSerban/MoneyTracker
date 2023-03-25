@@ -42,7 +42,6 @@ struct HomeView: View {
                     .shadow(radius: 75)
                     .cornerRadius(30)
                     .opacity(0.8)
-                //                    .offset(x: -60 + offset.width, y: +50 + offset.height)
                     .shadow(color: Color("MainColor").opacity(0.3), radius: 10, y: 10)
                     .overlay {
                         
@@ -110,7 +109,6 @@ struct HomeView: View {
                                     }
                                 }
                                 .offset(x: 25 + offset.width, y: 40 + offset.height)
-                                //                                .offset(x: 25, y: -10)
                             }
                             .padding()
                     }
@@ -161,7 +159,6 @@ struct HomeView: View {
                                     }
                                 }
                                 .offset(x:  -30 + offset.width, y: 40 + offset.height)
-                                //                                .offset(x: -30, y: -10)
                             }
                             .padding()
                     }
@@ -253,17 +250,20 @@ struct HomeView: View {
                             }
                             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                             .scrollContentBackground(.hidden)
-                            .animation(.spring(response: 0.8, dampingFraction: 0.8))
+                            
                         }
                     }
                 }
-                .offset(y: -20)
+              .onAppear(){
+                withAnimation(.spring(response: 0.8, dampingFraction: 0.8)) {}
+            }
                 
                 
                 Spacer()
                 
             }
         }
+        
         .onAppear {
             self.viewModel.getLastTransactions()
             self.viewModel.calculateMonthlyIncome()

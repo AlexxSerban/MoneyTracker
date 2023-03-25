@@ -69,7 +69,7 @@ struct ResetPasswordView: View {
                                         
                                         Image(systemName: "person")
                                             .foregroundColor(Color("MainColor"))
-                                        TextField("", text: $viewModel.email, prompt: Text("Your email").foregroundColor(Color("Text")))
+                                        TextField("", text: $viewModel.email, prompt: Text("Your email").foregroundColor(Color("SecondText")))
                                             .keyboardType(.emailAddress)
                                             .font(.system(size: 18, weight: .bold, design: .serif))
                                             .foregroundColor(Color.black)

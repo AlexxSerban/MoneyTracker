@@ -135,13 +135,13 @@ class ProfileViewModel: ObservableObject {
         }
 
         // Upload the file to the path "\(userId)/profilePicture/profilePhoto.jpg"
-        let uploadTask = photoRef.putData(imageData, metadata: nil) { (metadata, error) in
+        let _ = photoRef.putData(imageData, metadata: nil) { (metadata, error) in
             guard let metadata = metadata else {
                 print("A fost o eroare la uploadTask!")
                 return
             }
             // Metadata contains file metadata such as size, content-type.
-            let size = metadata.size
+            let _ = metadata.size
 
             photoRef.downloadURL { (url, error) in
                 guard let downloadURL = url else {

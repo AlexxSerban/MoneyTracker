@@ -72,7 +72,7 @@ struct JournalView: View {
                                 
                             }
                         }
-                        .animation(.easeIn(duration: 0.3))
+                        
                         .chartXAxis {
                             
                             AxisMarks(values: .automatic) { _ in
@@ -198,7 +198,7 @@ struct JournalView: View {
                             }
                             .scrollContentBackground(.hidden)
                             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                            .animation(.spring(response: 0.8, dampingFraction: 0.8))
+                            
                         }
                     }
                         

@@ -12,7 +12,9 @@ struct HistoryView: View {
     @ObservedObject var viewModel = HistoryViewModel()
     
     init() {
+        
         self.viewModel.updateMonthlyData(selectedMonth: viewModel.selectedMonth)
+           
     }
     
     var body: some View {
@@ -159,6 +161,7 @@ struct HistoryView: View {
                     
                 }
                 .padding(9)
+                .animation(.spring(response: 0.8, dampingFraction: 0.8))
                 
                 Divider()
                 
@@ -261,11 +264,6 @@ struct HistoryView: View {
                                                         .foregroundColor(Color("Text"))
                                                         .frame(maxWidth: .infinity)
                                                     
-//                                                    Text("\(transaction.currency.rawValue)")
-//                                                        .font(.headline).bold().italic()
-//                                                        .foregroundColor(Color("Text"))
-//                                                        .frame(maxWidth: .infinity)
-                                                    
                                                 }
                                                 .offset(x: 50)
                                             }
@@ -298,7 +296,6 @@ struct HistoryView: View {
                                                 self.viewModel.showAllTransactions.toggle()
                                             }) {
                                                 Text(viewModel.showAllTransactions ? "Less" : "See all")
-        //                                            .accentColor(Color("MainColor"))
                                                     .foregroundColor(Color("MainColor"))
                                             }
                                         }
@@ -314,6 +311,7 @@ struct HistoryView: View {
                         }
                     }
                 }
+                .animation(.spring(response: 0.8, dampingFraction: 0.8))
                 
                 Spacer()
             }
