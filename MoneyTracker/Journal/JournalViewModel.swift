@@ -20,11 +20,16 @@ class JournalViewModel: ObservableObject {
     
     @Published var model = JournalModel()
     
+    // Transaction Data
     @Published var transactionData = [TransactionData()]
-    @Published var periodSection : PeriodSection = .day
     @Published var transactionDataFiltered : [TransactionData] = []
+    
+    // Values for the time period
+    @Published var periodSection : PeriodSection = .day
     var startDate : Date = Date()
     var endDate : Date = Date()
+    
+    // Status
     @Published var isLoadingTransaction: Bool = false
     @Published var isLoadingChart: Bool = false
     
@@ -45,7 +50,7 @@ class JournalViewModel: ObservableObject {
                 case .day:
                     startDate = model.startOfDay
                     endDate = model.endOfDay
-                
+                    
                 case .week:
                     startDate = model.startOfWeek
                     endDate = model.endOfWeek
@@ -59,7 +64,7 @@ class JournalViewModel: ObservableObject {
                     endDate = model.endOfYear
                 }
                 
-                self.transactionData = try await transactionRepository.getFilteredTransaction(startDate: startDate, endDate: endDate)
+                self.transactionData = try await transactionRepository.getFilteredTransaction(startDate: startDate, endDate: endDate, currency: SelectionCurrency(rawValue: SelectionCurrency.defaultCurrency.rawValue) ?? .USD)
                 
                 await MainActor.run {
                     isLoadingTransaction = false
@@ -72,8 +77,11 @@ class JournalViewModel: ObservableObject {
     
     @MainActor
     func fetchSpendTransactions() {
+        
         Task{
+            
             do {
+                
                 isLoadingChart = true
                 if (periodSection == .day) {
                     startDate = model.startOfDay
@@ -89,11 +97,12 @@ class JournalViewModel: ObservableObject {
                     endDate = model.endOfYear
                 }
                 
-                self.transactionDataFiltered = try await transactionRepository.getSpendTransactions(periodSection: periodSection, startDate: startDate, endDate: endDate)
+                self.transactionDataFiltered = try await transactionRepository.getSpendTransactions(periodSection: periodSection, startDate: startDate, endDate: endDate, currency: SelectionCurrency(rawValue: SelectionCurrency.defaultCurrency.rawValue) ?? .USD)
                 
                 await MainActor.run {
                     isLoadingChart = false
                 }
+                
             } catch {
                 print(error.localizedDescription)
             }
@@ -103,7 +112,6 @@ class JournalViewModel: ObservableObject {
     @MainActor
     func deleteTransactionJournalView(at indexSet: IndexSet)  {
         transactionRepository.deleteTransactionFromFirestore(at: indexSet, transactionData: transactionData)
-        
         fetchTransactions()
         fetchSpendTransactions()
     }

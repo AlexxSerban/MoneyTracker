@@ -11,16 +11,32 @@ import FirebaseFirestore
 enum SelectionCurrency: String, CaseIterable, Identifiable {
     case RON, EUR, USD, GBP, JPY
     var id: Self {self}
+    
+    static var defaultCurrency: SelectionCurrency {
+        get {
+            if let rawValue = UserDefaults.standard.string(forKey: "defaultCurrency"), let currency = SelectionCurrency(rawValue: rawValue) {
+                return currency
+            }
+            return .USD // sau alta valoare implicita
+        }
+        set {
+            UserDefaults.standard.set(newValue.rawValue, forKey: "defaultCurrency")
+        }
+    }
 }
+
 
 enum SelectionCategory: String, CaseIterable, Identifiable {
-    case Food, Education, Pets, Fitness, Salary, Business, Gifts 
+    case Food, Education, Pets, Fitness, Salary, Business, Gifts
     var id: Self {self}
-}
+    
+    static var spendCategories: [SelectionCategory] {
+        return [.Food, .Education, .Pets, .Fitness]
+    }
 
-enum SelectionPay: String, CaseIterable, Identifiable {
-    case Cash, Card
-    var id: Self {self}
+    static var incomeCategories: [SelectionCategory] {
+        return [.Salary, .Business, .Gifts]
+    }
 }
 
 enum TransactionType: String, CaseIterable, Identifiable {
@@ -31,45 +47,67 @@ enum TransactionType: String, CaseIterable, Identifiable {
 class TransactionData: Identifiable, ObservableObject{
     var id : String
     var amount : String
-    var currency : SelectionCurrency
-    var category : SelectionCategory
+
+    @Published var currency : SelectionCurrency
+    @Published var category : SelectionCategory
     var paymentMethod : SelectionPay
     var date : Date
     var timestamp: Timestamp
-    var transactionType : TransactionType
+    @Published var transactionType : TransactionType
     
     var dictionary: [String: AnyHashable] {
+        
         return [
             "amount": amount,
             "currency": currency.rawValue,
             "category": category.rawValue,
-            "paymentMethod": paymentMethod.rawValue,
             "date": date,
             "timestamp": timestamp,
             "transactionType": transactionType.rawValue
         ]
+        
     }
     
     init(
+        
         id: String? = nil,
         amount: String = "",
-        currency: SelectionCurrency = .USD,
+        currency: SelectionCurrency = SelectionCurrency.defaultCurrency,
         category: SelectionCategory = .Food,
-        paymentMethod: SelectionPay = .Card,
         date: Date = Date(),
         timestamp: Timestamp = .init(),
         transactionType : TransactionType = .Spend
+        
     ) {
+        
         self.id = id ?? UUID().uuidString
         self.amount = amount
-        self.currency = currency
+        self.currency = currency 
         self.category = category
-        self.paymentMethod = paymentMethod
         self.date = date
         self.timestamp = timestamp
         self.transactionType = transactionType
+        
     }
+    
+    func setCurrency(to currency: SelectionCurrency) {
+        self.currency = currency
+        TransactionData.saveDefaultCurrency(currency: currency)
+    }
+    
+    static func defaultCurrency() -> SelectionCurrency {
+        let defaults = UserDefaults.standard
+        let defaultCurrencyRawValue = defaults.string(forKey: "defaultCurrency") ?? SelectionCurrency.USD.rawValue
+        return SelectionCurrency(rawValue: defaultCurrencyRawValue) ?? .USD
+    }
+    
+    static func saveDefaultCurrency(currency: SelectionCurrency) {
+        let defaults = UserDefaults.standard
+        defaults.set(currency.rawValue, forKey: "defaultCurrency")
+    }
+    
 }
+
 
 
 

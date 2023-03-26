@@ -18,6 +18,7 @@ class ResetPasswordViewModel: ObservableObject {
     
     // Navigation
     @Published var resetSuccessful: Bool = false
+    @Published var toLogin: Bool = false
     
     // Dependencies
     let authClient: AuthClient
@@ -26,18 +27,23 @@ class ResetPasswordViewModel: ObservableObject {
         self.authClient = authClient
     }
     
+    @MainActor
     func resetPassword() {
-        isLoading = true        
+        isLoading = true
+        
         Task {
             do {
                 let _ = try await authClient.resetPassword(email: email)
                 
                 await MainActor.run {
                     self.isLoading = false
+                    self.toLogin = true
                 }
             } catch {
                 print(error.localizedDescription)
                 self.forgotError = true
+                self.isLoading = false
+                
             }
         }
     }

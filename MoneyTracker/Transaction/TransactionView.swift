@@ -4,7 +4,7 @@
 //
 //  Created by Alex Serban on 14.11.2022.
 //
-
+import UIKit
 import SwiftUI
 import FirebaseFirestore
 import Combine
@@ -18,84 +18,149 @@ struct TransactionView: View {
     
     var body: some View {
         
-        VStack(spacing: 30){
+        ZStack{
             
-            Text("Transaction")
+            Color("Background")
+                .edgesIgnoringSafeArea(.all)
             
-            ZStack{
-                VStack(alignment:.leading){
-                    HStack{
-                        Picker("Select a currency", selection: $viewModel.transactionData.currency) {
-                            ForEach(SelectionCurrency.allCases, id: \.self) {
-                                Text($0.rawValue)
-                                    .tag($0)
-                            }
-                        }
-                        .pickerStyle(.menu)
-                        
-                        TextField("0", text: $viewModel.transactionData.amount)
-                            .textFieldStyle(.roundedBorder)
-                            .foregroundColor(Color.blue)
+            VStack(spacing: 30){
+                
+                HStack{
+                    
+                    Button {
+                        showSheet = false
+                    } label: {
+                        Image(systemName: "x.circle.fill")
+                            .resizable()
+                            .frame(width: 40, height: 40)
                     }
+                    .foregroundColor(Color("MainColor"))
+                }
+                .offset(x: 180, y: -15)
+                
+                HStack(alignment: .center){
+                    Text("Transaction")
+                        .font(.system(size: 34, weight: .bold, design: .rounded))
+                        .offset(y: -40)
+                        .foregroundColor(Color("Text"))
+                }
+                
+                HStack{
                     
-                    HStack{
-                        Image(systemName: "folder.circle.fill")
+                    VStack(alignment:.leading){
                         
-                        Text("Category")
-                        
-                        Picker("Select a category", selection: $viewModel.transactionData.category) {
-                            ForEach(SelectionCategory.allCases, id: \.self) {
-                                Text($0.rawValue)
-                                    .tag($0)
+                        VStack{}
+                            .padding()
+                            .frame(width: 400, height: 430)
+                            .background(Color("BackgroundBlocks"), in: RoundedRectangle(cornerRadius: 50, style: .continuous))
+                            .shadow(radius: 4)
+                            .overlay {
+                                
+                                VStack(alignment: .leading, spacing: 16){
+                                    
+                                    HStack(alignment: .center){
+                                        TextField("", text: $viewModel.transactionData.amount,
+                                                  prompt: Text("Amount ").foregroundColor(Color("Text")))
+                                        .font(.system(size: 18, design: .serif))
+                                        .accentColor(Color("Text"))
+                                        .keyboardType(.numberPad)
+                                        
+                                        Spacer()
+                                    }
+                                    
+                                    
+                                    
+                                    Divider()
+                                    
+                                    HStack{
+                                        
+                                        Text("Transaction Type")
+                                            .font(.system(size: 18, design: .serif))
+                                            .foregroundColor(Color("Text"))
+                                        
+                                        Spacer()
+                                        
+                                        Picker("Select a category", selection: $viewModel.transactionData.transactionType) {
+                                            ForEach(TransactionType.allCases, id: \.self) {
+                                                Text($0.rawValue)
+                                                    .tag($0)
+                                            }
+                                        }
+                                        .accentColor(Color.white)
+                                        .background(Color("MainColor"))
+                                        .opacity(0.8)
+                                        .foregroundColor(Color.white)
+                                        .cornerRadius(10)
+                                        .shadow(color: Color("MainColor").opacity(0.3), radius: 10, y: 10)
+                                        .pickerStyle(.menu)
+                                    }
+                                    
+                                    Divider()
+                                    
+                                    HStack{
+                                        
+                                        Text("Category")
+                                            .font(.system(size: 18, design: .serif))
+                                            .foregroundColor(Color("Text"))
+                                        
+                                        Spacer()
+                                        
+                                        Picker("Select a category", selection: $viewModel.transactionData.category) {
+                                            ForEach(viewModel.transactionData.transactionType == .Spend ? SelectionCategory.spendCategories : SelectionCategory.incomeCategories,  id: \.self) {
+                                                Text($0.rawValue)
+                                                    .tag($0)
+                                            }
+                                        }
+                                        .accentColor(Color.white)
+                                        .background(Color("MainColor"))
+                                        .opacity(0.8)
+                                        .cornerRadius(10)
+                                        .shadow(color: Color("MainColor").opacity(0.3), radius: 10, y: 10)
+                                        .pickerStyle(.menu)
+                                    }
+                                    
+                                    Divider()
+                                    
+                                    DatePicker(selection: $viewModel.transactionData.date,
+                                               label: {
+                                        Text("Enter date")
+                                            .font(.system(size: 18, design: .serif))
+                                            .foregroundColor(Color("Text"))
+                                    })
+                                    
+                                    Divider()
+                                    
+                                    
+                                }.padding()
                             }
-                        }
-                        .pickerStyle(.menu)
-                    }
-                    
-                    HStack{
-                        Text("How do you pay?")
-                        Picker("Select a category", selection: $viewModel.transactionData.paymentMethod) {
-                            ForEach(SelectionPay.allCases, id: \.self) {
-                                Text($0.rawValue)
-                                    .tag($0)
-                            }
-                        }
-                        .pickerStyle(.menu)
-                    }
-                    
-                    DatePicker(selection: $viewModel.transactionData.date, label: { Text("Enter date") })
-                    
-                    HStack{
-                        Text("Transaction Type")
-                        Picker("Select a category", selection: $viewModel.transactionData.transactionType) {
-                            ForEach(TransactionType.allCases, id: \.self) {
-                                Text($0.rawValue)
-                                    .tag($0)
-                            }
-                        }
-                        .pickerStyle(.menu)
+                            .padding()
                     }
                 }
+                
+                
+                Button {
+                    viewModel.addTransactionInfo()
+                    showSheet = false
+                } label: {
+                    
+                    Circle()
+                        .fill(Color("MainColor"))
+                        .frame(width: 80, height: 60)
+                        .overlay(
+                            Image(systemName: "checkmark")
+                                .resizable()
+                                .padding(10)
+                                .frame(width: 40, height: 40)
+                                .foregroundColor(.white)
+                                .mask(Circle())
+                        )
+                    
+                }
+                .font(.system(size: 18, weight: .bold, design: .serif))
+                .foregroundColor(Color.orange)
             }
-            .padding()
-            
-            Button {
-                viewModel.addTransactionInfo()
-                showSheet = false
-            } label: {
-                Text("Save")
-            }
-            .font(.system(size: 18, weight: .bold, design: .serif))
-            .foregroundColor(Color.orange)
-            
-            Button {
-                showSheet = false
-            } label: {
-                Text("Cancel")
-            }
-            .font(.system(size: 18, weight: .bold, design: .serif))
-            .foregroundColor(Color.orange)
         }
+        .onTapGesture { UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil) }
     }
 }
 

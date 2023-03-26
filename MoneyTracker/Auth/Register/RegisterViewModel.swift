@@ -31,6 +31,7 @@ class RegisterViewModel: ObservableObject {
     
     func register() {
         self.isLoading = true
+        
         Task {
             do {
                 let _ = try await authClient.createUser(email: email, password: password)
@@ -45,6 +46,7 @@ class RegisterViewModel: ObservableObject {
                     self.registeringError = true
                 }
             }
+            
         }
     }
 }
