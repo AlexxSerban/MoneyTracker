@@ -89,10 +89,6 @@ struct MoneyTracker: App {
                     }
                 }
             }
-            .onAppear {
-                withAnimation(.easeIn) {
-                    
-                }
                 let _ = Auth.auth().addStateDidChangeListener { auth, user in
                     if let user = user {
                         isUserAuthenticated = true
