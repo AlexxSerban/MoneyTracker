@@ -14,9 +14,15 @@ class TransactionRepository: ObservableObject {
     let dataBase: Firestore
     let authClient: AuthClient
     
-    init(dataBase: Firestore = Firestore.firestore(), authClient: AuthClient = DIContainer.shared.resolve(type: AuthClient.self)) {
-        self.dataBase = dataBase
+    init(authClient: AuthClient = DIContainer.shared.resolve(type: AuthClient.self)) {
+        self.dataBase = Firestore.firestore()
         self.authClient = authClient
+        
+        let settings = FirestoreSettings()
+        settings.isPersistenceEnabled = true
+        
+        // Enable offline data persistence
+        self.dataBase.settings = settings
     }
     
     func addTransaction(transactionData: TransactionData) async throws {

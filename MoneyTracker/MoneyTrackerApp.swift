@@ -89,7 +89,9 @@ struct MoneyTracker: App {
                     }
                 }
             }
+
                 let _ = Auth.auth().addStateDidChangeListener { auth, user in
+
                     if let user = user {
                         isUserAuthenticated = true
                         print("Utilizatorul este logat cu adresa de email \(user.email ?? "")")
@@ -98,7 +100,6 @@ struct MoneyTracker: App {
                         print("Utilizatorul nu este logat")
                     }
                 }
-            }
         }
     }
 }
