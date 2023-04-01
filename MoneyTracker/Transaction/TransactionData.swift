@@ -17,7 +17,7 @@ enum SelectionCurrency: String, CaseIterable, Identifiable {
             if let rawValue = UserDefaults.standard.string(forKey: "defaultCurrency"), let currency = SelectionCurrency(rawValue: rawValue) {
                 return currency
             }
-            return .USD // sau alta valoare implicita
+            return .USD 
         }
         set {
             UserDefaults.standard.set(newValue.rawValue, forKey: "defaultCurrency")
@@ -50,7 +50,6 @@ class TransactionData: Identifiable, ObservableObject{
 
     @Published var currency : SelectionCurrency
     @Published var category : SelectionCategory
-    var paymentMethod : SelectionPay
     var date : Date
     var timestamp: Timestamp
     @Published var transactionType : TransactionType

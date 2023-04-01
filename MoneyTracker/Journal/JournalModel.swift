@@ -43,37 +43,37 @@ class JournalModel {
         self.startOfYear = Date().startOfYear(using: self.calendar)
         self.endOfYear = Date().endOfYear(using: self.calendar)
         
-        print("AICI")
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        dateFormatter.timeZone = TimeZone(identifier: "GMT")!
-        
-        print("Azi")
-        print(dateFormatter.string(from: self.date))
-        
-        print("Inceput zi")
-        print(dateFormatter.string(from: self.startOfDay))
-        
-        print("Sfarsit zi")
-        print(dateFormatter.string(from: self.endOfDay))
-        
-        print("Inceput saptamana")
-        print(dateFormatter.string(from: self.startOfWeek))
-        
-        print("Sfarsit saptamana")
-        print(dateFormatter.string(from: self.endOfWeek))
-        
-        print("Inceput luna")
-        print(dateFormatter.string(from: self.startOfMonth))
-        
-        print("Sfarsit luna")
-        print(dateFormatter.string(from: self.endOfMonth))
-        
-        print("Inceput an")
-        print(dateFormatter.string(from: self.startOfYear))
-        
-        print("Sfarsit an")
-        print(dateFormatter.string(from: self.endOfYear))
+//        print("AICI")
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//        dateFormatter.timeZone = TimeZone(identifier: "GMT")!
+//        
+//        print("Azi")
+//        print(dateFormatter.string(from: self.date))
+//        
+//        print("Inceput zi")
+//        print(dateFormatter.string(from: self.startOfDay))
+//        
+//        print("Sfarsit zi")
+//        print(dateFormatter.string(from: self.endOfDay))
+//        
+//        print("Inceput saptamana")
+//        print(dateFormatter.string(from: self.startOfWeek))
+//        
+//        print("Sfarsit saptamana")
+//        print(dateFormatter.string(from: self.endOfWeek))
+//        
+//        print("Inceput luna")
+//        print(dateFormatter.string(from: self.startOfMonth))
+//        
+//        print("Sfarsit luna")
+//        print(dateFormatter.string(from: self.endOfMonth))
+//        
+//        print("Inceput an")
+//        print(dateFormatter.string(from: self.startOfYear))
+//        
+//        print("Sfarsit an")
+//        print(dateFormatter.string(from: self.endOfYear))
     }
 }
 
