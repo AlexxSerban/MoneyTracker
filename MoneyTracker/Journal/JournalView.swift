@@ -75,10 +75,11 @@ struct JournalView: View {
                         .chartXAxis {
                             
                             AxisMarks(values: .automatic) { _ in
-                                AxisValueLabel()
+                                AxisValueLabel(centered: true)
                                 
                             }
                         }
+                        
                         .chartYAxis {
                             
                             AxisMarks(position: .leading, values: .automatic) { value in

@@ -242,8 +242,9 @@ struct HomeView: View {
                                     
                                     Text("Recent transactions")
                                         .foregroundColor(Color("Text"))
-                                    
+                                        .padding()
                                 }
+                                
                                 .listRowInsets(.init(top: 0, leading: 10, bottom: 0, trailing: 10))
                                 .headerProminence(.increased)
                                 
