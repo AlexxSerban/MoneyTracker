@@ -10,6 +10,8 @@ struct ProfileView: View {
     
     @StateObject var viewModel = ProfileViewModel()
     
+    @State private var showPrivacyPolicy = false
+    @State private var showTermCond = false
     
     var body: some View {
         
@@ -163,6 +165,27 @@ struct ProfileView: View {
                                     }
                                 }
                                 
+                                
+                                Section(header: Text("Informations")) {
+                                    
+                                        Button(action: {
+                                            showTermCond = true
+                                        }) {
+                                            Text("Term and Conditions")
+                                                .font(.system(size: 16, design: .serif))
+                                                .foregroundColor(Color("Text"))
+                                        }
+                                        
+                                        Button(action: {
+                                            showPrivacyPolicy = true
+                                        }) {
+                                            Text("Privacy Policy ")
+                                                .font(.system(size: 16, design: .serif))
+                                                .foregroundColor(Color("Text"))
+                                        }
+                                    
+                                }
+                                
                                 Section(header: Text("Actions")) {
                                     
                                     HStack{
@@ -253,6 +276,12 @@ struct ProfileView: View {
         .onChange(of: viewModel.selectedCurrency) { value in
             viewModel.transactionData.setCurrency(to: value)
             self.viewModel.selectedCurrency = self.viewModel.transactionData.currency
+        }
+        .sheet(isPresented: $showTermCond ) {
+            Term_CondView(showTermCond: $showTermCond)
+        }
+        .sheet(isPresented: $showPrivacyPolicy ) {
+            PrivacyPolicyView(showPrivacyPolicy: $showPrivacyPolicy)
         }
     }
 }
