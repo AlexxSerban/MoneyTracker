@@ -41,6 +41,8 @@
 		3EE3BA68290D24510001F751 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3BA67290D24510001F751 /* UserRepository.swift */; };
 		3EE3BA6A290D2A8F0001F751 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3BA69290D2A8F0001F751 /* UserData.swift */; };
 		3EEA3F2C29B48A780017F2D9 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 3EEA3F2B29B48A780017F2D9 /* FirebaseStorage */; };
+		3EFE5BCE29F3B62A006513C9 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFE5BCD29F3B62A006513C9 /* PrivacyPolicyView.swift */; };
+		3EFE5BD029F3B647006513C9 /* Term&CondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFE5BCF29F3B647006513C9 /* Term&CondView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +78,8 @@
 		3EE3BA67290D24510001F751 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		3EE3BA69290D2A8F0001F751 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		3EFE5BCC29F2BA6A006513C9 /* Peso.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Peso.entitlements; sourceTree = "<group>"; };
+		3EFE5BCD29F3B62A006513C9 /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
+		3EFE5BCF29F3B647006513C9 /* Term&CondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Term&CondView.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +195,8 @@
 			children = (
 				3E8B8163291E9A760081ED79 /* ProfileViewModel.swift */,
 				3E8B8165291E9A8D0081ED79 /* ProfileView.swift */,
+				3EFE5BCD29F3B62A006513C9 /* PrivacyPolicyView.swift */,
+				3EFE5BCF29F3B647006513C9 /* Term&CondView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -353,6 +359,7 @@
 				3E2B453429CB04A500207B90 /* OnboardingFlowView.swift in Sources */,
 				3EB6082729228B4400B2BE0A /* TransactionView.swift in Sources */,
 				3EE3BA6028FF26590001F751 /* ResetPasswordViewModel.swift in Sources */,
+				3EFE5BD029F3B647006513C9 /* Term&CondView.swift in Sources */,
 				3EE3BA68290D24510001F751 /* UserRepository.swift in Sources */,
 				3EB608202922863D00B2BE0A /* JournalView.swift in Sources */,
 				3E430F18293BA9BF00ACAA6E /* HomeViewModel.swift in Sources */,
@@ -362,6 +369,7 @@
 				3E8B8164291E9A760081ED79 /* ProfileViewModel.swift in Sources */,
 				3E8B8166291E9A8D0081ED79 /* ProfileView.swift in Sources */,
 				3EE3BA6A290D2A8F0001F751 /* UserData.swift in Sources */,
+				3EFE5BCE29F3B62A006513C9 /* PrivacyPolicyView.swift in Sources */,
 				3EE3BA5E28FF260A0001F751 /* ResetPasswordView.swift in Sources */,
 				3EE3BA1428F03E670001F751 /* LoginView.swift in Sources */,
 				3EC2C82D2986EEC800B4C5C0 /* HistoryView.swift in Sources */,
