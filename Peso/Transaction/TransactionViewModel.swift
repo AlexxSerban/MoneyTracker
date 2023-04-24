@@ -25,7 +25,7 @@ class TransactionViewModel: ObservableObject {
                 try await transactionRepository.addTransaction(transactionData: transactionData)
                 
                 await MainActor.run {
-                    print("A mers addTransactionInfo")
+                    print(" Worked addTransactionInfo")
                 }
             } catch {
                 print(error.localizedDescription)

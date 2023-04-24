@@ -94,10 +94,10 @@ struct MoneyTracker: App {
 
                     if let user = user {
                         isUserAuthenticated = true
-                        print("Utilizatorul este logat cu adresa de email \(user.email ?? "")")
+                        print("The user is logged in with email address \(user.email ?? "")")
                     } else {
                         isUserAuthenticated = false
-                        print("Utilizatorul nu este logat")
+                        print("The user is not logged in")
                     }
                 }
         }

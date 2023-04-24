@@ -77,13 +77,11 @@ struct OnboardingFlowView: View {
     }
 }
 
-
 struct OnboardingFlowView_Previews: PreviewProvider {
     static var previews: some View {
         OnboardingFlowView()
     }
 }
-
 
 struct OnboardView: View {
     

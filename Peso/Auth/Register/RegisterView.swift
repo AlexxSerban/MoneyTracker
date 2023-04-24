@@ -155,7 +155,6 @@ struct RegisterView: View {
                             
                         }
                     }
-                    
                 }
                 .padding()
                 .alert("Wrong email", isPresented: $viewModel.registeringError, actions: {

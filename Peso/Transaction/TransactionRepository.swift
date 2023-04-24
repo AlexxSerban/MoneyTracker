@@ -293,7 +293,7 @@ class TransactionRepository: ObservableObject {
                 if let error = error {
                     print(error.localizedDescription)
                 } else {
-                    print("A mers DeleteTransacation")
+                    print("Worked DeleteTransacation")
                 }
                 
             }

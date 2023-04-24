@@ -84,7 +84,7 @@ struct Term_CondView: View {
                                 .font(.system(size: 20, weight: .bold, design: .rounded))
                                 .foregroundColor(Color("MainColor"))
                             
-                                Text("If you have any questions or comments about these Terms and Conditions, please contact us at pesomoneytracker@gmail.com .")
+                                Text("If you have any questions or comments about these Terms and Conditions, please contact us at pesomoneytracker@gmail.com.")
                             }
                         
                     }.padding()

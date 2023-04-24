@@ -48,17 +48,10 @@ struct PrivacyPolicyView: View {
                                 .font(.system(size: 20, weight: .bold, design: .rounded))
                                 .foregroundColor(Color("MainColor"))
                             
-                            Text("For a better experience, while using our Service, we may require you to provide us with certain personally identifiable information, including but not limited to your name, email address, and financial information. The information that we collect will be used to contact or identify you.")
-                            
-                            Text(" We may also collect non-personally identifiable information that your device sends whenever you use our Service. This may include information such as your device's Internet Protocol (IP) address, device name, operating system version, app version, the time and date of your use of the Service, and other statistics.")
+                            Text("In order to provide a better experience while using our service, it is necessary to provide personal data such as your name, email address for the sole purpose of creating an account. We do not collect information about our users while using our service. We assure you that the privacy of your data is a priority for us and that we respect your privacy rights.")
                         
                         
                         VStack(alignment: .leading, spacing: 20){
-                            Text("Log Data")
-                                .font(.system(size: 20, weight: .bold, design: .rounded))
-                                .foregroundColor(Color("MainColor"))
-                            
-                            Text("We want to inform you that whenever you use our Service, in case of an error in the app, we collect data and information (through third-party products) on your phone called Log Data. This Log Data may include information such as your device's Internet Protocol (IP) address, device name, operating system version, app version, the time and date of your use of the Service, and other statistics.")
                             
                             Text("Cookies")
                                 .font(.system(size: 20, weight: .bold, design: .rounded))
