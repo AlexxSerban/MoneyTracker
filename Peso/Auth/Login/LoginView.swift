@@ -132,12 +132,13 @@ struct LoginView: View {
                                 )
                             }
                         }
+                        .padding()
                     }
                     
                     Button {
                         
                         viewModel.forgotPassword = true
-                        print("A mers butonul de Forgot")
+                        print("Forgot Password Ok")
                         print("\(viewModel.forgotPassword)")
                     } label: {
                         
@@ -169,7 +170,9 @@ struct LoginView: View {
                                 
                             }
                             .offset(x: -155)
+                            
                         }
+                        .padding()
                     }
                 }
                 .padding()

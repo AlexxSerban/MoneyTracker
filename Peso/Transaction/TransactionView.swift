@@ -27,6 +27,8 @@ struct TransactionView: View {
                 
                 HStack{
                     
+                    Spacer()
+                    
                     Button {
                         showSheet = false
                     } label: {
@@ -35,8 +37,9 @@ struct TransactionView: View {
                             .frame(width: 40, height: 40)
                     }
                     .foregroundColor(Color("MainColor"))
+                    .padding()
                 }
-                .offset(x: 180, y: -15)
+                .padding()
                 
                 HStack(alignment: .center){
                     Text("Transaction")
@@ -135,6 +138,7 @@ struct TransactionView: View {
                     }
                 }
                 
+                
                 Button {
                     viewModel.addTransactionInfo()
                     showSheet = false
@@ -155,10 +159,15 @@ struct TransactionView: View {
                 }
                 .font(.system(size: 18, weight: .bold, design: .serif))
                 .foregroundColor(Color.orange)
+                .offset(y: -30)
+                .padding()
+                
             }
         }
+        .padding()
         .onTapGesture { UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil) }
     }
+        
 }
 
 struct TransactionView_Previews: PreviewProvider {

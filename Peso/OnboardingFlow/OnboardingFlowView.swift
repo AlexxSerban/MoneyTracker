@@ -44,6 +44,7 @@ struct OnboardingFlowView: View {
             }
             .tabViewStyle(.page(indexDisplayMode: .always))
             .indexViewStyle(.page(backgroundDisplayMode: .always))
+            .ignoresSafeArea()
             
             if currentPageIndex == 2 && showButton {
                 Button(action: {
@@ -68,6 +69,7 @@ struct OnboardingFlowView: View {
                 .offset(y: 310)
             }
         }
+    
         .onAppear {
             showButton = false
         }
