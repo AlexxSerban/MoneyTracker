@@ -128,7 +128,7 @@ struct JournalView: View {
                                     
                                     ForEach(viewModel.transactionData){ transaction in
                                         
-                                        HStack(spacing: 20){
+                                        HStack(spacing: 15){
                                             
                                             (
                                                 transaction.transactionType == .Spend ?

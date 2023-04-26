@@ -24,42 +24,43 @@ struct HomeView: View {
             VStack{
                 
                 HStack{
-                    
+                   
                     Text("Home")
                         .font(.system(size: 34, weight: .bold, design: .serif))
                         .foregroundColor(Color("Text"))
-                        .offset(x: -140)
-                    
+                        
                 }
                 .padding()
                 
-                VStack{}
-                    .frame(width: 300, height: 130)
-                    .background(
-                        LinearGradient(gradient: Gradient(colors: [Color("ThirdColor"), Color("MainColor")]),
-                                       startPoint: .bottomTrailing, endPoint: .topLeading)
-                    )
-                    .shadow(radius: 75)
-                    .cornerRadius(30)
-                    .opacity(0.8)
-                    .shadow(color: Color("MainColor").opacity(0.3), radius: 10, y: 10)
-                    .overlay {
-                        
-                        VStack(alignment: .leading, spacing: 16){
+                HStack{
+                    VStack{}
+                        .frame(width: 300, height: 130)
+                        .background(
+                            LinearGradient(gradient: Gradient(colors: [Color("ThirdColor"), Color("MainColor")]),
+                                           startPoint: .bottomTrailing, endPoint: .topLeading)
+                        )
+                        .shadow(radius: 75)
+                        .cornerRadius(30)
+                        .opacity(0.8)
+                        .shadow(color: Color("MainColor").opacity(0.3), radius: 10, y: 10)
+                        .overlay {
                             
-                            Text("\(viewModel.totalIncome - viewModel.totalSpend) \(SelectionCurrency.defaultCurrency.rawValue)")
-                                .font(.system(size: 32, weight: .bold, design: .serif))
-                                .foregroundColor(Color("Text"))
-                            
-                            Text("Available Balance")
-                                .font(.system(size: 19, design: .serif))
-                                .foregroundColor(Color("Text"))
+                            VStack(alignment: .leading, spacing: 16){
+                                
+                                Text("\(viewModel.totalIncome - viewModel.totalSpend) \(SelectionCurrency.defaultCurrency.rawValue)")
+                                    .font(.system(size: 32, weight: .bold, design: .serif))
+                                    .foregroundColor(Color("Text"))
+                                
+                                Text("Available Balance")
+                                    .font(.system(size: 19, design: .serif))
+                                    .foregroundColor(Color("Text"))
+                                
+                            }
+                            .offset(x: -50 + offset.width, y: +50 + offset.height)
+                            .rotationEffect(Angle(degrees: 360))
                             
                         }
-                        .offset(x: -50 + offset.width, y: +50 + offset.height)
-                        .rotationEffect(Angle(degrees: 360))
-                        
-                    }
+                }
                 
                     .padding()
                 
@@ -114,6 +115,9 @@ struct HomeView: View {
                     }
                     .padding()
                     
+                    Spacer()
+                        .frame(width: 3)
+                    
                     
                     HStack(spacing: 5){
                         
@@ -162,99 +166,110 @@ struct HomeView: View {
                             }
                             .padding()
                     }
-                    .padding()
+                    Spacer()
+                        .frame(width: 3)
                 }
                 
-                VStack {
-                    
-                    if viewModel.transactionData.isEmpty {
+                
+                
+                    VStack {
                         
-                        Text("No transactions found.")
-                        
-                    } else {
-                        
-                        if viewModel.isLoadingTransactions {
+                        if viewModel.transactionData.isEmpty {
                             
-                            ProgressView("Processing")
-                                .tint(.orange)
-                                .foregroundColor(.gray)
+                            Text("No transactions found.")
                             
                         } else {
                             
-                            List{
+                            if viewModel.isLoadingTransactions {
                                 
-                                Section{
+                                ProgressView("Processing")
+                                    .tint(.orange)
+                                    .foregroundColor(.gray)
+                                
+                            } else {
+                                
+                                List{
                                     
-                                    ForEach(viewModel.transactionData) { transaction in
+                                    Section{
                                         
-                                        HStack(spacing: 20){
+                                        ForEach(viewModel.transactionData) { transaction in
                                             
-                                            (
-                                                transaction.transactionType == .Spend ? Image(systemName: "cart.fill.badge.minus") : Image(systemName: "banknote.fill")
-                                            )
-                                            .resizable()
-                                            .frame(width: 24, height: 26)
-                                            .foregroundColor(Color("MainColor"))
-                                            
-                                            VStack(alignment: .leading, spacing: 6){
+                                            HStack(spacing: 20){
                                                 
-                                                Text("\(transaction.category.rawValue)")
-                                                    .font(.headline).bold().italic()
-                                                    .minimumScaleFactor(0.5)
-                                                    .foregroundColor(Color("Text"))
+                                                (
+                                                    transaction.transactionType == .Spend ? Image(systemName: "cart.fill.badge.minus") : Image(systemName: "banknote.fill")
+                                                )
+                                                .resizable()
+                                                .frame(width: 24, height: 26)
+                                                .foregroundColor(Color("MainColor"))
                                                 
-                                                Text("\(transaction.timestamp.dateValue().formatted(date: .long , time: .omitted))")
-                                                    .font(.subheadline)
-                                                    .foregroundColor(Color("Text"))
+                                                VStack(alignment: .leading, spacing: 6){
+                                                    
+                                                    Text("\(transaction.category.rawValue)")
+                                                        .font(.headline).bold().italic()
+                                                        .minimumScaleFactor(0.5)
+                                                        .foregroundColor(Color("Text"))
+                                                    
+                                                    Text("\(transaction.timestamp.dateValue().formatted(date: .long , time: .omitted))")
+                                                        .font(.subheadline)
+                                                        .foregroundColor(Color("Text"))
+                                                }
+                                                
+                                                Spacer()
+                                                
+                                                VStack(spacing: 5){
+                                                    
+                                                    Text("\(transaction.amount) \(transaction.currency.rawValue)")
+                                                        .fixedSize(horizontal: true, vertical: false)
+                                                        .font(.headline).bold().italic()
+                                                        .foregroundColor(transaction.transactionType == .Spend ? Color.red : Color.green)
+                                                        .foregroundColor(Color("Text"))
+                                                        .frame(maxWidth: .infinity)
+                                                }.padding()
+                                                    .offset(x: 50)
+                                                
                                             }
-                                            
-                                            Spacer()
-                                            
-                                            VStack(spacing: 5){
-                                                
-                                                Text("\(transaction.amount) \(transaction.currency.rawValue)")
-                                                    .fixedSize(horizontal: true, vertical: false)
-                                                    .font(.headline).bold().italic()
-                                                    .foregroundColor(transaction.transactionType == .Spend ? Color.red : Color.green)
-                                                    .foregroundColor(Color("Text"))
-                                                    .frame(maxWidth: .infinity)
-                                            }.padding()
-                                                .offset(x: 50)
-                                            
+                                            .padding(.vertical, 5)
                                         }
-                                        .padding(.vertical, 5)
+                                        .frame(height: 80)
+                                        .listRowBackground(
+                                            
+                                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                                .fill(Color("BackgroundBlocks"))
+                                                .opacity(0.8)
+                                                .padding(.vertical, 1)
+                                                .cornerRadius(2)
+                                            
+                                        )
+                                        .listStyle(.insetGrouped)
+                                        .listRowSeparator(.hidden)
+                                        .listRowInsets(.init(top: 0, leading: 40, bottom: 0, trailing: 40))
+                                        
+                                    } header: {
+                                        
+                                        HStack{
+                                        
+                                            Spacer()
+                                                .frame(width: 15)
+                                            
+                                            Text("Recent transactions")
+                                                .foregroundColor(Color("Text"))
+                                                .padding()
+                                        }
                                     }
-                                    .frame(height: 80)
-                                    .listRowBackground(
-                                        
-                                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                            .fill(Color("BackgroundBlocks"))
-                                            .opacity(0.8)
-                                            .padding(.vertical, 1)
-                                            .cornerRadius(2)
-                                        
-                                    )
-                                    .listStyle(.insetGrouped)
-                                    .listRowSeparator(.hidden)
-                                    .listRowInsets(.init(top: 0, leading: 40, bottom: 0, trailing: 40))
+//                                    .padding()
                                     
-                                } header: {
+                                    .listRowInsets(.init(top: 0, leading: 10, bottom: 0, trailing: 10))
+                                    .headerProminence(.increased)
                                     
-                                    Text("Recent transactions")
-                                        .foregroundColor(Color("Text"))
-                                        .padding()
                                 }
-                                
-                                .listRowInsets(.init(top: 0, leading: 10, bottom: 0, trailing: 10))
-                                .headerProminence(.increased)
+                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                                .scrollContentBackground(.hidden)
                                 
                             }
-                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                            .scrollContentBackground(.hidden)
-                            
                         }
                     }
-                }
+                
                 .onAppear(){
                     withAnimation(.spring(response: 0.8, dampingFraction: 0.8)) {}
                 }
@@ -262,6 +277,7 @@ struct HomeView: View {
                 Spacer()
                 
             }
+            .padding()
         }
         .onAppear {
             self.viewModel.getLastTransactions()

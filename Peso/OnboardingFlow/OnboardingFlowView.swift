@@ -66,7 +66,7 @@ struct OnboardingFlowView: View {
                 .cornerRadius(30)
                 .transition(.move(edge: .bottom))
                 .animation(.easeInOut)
-                .offset(y: 310)
+                .offset(y: 290)
             }
         }
     

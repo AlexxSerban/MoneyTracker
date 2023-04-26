@@ -23,30 +23,34 @@ struct TransactionView: View {
             Color("Background")
                 .edgesIgnoringSafeArea(.all)
             
-            VStack(spacing: 30){
+            VStack(spacing: 10){
                 
-                HStack{
-                    
-                    Spacer()
-                    
-                    Button {
-                        showSheet = false
-                    } label: {
-                        Image(systemName: "x.circle.fill")
-                            .resizable()
-                            .frame(width: 40, height: 40)
+                
+                    HStack{
+                        
+                        Spacer()
+                        
+                        Button {
+                            showSheet = false
+                        } label: {
+                            Image(systemName: "x.circle.fill")
+                                .resizable()
+                                .frame(width: 40, height: 40)
+                        }
+                        .foregroundColor(Color("MainColor"))
+                        .padding()
                     }
-                    .foregroundColor(Color("MainColor"))
                     .padding()
-                }
-                .padding()
-                
-                HStack(alignment: .center){
-                    Text("Transaction")
-                        .font(.system(size: 34, weight: .bold, design: .rounded))
-                        .offset(y: -40)
-                        .foregroundColor(Color("Text"))
-                }
+                    
+                    HStack(alignment: .center){
+                        Text("Transaction")
+                            .font(.system(size: 34, weight: .bold, design: .rounded))
+                            .offset(y: -40)
+                            .foregroundColor(Color("Text"))
+                    }
+               
+                Spacer()
+                    .frame(height: 10)
                 
                 HStack{
                     
@@ -54,7 +58,7 @@ struct TransactionView: View {
                         
                         VStack{}
                             .padding()
-                            .frame(width: 400, height: 430)
+                            .frame(width: 360, height: 350)
                             .background(Color("BackgroundBlocks"), in: RoundedRectangle(cornerRadius: 50, style: .continuous))
                             .shadow(radius: 4)
                             .overlay {
@@ -129,15 +133,13 @@ struct TransactionView: View {
                                             .foregroundColor(Color("Text"))
                                     })
                                     
-                                    Divider()
-                                    
                                     
                                 }.padding()
                             }
                             .padding()
                     }
                 }
-                
+
                 
                 Button {
                     viewModel.addTransactionInfo()
@@ -164,7 +166,6 @@ struct TransactionView: View {
                 
             }
         }
-        .padding()
         .onTapGesture { UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil) }
     }
         

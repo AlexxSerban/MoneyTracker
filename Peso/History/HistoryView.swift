@@ -86,7 +86,10 @@ struct HistoryView: View {
                 
                 ScrollView(.horizontal){
                     
-                    HStack(spacing: 26){
+                    HStack(spacing: 20){
+                        
+                        Spacer()
+                            .frame(width: -5)
                         
                         VStack{}
                             .frame(width: 150, height: 140)
