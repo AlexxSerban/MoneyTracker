@@ -25,7 +25,6 @@ struct TransactionView: View {
             
             VStack(spacing: 10){
                 
-                
                     HStack{
                         
                         Spacer()
