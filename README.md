@@ -9,11 +9,6 @@ Dark mode support for comfortable use at any time of day.
 Password protection for your privacy.
 
 Getting Started
-Prerequisites
-Android 5.0 or higher
-A Google account to download from the Google Play Store
-Installing
-Open the Google Play Store on your Android device.
 Search for "Peso - Money Tracker."
 Tap "Install" to download and install the app.
 
