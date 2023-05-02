@@ -4,7 +4,6 @@ Peso is a simple and easy-to-use money tracker app that helps you manage your fi
 Features
 Add expenses and income quickly and easily.
 View your spending habits over time with detailed graphs and charts.
-Export your financial data to CSV for use in other programs.
 Dark mode support for comfortable use at any time of day.
 Password protection for your privacy.
 
