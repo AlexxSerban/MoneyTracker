@@ -20,8 +20,6 @@ struct ResetPasswordView: View {
                     .edgesIgnoringSafeArea(.all)
                 
                 
-                
-                
                 VStack(spacing: 16) {
                     
                     Spacer()
@@ -42,8 +40,6 @@ struct ResetPasswordView: View {
                         
                         
                         
-                        
-                        
                         VStack(spacing: 0){
                             
                             HStack(spacing: 20) {
@@ -53,7 +49,7 @@ struct ResetPasswordView: View {
                                 TextField("", text: $viewModel.email, prompt: Text("Your email").foregroundColor(Color("SecondText")))
                                     .keyboardType(.emailAddress)
                                     .font(.system(size: 18, weight: .bold, design: .serif))
-                                    .foregroundColor(Color.black)
+                                    .foregroundColor(Color("SecondText"))
                                 
                             }.padding()
                             

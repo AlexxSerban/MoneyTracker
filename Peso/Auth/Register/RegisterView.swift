@@ -39,10 +39,10 @@ struct RegisterView: View {
                                     
                                     Image(systemName: "person")
                                         .foregroundColor(Color("MainColor"))
-                                    TextField("Email", text: $viewModel.email, prompt: Text("Email").foregroundColor(Color("SecondText")))
+                                    TextField("Email", text: $viewModel.email, prompt: Text("Email").foregroundColor(Color("Text")))
                                         .keyboardType(.emailAddress)
                                         .font(.system(size: 18, weight: .bold, design: .serif))
-                                        .foregroundColor(Color.black)
+                                        .foregroundColor(Color("Text"))
                                     
                                 }
                                 
@@ -52,9 +52,10 @@ struct RegisterView: View {
                                     
                                     Image(systemName: "lock")
                                         .foregroundColor(Color("MainColor"))
-                                    SecureField("", text: $viewModel.password, prompt: Text("Password").foregroundColor(Color("SecondText")))
+                                    SecureField("", text: $viewModel.password, prompt: Text("Password").foregroundColor(Color("Text")))
                                         .font(.system(size: 18, weight: .bold, design: .serif))
-                                        .foregroundColor(Color.black)
+                                        .foregroundColor(Color("Text"))
+                                    
                                 }
                             }
                             .padding()
